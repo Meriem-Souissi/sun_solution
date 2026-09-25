@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --forest: #144870; /* bleu marine du logo */
+  --forest-deep: #0e3555;
+  --forest-soft: #2c6b93;
+  --cream: #faf7f1;
+  --cream-2: #f2ecdf;
+  --sage: #eaf0f4;
+  --gold: #e8951a; /* orange du logo */
+  --gold-deep: #c97a0f;
+  --terracotta: #d92115; /* rouge du logo */
+  --sun-yellow: #f6e31d; /* jaune du logo */
+  --ink: #17242e;
+  --slate: #59636b;
+  --line: #e3dfd3;
+  --white: #ffffff;
+  --sun: linear-gradient(135deg, #b8420f 0%, #d97f1e 100%);
+  --sun-hover: linear-gradient(135deg, #a6390c 0%, #c46f16 100%);
+  --sky: #6fa3d6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
+@utility blue-button {
+  @apply inline-flex items-center gap-2 
+         bg-(--forest) text-(--cream)
+         px-[22px] py-[11px] 
+         rounded-full 
+         font-bold text-[14px] 
+         shadow-[0_10px_22px_-10px_rgba(20,72,112,0.45)] 
+         transition-[background,transform,box-shadow] duration-200
+         cursor-pointer
+         hover:bg-(--forest-deep)
+         hover:transform-[translateY(-1px)] 
+         hover:shadow-[0_12px_26px_-8px_rgba(20,72,112,0.55)];
+}
+
+@utility section-title {
+  @apply flex items-center gap-2.5 text-xs font-semibold text-(--forest) tracking-wider mb-5 
+  before:content-['']
+  before:w-5 before:h-px
+before:bg-(--gold);
+}
+
+@utility project-card {
+  @apply relative flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 transition-all duration-300 
+  hover:-translate-y-1 
+  hover:border-(--line)
+  hover:shadow-xl 
+  hover:shadow-blue-500/10;
+}
+
+@utility input-class {
+  @apply w-full rounded-[10px] border border-(--line) bg-(--cream) px-4 py-3.25 
+    text-[14.5px] text-(--ink) 
+    outline-none transition-colors 
+    placeholder:text-(--slate)/70 focus:border-(--forest) focus:bg-white;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Inter", sans-serif;
+
+  /* margin: 0;
+  padding: 0; */
+}
+.ic {
+  width: 19px;
+  height: 19px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: var(--gold-deep);
 }
