@@ -31,7 +31,6 @@ export default function Navbar() {
             />
           </div>
           <span className="font-serif font-medium text-lg text-ink leading-tight">
-            Sun Solution
             <i className="block not-italic font-sans font-medium text-[10.5px] text-slateCustom tracking-wider mt-0.5">
               Votre satisfaction est notre engagement
             </i>

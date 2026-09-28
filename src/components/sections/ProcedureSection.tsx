@@ -34,9 +34,9 @@ const ProcedureSection = () => {
     },
     {
       step: "06",
-      title: "Mise en service",
-      text: "Raccordement, tests de production, suivi dans la durée.",
-      meta: "Suivi continu",
+      title: "Service aprés vente",
+      text: "**********************************",
+      meta: "*****",
     },
   ];
   return (

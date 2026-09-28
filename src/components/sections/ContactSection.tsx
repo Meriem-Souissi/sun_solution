@@ -93,7 +93,7 @@ export default function Contact() {
                 Email
               </b>
               <span className="text-[14.5px] text-[#59636B]">
-                contact@sunsolution.tn
+                info@sun-sol.tn
               </span>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function Contact() {
                 Téléphone
               </b>
               <span className="text-[14.5px] text-[#59636B]">
-                +216 71 000 000
+                +216 71 781 089
               </span>
             </div>
           </div>
