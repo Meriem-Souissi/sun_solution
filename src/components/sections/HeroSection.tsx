@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import imgHeroSection from "./../../../public/images/heroSection.jpg";
+import imgHeroSection from "./../../../public/images/heroSection2.jpg";
 import { ArrowIcon } from "../icons/ArrowIcon";
 import BlueButton from "../ui/BlueButton";
 
@@ -8,7 +8,7 @@ const HeroSection = () => {
   return (
     <>
       <section id="accueil" className="pt-20 pb-0">
-        <div className="max-w-[1160px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-[1fr_0.92fr] gap-16 items-center">
+        <div className="max-w-290 mx-auto px-8 grid grid-cols-1 lg:grid-cols-[1fr_0.92fr] gap-16 items-center">
           <div>
             <div className="section-title">
               EPC fournisseur d'équipement photovoltaïque

@@ -114,7 +114,7 @@ export default function Contact() {
             <MapsIcon />
             <div>
               <b className="mb-0.5 block text-sm font-semibold text-[#17242E]">
-                Avenue Habib Bourguiba, Tunis, Tunisie
+                Rue De Riadh, Mutuelleville, Tunisie
               </b>
               <span className="text-[14.5px] text-[#59636B]">
                 <a
@@ -212,8 +212,8 @@ export default function Contact() {
                     <Field label="Type de projet">
                       <select name="typeProjet" className="input-class">
                         <option>Choisir votre projet</option>
-                        <option>Installation résidentiel</option>
-                        <option>Installation commercialle</option>
+                        <option>Installation résidentielle</option>
+                        <option>Installation commerciale</option>
                         <option>Site isolé</option>
                         <option>Pompage</option>
                       </select>
@@ -370,8 +370,8 @@ export default function Contact() {
                   <Field label="Type de projet">
                     <select name="typeProjet" className="input-class">
                       <option>Choisir votre projet</option>
-                      <option>Installation résidentiel</option>
-                      <option>Installation commercialle</option>
+                      <option>Installation résidentielle</option>
+                      <option>Installation commerciale</option>
                       <option>Site isolé</option>
                       <option>Pompage</option>
                     </select>
