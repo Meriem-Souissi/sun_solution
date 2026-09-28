@@ -51,28 +51,32 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link href="#devis" className="hidden md:block">
+        <Link href="#contact" className="hidden md:block">
           <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
         </Link>
+        {/* <button className="menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+    </button> */}
       </div>
-      {/* <div class="mobile-menu" id="mobileMenu">
-      <nav class="mobile-menu-links">
-        {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-slateCustom px-4 py-2 rounded-full hover:text-(--ink) hover:bg-(--sage) transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-            </nav>
+      {menuOpen && (
+        <div className="block  bg-(--cream) border-t border-(--line) max-h-130 md:hidden">
+          <nav className="mobile-menu-links">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-slateCustom px-4 py-2 rounded-full hover:text-(--ink) hover:bg-(--sage) transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
           <Link href="#devis">
-          <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
-        </Link>
-   
-    
-  </div> */}
+            <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
+          </Link>
+        </div>
+      )}
+
       {/* <nav class="mobile-menu-links">
       <a href="#accueil">Accueil</a>
       <a href="#services">Services</a>

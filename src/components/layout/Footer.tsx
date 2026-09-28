@@ -9,10 +9,10 @@ import PhoneIcon from "../icons/PhoneIcon";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-(--forest-deep) text-[#9FB0A3] pt-16 pb-7">
+      <footer className="bg-(--forest-deep) text-[#9FB0A3] pt-10 pb-7">
         <div className="w-full max-w-[1160px] mx-auto px-5 sm:px-8">
           {/* Main Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-9 lg:gap-16 pb-10 border-b border-(--cream)/12">
+          <div className="grid grid-cols-1 items-center lg:grid-cols-[1.3fr_0.7fr] gap-9 lg:gap-16 pb-6 border-b border-(--cream)/12">
             {/* Brand & Info */}
             <div className="flex flex-col">
               <div className="mb-4.5">
@@ -25,12 +25,12 @@ const Footer = () => {
                   priority
                 />
               </div>
-              <p className="text-[14.5px] text-[#B7C4B9] max-w-[38ch] leading-[1.6] mb-[28px]">
+              <p className="text-[14.5px] text-[#B7C4B9] max-w-[38ch] leading-[1.6] mb-5">
                 Installateur photovoltaïque certifié — études, installation et
                 maintenance pour particuliers et entreprises.
               </p>
 
-              <div className="space-y-0">
+              {/* <div className="space-y-0">
                 <div className="flex items-start gap-3.5 py-3.5 border-t border-(--cream)/10">
                   <MapsIcon />
                   <div className="flex flex-col gap-1.5">
@@ -73,7 +73,7 @@ const Footer = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Navigation Column */}
@@ -81,7 +81,7 @@ const Footer = () => {
               <span className="block text-[12.5px] font-semibold tracking-[0.05em] text-[#7E9089] mb-5">
                 Navigation
               </span>
-              <nav className="flex flex-col gap-3.5">
+              <nav className="flex gap-3.5">
                 <Link
                   href="#accueil"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"

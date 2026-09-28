@@ -5,6 +5,7 @@ import MailIcon from "../icons/MailIcon";
 import MapsIcon from "../icons/MapsIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 import CheckIcon from "../icons/CheckIcon";
+import Arrow2Icon from "../icons/Arrow2Icon";
 import { ArrowIcon } from "../icons/ArrowIcon";
 
 type FormType = "devis" | "etude";
@@ -71,7 +72,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="bg-[#FAF7F1] py-20 min-[961px]:py-[120px]">
-      <div className="mx-auto grid w-full max-w-[1160px] grid-cols-1 gap-12 px-5 min-[521px]:px-8 min-[961px]:grid-cols-[0.9fr_1.1fr] min-[961px]:gap-[70px]">
+      <div className="mx-auto grid w-full max-w-290 grid-cols-1 gap-12 px-5 min-[521px]:px-8 min-[961px]:grid-cols-[0.9fr_1.1fr] min-[961px]:gap-[70px]">
         {/* ==================== CONTACT INFO ==================== */}
         <div className="contact-info">
           <div className="section-title">Contact</div>
@@ -81,8 +82,8 @@ export default function Contact() {
           </h2>
 
           <p className="mb-9 mt-5 max-w-[42ch] text-base leading-[1.6] text-[#59636B]">
-            Décrivez-nous votre toiture ou votre facture actuelle : nous
-            revenons vers vous avec une première estimation sous 48h.
+            Décrivez-nous votre toiture ou votre facture actuelle: nous revenons
+            vers vous avec une première estimation sous 48h.
           </p>
 
           <div className="flex gap-4 border-t border-[#E3DFD3] py-5">
@@ -113,10 +114,18 @@ export default function Contact() {
             <MapsIcon />
             <div>
               <b className="mb-0.5 block text-sm font-semibold text-[#17242E]">
-                Zone d&apos;intervention
+                Avenue Habib Bourguiba, Tunis, Tunisie
               </b>
               <span className="text-[14.5px] text-[#59636B]">
-                Tunis et Grand Tunis
+                <a
+                  className="inline-flex items-center gap-1.5 font-semibold text-(--gold) hover:text-[#F2B15A] transition-colors"
+                  href="https://www.google.com/maps/search/?api=1&query=Avenue+Habib+Bourguiba+Tunis"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Voir sur Google Maps
+                  <Arrow2Icon />
+                </a>
               </span>
             </div>
           </div>
@@ -134,7 +143,7 @@ export default function Contact() {
               role="tab"
               aria-selected={activeForm === "devis"}
               onClick={() => setActiveForm("devis")}
-              className={`rounded-full px-[18px] py-2.5 text-[13.5px] font-semibold transition-colors ${
+              className={`rounded-full px-4.5 py-2.5 text-[13.5px] font-semibold transition-colors cursor-pointer ${
                 activeForm === "devis"
                   ? "bg-[#144870] text-[#FAF7F1]"
                   : "text-[#59636B] hover:text-[#17242E]"
@@ -148,7 +157,7 @@ export default function Contact() {
               role="tab"
               aria-selected={activeForm === "etude"}
               onClick={() => setActiveForm("etude")}
-              className={`rounded-full px-[18px] py-2.5 text-[13.5px] font-semibold transition-colors ${
+              className={`rounded-full px-4.5 py-2.5 text-[13.5px] font-semibold transition-colors cursor-pointer ${
                 activeForm === "etude"
                   ? "bg-[#144870] text-[#FAF7F1]"
                   : "text-[#59636B] hover:text-[#17242E]"
@@ -211,7 +220,7 @@ export default function Contact() {
 
                     <Field label="Puissance à installer">
                       <select name="puissance" className="input-class">
-                        <option>Je ne sais pas encore</option>
+                        <option>Saisir votre puissance</option>
                         <option>Moins de 6 kWc</option>
                         <option>6 à 9 kWc</option>
                         <option>9 à 12 kWc</option>
