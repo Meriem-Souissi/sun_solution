@@ -42,7 +42,7 @@ const HeroSection = () => {
             <div className="flex items-center gap-7 mt-14 pt-7 border-t border-(--line) flex-wrap">
               <div className="flex items-center gap-2.5">
                 <b className="font-serif text-2xl font-medium text-(--forest)">
-                  +450
+                  +X
                 </b>
                 <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
                   installations réalisées
@@ -58,7 +58,7 @@ const HeroSection = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <b className="font-serif text-2xl font-medium text-(--forest)">
-                  25 ans
+                  15 ans
                 </b>
                 <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
                   garantie panneaux

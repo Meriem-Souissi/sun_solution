@@ -211,22 +211,22 @@ export default function Contact() {
                   <div className="grid grid-cols-1 gap-4 min-[521px]:grid-cols-2">
                     <Field label="Type de projet">
                       <select name="typeProjet" className="input-class">
-                        <option>Habitation individuelle</option>
+                        <option>Choisir votre projet</option>
                         <option>Immeuble résidentiel</option>
-                        <option>Local commercial</option>
-                        <option>Site industriel</option>
+                        <option>Installation commercialle</option>
+                        <option>Site isolé</option>
+                        <option>Pompage</option>
                       </select>
                     </Field>
 
                     <Field label="Puissance à installer">
-                      <select name="puissance" className="input-class">
-                        <option>Saisir votre puissance</option>
-                        <option>Moins de 6 kWc</option>
-                        <option>6 à 9 kWc</option>
-                        <option>9 à 12 kWc</option>
-                        <option>12 à 18 kWc</option>
-                        <option>Plus de 18 kWc</option>
-                      </select>
+                      <input
+                        name="power"
+                        type="power"
+                        placeholder="Saisir la puissance à installer"
+                        required
+                        className="input-class"
+                      />
                     </Field>
                   </div>
 
@@ -300,7 +300,7 @@ export default function Contact() {
                       <input
                         name="steg"
                         type="text"
-                        placeholder="Référence de votre police STEG"
+                        placeholder="Référence de votre STEG"
                         className="input-class"
                       />
                     </Field>
@@ -369,10 +369,11 @@ export default function Contact() {
 
                   <Field label="Type de projet">
                     <select name="typeProjet" className="input-class">
-                      <option>Habitation individuelle</option>
+                      <option>Choisir votre projet</option>
                       <option>Immeuble résidentiel</option>
-                      <option>Local commercial</option>
-                      <option>Site industriel</option>
+                      <option>Installation commercialle</option>
+                      <option>Site isolé</option>
+                      <option>Pompage</option>
                     </select>
                   </Field>
 

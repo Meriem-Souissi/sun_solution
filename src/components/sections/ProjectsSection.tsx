@@ -2,50 +2,46 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-// import imgProject0 from "./../../../public/images/projet0.jpg";
-// import imgProject1 from "./../../../public/images/projet1.jpg";
 
 type Project = {
   title: string;
   tag: string;
   description: string;
-  image?: any;
+  image: string;
 };
 
 const projects: Project[] = [
   {
-    title: "Villa Les Oliviers",
+    title: "Villa à grand Tunis",
     tag: "Résidentiel",
     description:
-      "9 kWc en toiture inclinée, autoconsommation avec revente du surplus.",
+      "Installation solaire photovoltaïque de 5,5 kWc sur toit plat, autoconsommation avec revente du surplus.",
     image: "/images/projet0.jpg",
   },
   {
-    title: "Ombrière de parking",
-    tag: "Commercial",
+    title: "El Mawassir à Zaghouan",
+    tag: "Eclairage public",
     description:
-      "60 kWc en ombrière, à la fois production d'énergie et places à l'ombre.",
+      "11 kWc en ombrière, à la fois production d'énergie et places à l'ombre.",
     image: "/images/projet1.jpg",
   },
   {
     title: "Ferme solaire de Sfax",
-    tag: "Agrivoltaïque",
+    tag: "Pompage photovoltaïque",
     description:
-      "250 kWc au sol, raccordement moyenne tension et suivi de production à distance.",
+      "*** kWc au sol, raccordement moyenne tension et suivi de production à distance.",
     image: "/images/projet2.jpg",
   },
   {
-    title: "Rénovation toiture Hammamet",
-    tag: "Résidentiel",
-    description:
-      "12 kWc avec remplacement de couverture et intégration esthétique des panneaux.",
+    title: "********",
+    tag: "Commercial",
+    description: "***************************************************",
     image: "/images/projet3.jpg",
   },
   {
-    title: "Extension atelier technique",
-    tag: "Industriel",
-    description:
-      "80 kWc en toiture, dimensionné pour couvrir les pics de consommation en journée.",
+    title: "***********",
+    tag: "Centrale photovoltaïque",
+    description: "**********************************************",
     image: "/images/projet4.jpg",
   },
 ];
