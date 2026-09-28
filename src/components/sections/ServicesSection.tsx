@@ -10,7 +10,7 @@ const ServicesSection = () => {
     {
       index: "02",
       title: "Fourniture",
-      text: "Assure les equipements necessaires d'une installation photovoltaïque (panneaux solaires PV, onduleurs, coffret DC et AC....).",
+      text: "Assurer la fourniture des equipements necessaires à installation photovoltaïque: panneaux solaires, onduleurs, coffrets DC/AC, câblage et accessoires.",
     },
     {
       index: "03",

@@ -13,9 +13,9 @@ const HeroSection = () => {
             <div className="section-title">
               EPC fournisseur d'équipement photovoltaïque
             </div>
-            <h1 className="font-serif text-4xl lg:text-6xl font-medium text-ink leading-tight">
+            <h1 className="font-serif text-4xl lg:text-6xl font-medium text-(--ink) leading-tight">
               L'énergie solaire,{" "}
-              <em className="italic text-forest font-serif">
+              <em className="italic text-(--forest) font-serif">
                 pensée simplement.
               </em>
             </h1>

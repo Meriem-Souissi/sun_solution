@@ -119,7 +119,7 @@ export default function Contact() {
               <span className="text-[14.5px] text-[#59636B]">
                 <a
                   className="inline-flex items-center gap-1.5 font-semibold text-(--gold) hover:text-[#F2B15A] transition-colors"
-                  href="https://www.google.com/maps/search/?api=1&query=Avenue+Habib+Bourguiba+Tunis"
+                  href="https://www.google.com/maps/place/CCDH+Training/@36.8348083,10.165009,17z/data=!3m1!4b1!4m6!3m5!1s0x12fd336182427403:0xf1a29571490b9d22!8m2!3d36.834804!4d10.1675839!16s%2Fg%2F11g8_6x8y4?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -212,7 +212,7 @@ export default function Contact() {
                     <Field label="Type de projet">
                       <select name="typeProjet" className="input-class">
                         <option>Choisir votre projet</option>
-                        <option>Immeuble résidentiel</option>
+                        <option>Installation résidentiel</option>
                         <option>Installation commercialle</option>
                         <option>Site isolé</option>
                         <option>Pompage</option>
@@ -370,7 +370,7 @@ export default function Contact() {
                   <Field label="Type de projet">
                     <select name="typeProjet" className="input-class">
                       <option>Choisir votre projet</option>
-                      <option>Immeuble résidentiel</option>
+                      <option>Installation résidentiel</option>
                       <option>Installation commercialle</option>
                       <option>Site isolé</option>
                       <option>Pompage</option>

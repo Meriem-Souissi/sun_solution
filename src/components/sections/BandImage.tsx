@@ -28,7 +28,7 @@ const BandImage = () => {
           <div className="grid grid-cols-2 gap-7">
             <div>
               <b className="font-serif text-3xl font-medium text-(--gold) block">
-                450+
+                X
               </b>
               <span className="text-[#D4DED6] text-xs mt-1 block">
                 installations
@@ -36,7 +36,7 @@ const BandImage = () => {
             </div>
             <div>
               <b className="font-serif text-3xl font-medium text-(--gold) block">
-                25 MW
+                xx MW
               </b>
               <span className="text-[#D4DED6] text-xs mt-1 block">
                 puissance cumulée
@@ -44,7 +44,7 @@ const BandImage = () => {
             </div>
             <div>
               <b className="font-serif text-3xl font-medium text-(--gold) block">
-                12
+                8
               </b>
               <span className="text-[#D4DED6] text-xs mt-1 block">
                 ans d'expérience

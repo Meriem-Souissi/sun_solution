@@ -15,21 +15,21 @@ const projects: Project[] = [
     title: "Villa à grand Tunis",
     tag: "Résidentiel",
     description:
-      "Installation solaire photovoltaïque de 5,5 kWc sur toit plat, autoconsommation avec revente du surplus.",
+      "Installation solaire photovoltaïque de 5,5 kWc sur toit, autoconsommation avec revente du surplus.",
     image: "/images/projet0.jpg",
   },
   {
     title: "El Mawassir à Zaghouan",
     tag: "Eclairage public",
     description:
-      "11 kWc en ombrière, à la fois production d'énergie et places à l'ombre.",
+      "Installation d'un système d'éclairage public solaire de 11 kWc assurant l'éclairage des espaces extérieurs tout en réduisant la consommation d'énergie et l'empreinte environnementale.",
     image: "/images/projet1.jpg",
   },
   {
-    title: "Ferme solaire de Sfax",
+    title: "Ferme solaire à Gafsa",
     tag: "Pompage photovoltaïque",
     description:
-      "*** kWc au sol, raccordement moyenne tension et suivi de production à distance.",
+      "50 kWc au sol, raccordement moyenne tension et suivi de production à distance.",
     image: "/images/projet2.jpg",
   },
   {
@@ -39,9 +39,10 @@ const projects: Project[] = [
     image: "/images/projet3.jpg",
   },
   {
-    title: "***********",
+    title: "Centrale photovoltaïque à Medenin",
     tag: "Centrale photovoltaïque",
-    description: "**********************************************",
+    description:
+      "Réalisation d'une centrale solaire photovoltaïque de puissance de 998.44 kWc, permet de produire une énergie électrique propre et renouvelable à partir du rayonnement solaire, tout en contribuant à la réduction des émissions de CO₂",
     image: "/images/projet4.jpg",
   },
 ];

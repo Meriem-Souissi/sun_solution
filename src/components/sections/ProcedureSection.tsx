@@ -17,7 +17,7 @@ const ProcedureSection = () => {
     {
       step: "03",
       title: "Démarches admin.",
-      text: "Raccordement et autorisations déposés pour vous.",
+      text: "Prise en charge les autorisations et les démarches de raccordement auprès des organismes concernés. ",
       meta: "Pris en charge",
     },
     {
@@ -35,8 +35,8 @@ const ProcedureSection = () => {
     {
       step: "06",
       title: "Service aprés vente",
-      text: "**********************************",
-      meta: "*****",
+      text: "Un suivi et une maintenance pour une performance durable",
+      meta: "Suivi continu",
     },
   ];
   return (
@@ -45,12 +45,12 @@ const ProcedureSection = () => {
         <div className="max-w-[1160px] mx-auto px-8">
           <div className="max-w-2xl mb-16">
             <div className="section-title text-(--gold)">Notre procédure</div>
-            <h2 className="font-serif text-3xl md:text-4xl text-cream font-medium">
-              De la prise de contact à la mise en service
+            <h2 className="font-serif text-3xl md:text-4xl text-(--cream) font-medium">
+              De la prise de contact à la mise en service et exploitation
             </h2>
             <p className="text-[#C7D2C9] mt-4 text-base">
-              Un déroulé encadré en cinq étapes, avec un point de suivi à
-              chacune d'elles.
+              Un déroulé encadré en six étapes, avec un point de suivi à chacune
+              d'elles.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-7">
