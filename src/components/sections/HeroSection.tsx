@@ -27,9 +27,9 @@ const HeroSection = () => {
               plus propre et durable!
             </p>
             <div className="flex gap-4 mt-9 flex-wrap">
-              <Link href="#contact">
+              <Link href="/etude">
                 <BlueButton icon={<ArrowIcon />} className="px-6 py-4">
-                  Demander une étude gratuite
+                  Etude gratuite
                 </BlueButton>
               </Link>
               <Link

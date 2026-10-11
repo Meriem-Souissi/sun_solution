@@ -28,7 +28,7 @@ const Field = ({
   );
 };
 
-export default function Contact() {
+const Contact = () => {
   const [activeForm, setActiveForm] = useState<FormType>("devis");
   const [clientType, setClientType] = useState<ClientType>("physique");
   const [submitted, setSubmitted] = useState<Record<FormType, boolean>>({
@@ -86,7 +86,7 @@ export default function Contact() {
             vers vous avec une première estimation sous 48h.
           </p>
 
-          <div className="flex gap-4 border-t border-[#E3DFD3] py-5">
+          <div className="flex gap-4 border-t border-(--line) py-5">
             <MailIcon />
             <div>
               <b className="mb-0.5 block text-sm font-semibold text-[#17242E]">
@@ -98,7 +98,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="flex gap-4 border-t border-[#E3DFD3] py-5">
+          <div className="flex gap-4 border-t border-(--line) py-5">
             <PhoneIcon />
             <div>
               <b className="mb-0.5 block text-sm font-semibold text-[#17242E]">
@@ -110,7 +110,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="flex gap-4 border-y border-[#E3DFD3] py-5">
+          <div className="flex gap-4 border-y border-(--line) py-5">
             <MapsIcon />
             <div>
               <b className="mb-0.5 block text-sm font-semibold text-[#17242E]">
@@ -133,7 +133,7 @@ export default function Contact() {
 
         {/* ==================== CONTACT FORMS ==================== */}
         <div className="w-full">
-          <div
+          {/* <div
             className="mb-5 inline-flex gap-0.5 rounded-full border border-[#E3DFD3] bg-white p-[5px]"
             role="tablist"
             aria-label="Type de demande"
@@ -165,7 +165,7 @@ export default function Contact() {
             >
               Étude technique gratuite
             </button>
-          </div>
+          </div> */}
 
           {/* ==================== DEVIS ==================== */}
           {activeForm === "devis" && (
@@ -405,7 +405,7 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+};
 
 function SubmitButton({ children }: { children: React.ReactNode }) {
   return (
@@ -457,3 +457,5 @@ function SuccessMessage({
     </div>
   );
 }
+
+export default Contact;

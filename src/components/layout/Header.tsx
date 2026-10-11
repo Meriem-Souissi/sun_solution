@@ -8,10 +8,10 @@ import logo from "./../../../public/images/logo.png";
 import { useState } from "react";
 
 const navLinks = [
-  { name: "Accueil", href: "#accueil" },
-  { name: "Services", href: "#services" },
-  { name: "Projets", href: "#projets" },
-  { name: "Procédure", href: "#procedure" },
+  { name: "Accueil", href: "/" },
+  { name: "Services", href: "/#services" },
+  { name: "Projets", href: "/#projets" },
+  { name: "Procédure", href: "/#procedure" },
 ];
 
 export default function Navbar() {
@@ -50,7 +50,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link href="#contact" className="hidden md:block">
+        <Link href="/#contact" className="hidden md:block">
           <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
         </Link>
         {/* <button className="menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
