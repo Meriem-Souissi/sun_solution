@@ -10,7 +10,7 @@ import MailIcon from "@/components/icons/MailIcon";
 
 type ClientType = "physique" | "morale";
 type ProjectType = "autorisation" | "autoproduction";
-type TensionType = "bt" | "mt" | "";
+type TensionType = "bt" | "mt";
 type CourbeChargeType = "oui" | "non" | "";
 
 interface FormState {
@@ -42,13 +42,14 @@ interface FormState {
 
   // Sous-branche MT
   mtSecteur: string;
+  mtSecteurSpecified: string;
   mtConso: string;
   mtFacturesFiles: FileList | null;
   courbeCharge: CourbeChargeType;
   mtCourbeFile: File | null;
   mtPuissance: string;
   mtHoraire: string;
-  mtSuperficie: string;
+  mtSuperficie: { toiture: string; terrain: string };
 }
 
 const Etude = () => {
@@ -71,7 +72,7 @@ const Etude = () => {
     aStegFile: null,
     aAgriFile: null,
 
-    tensionType: "",
+    tensionType: "bt",
     pSite: "",
     pReference: "",
 
@@ -79,13 +80,14 @@ const Etude = () => {
     btDisjoncteurFile: null,
 
     mtSecteur: "",
+    mtSecteurSpecified: "",
     mtConso: "",
     mtFacturesFiles: null,
     courbeCharge: "",
     mtCourbeFile: null,
     mtPuissance: "",
     mtHoraire: "",
-    mtSuperficie: "",
+    mtSuperficie: { toiture: "", terrain: "" },
   });
 
   // Modificateurs de champs textes / select
@@ -158,19 +160,20 @@ const Etude = () => {
       aTitreFile: null,
       aStegFile: null,
       aAgriFile: null,
-      tensionType: "",
+      tensionType: "bt",
       pSite: "",
       pReference: "",
       btCompteurFile: null,
       btDisjoncteurFile: null,
       mtSecteur: "",
+      mtSecteurSpecified: "",
       mtConso: "",
       mtFacturesFiles: null,
       courbeCharge: "",
       mtCourbeFile: null,
       mtPuissance: "",
       mtHoraire: "",
-      mtSuperficie: "",
+      mtSuperficie: { toiture: "", terrain: "" },
     });
     setStep(1);
     setSubmitted(false);
@@ -513,23 +516,6 @@ const Etude = () => {
                         >
                           Continuer
                         </BlueButton>
-
-                        {/* <button
-                          type="button"
-                          onClick={handleNextStep}
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-forest text-cream px-7 py-3.5 rounded-full font-bold text-sm shadow-md hover:bg-forest-deep transition-all transform hover:-translate-y-0.5 group"
-                        >
-                          Continuer
-                          <svg
-                            className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.4"
-                          >
-                            <path d="M5 12h14M13 6l6 6-6 6" />
-                          </svg>
-                        </button> */}
                       </div>
                     </div>
                   )}
@@ -746,15 +732,30 @@ const Etude = () => {
                                   >
                                     Secteur d'activité *
                                   </label>
-                                  <input
+                                  <select
                                     id="mtSecteur"
-                                    type="text"
                                     required
-                                    placeholder="Ex : agroalimentaire, textile..."
                                     value={formData.mtSecteur}
                                     onChange={handleChange}
                                     className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                                  />
+                                  >
+                                    <option value="">Choisir...</option>
+                                    <option>Industrie</option>
+                                    <option>Hôtel</option>
+                                    <option>Autre à spécifier</option>
+                                  </select>
+                                  {formData.mtSecteur ===
+                                    "Autre à spécifier" && (
+                                    <input
+                                      id="mtSecteurSpecified"
+                                      type="text"
+                                      required
+                                      placeholder="Ex : agroalimentaire, textile..."
+                                      value={formData.mtSecteurSpecified}
+                                      onChange={handleChange}
+                                      className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                                    />
+                                  )}
                                 </div>
                                 <div>
                                   <label
@@ -903,8 +904,17 @@ const Etude = () => {
                                   id="mtSuperficie"
                                   type="text"
                                   required
-                                  placeholder="Ex : 5 000 m²"
-                                  value={formData.mtSuperficie}
+                                  placeholder="Votre surface de toiture (m²)"
+                                  value={formData.mtSuperficie.toiture}
+                                  onChange={handleChange}
+                                  className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                                />
+                                <input
+                                  id="mtSuperficie"
+                                  type="text"
+                                  required
+                                  placeholder="Votre surface de terrain (m²)"
+                                  value={formData.mtSuperficie.terrain}
                                   onChange={handleChange}
                                   className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                                 />

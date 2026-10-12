@@ -51,8 +51,8 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link href="/#contact" className="hidden md:block">
-          <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
+        <Link href="/etude" className="hidden md:block">
+          <BlueButton icon={<ArrowIcon />}>Faire une etude</BlueButton>
         </Link>
         <button
           className="flex items-center justify-center cursor-pointer w-10.5 h-10.5 bg-(--white) border border-(--line) rounded-full md:hidden "
