@@ -20,6 +20,10 @@
   --sky: #6fa3d6;
 }
 
+@theme {
+  --breakpoint-md: 960px;
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -63,6 +67,14 @@ before:bg-(--gold);
     placeholder:text-(--slate)/70 focus:border-(--forest) focus:bg-white;
 }
 
+@utility ic {
+  @apply w-4.75 h-4.75 mt-0.5 shrink-0 text-(--gold-deep);
+}
+
+@utility burger-icon {
+  @apply block w-5 h-5;
+}
+
 /* Animation douce lors des transitions d'étapes */
 @keyframes stepIn {
   from {
@@ -94,11 +106,4 @@ body {
 
   /* margin: 0;
   padding: 0; */
-}
-.ic {
-  width: 19px;
-  height: 19px;
-  margin-top: 2px;
-  flex-shrink: 0;
-  color: var(--gold-deep);
 }

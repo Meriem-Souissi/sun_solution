@@ -1,7 +1,7 @@
 const CheckIcon = () => {
   return (
     <svg
-      className="h-[26px] w-[26px]"
+      className="h-6.5 w-6.5"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

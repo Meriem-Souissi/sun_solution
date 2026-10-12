@@ -26,54 +26,9 @@ const Footer = () => {
                 />
               </div>
               <p className="text-[14.5px] text-[#B7C4B9] max-w-[38ch] leading-[1.6] mb-5">
-                Installateur photovoltaïque certifié — études, installation et
+                Fournisseur photovoltaïque certifié — études, installation et
                 maintenance pour particuliers et entreprises.
               </p>
-
-              {/* <div className="space-y-0">
-                <div className="flex items-start gap-3.5 py-3.5 border-t border-(--cream)/10">
-                  <MapsIcon />
-                  <div className="flex flex-col gap-1.5">
-                    <span className="text-[14.5px] text-(--cream)">
-                      Avenue Habib Bourguiba, Tunis, Tunisie
-                    </span>
-                    <a
-                      className="inline-flex items-center gap-1.5
-                      text-[13px] font-semibold text-(--gold) hover:text-[#F2B15A] transition-colors"
-                      href="https://www.google.com/maps/search/?api=1&query=Avenue+Habib+Bourguiba+Tunis"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Voir sur Google Maps
-                      <Arrow2Icon />
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5 py-3.5 border-t border-(--cream)/10">
-                  <PhoneIcon />
-                  <div className="flex flex-col gap-1.5">
-                    <a
-                      href="tel:+21671000000"
-                      className="text-[14.5px] text-(--cream) hover:text-(--gold) transition-colors"
-                    >
-                      +216 71 000 000
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3.5 py-3.5 border-t border-(--cream)/10">
-                  <MailIcon />
-                  <div className="flex flex-col gap-1.5">
-                    <a
-                      href="mailto:contact@sunsolution.tn"
-                      className="text-[14.5px] text-(--cream) hover:text-(--gold) transition-colors"
-                    >
-                      contact@sunsolution.tn
-                    </a>
-                  </div>
-                </div>
-              </div> */}
             </div>
 
             {/* Navigation Column */}
@@ -83,31 +38,31 @@ const Footer = () => {
               </span>
               <nav className="flex gap-3.5">
                 <Link
-                  href="#accueil"
+                  href="/#accueil"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"
                 >
                   Accueil
                 </Link>
                 <Link
-                  href="#services"
+                  href="/#services"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"
                 >
                   Services
                 </Link>
                 <Link
-                  href="#projets"
+                  href="/#projets"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"
                 >
                   Projets
                 </Link>
                 <Link
-                  href="#procedure"
+                  href="/#procedure"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"
                 >
                   Procédure
                 </Link>
                 <Link
-                  href="#contact"
+                  href="/#contact"
                   className="text-[14.5px] text-[#B7C4B9] hover:text-(--cream) transition-colors"
                 >
                   Contact
