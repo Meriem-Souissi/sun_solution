@@ -11,7 +11,13 @@ import MailIcon from "@/components/icons/MailIcon";
 type ClientType = "physique" | "morale";
 type ProjectType = "autorisation" | "autoproduction";
 type TensionType = "bt" | "mt";
-type CourbeChargeType = "oui" | "non" | "";
+type CourbeChargeType = "oui" | "non";
+type mtTypeSuperficie =
+  | "Toiture plate (terrasse)"
+  | "Toiture inclinée (charpente)"
+  | "Terrain au sol (parking, champ)"
+  | "Ombrière de parking"
+  | "Aucune surface disponible";
 
 interface FormState {
   // Étape 1
@@ -49,6 +55,7 @@ interface FormState {
   mtCourbeFile: File | null;
   mtPuissance: string;
   mtHoraire: string;
+  mtTypeSuperficie: mtTypeSuperficie;
   mtSuperficie: { toiture: string; terrain: string };
 }
 
@@ -83,10 +90,11 @@ const Etude = () => {
     mtSecteurSpecified: "",
     mtConso: "",
     mtFacturesFiles: null,
-    courbeCharge: "",
+    courbeCharge: "non",
     mtCourbeFile: null,
     mtPuissance: "",
     mtHoraire: "",
+    mtTypeSuperficie: "Toiture plate (terrasse)",
     mtSuperficie: { toiture: "", terrain: "" },
   });
 
@@ -169,10 +177,11 @@ const Etude = () => {
       mtSecteurSpecified: "",
       mtConso: "",
       mtFacturesFiles: null,
-      courbeCharge: "",
+      courbeCharge: "non",
       mtCourbeFile: null,
       mtPuissance: "",
       mtHoraire: "",
+      mtTypeSuperficie: "Toiture plate (terrasse)",
       mtSuperficie: { toiture: "", terrain: "" },
     });
     setStep(1);
@@ -184,14 +193,14 @@ const Etude = () => {
       {/* PAGE HERO */}
       <section className="pt-16 pb-9">
         <div className="max-w-180 mx-auto px-8">
-          <div className="section-title">Etude</div>
+          <div className="section-title">Etude gratuite & sans engagement</div>
           <h1 className="text-(--ink) font-serif text-3xl sm:text-4xl md:text-5xl font-medium leading-tight">
-            Parlons de votre projet solaire
+            Passez à l'Energie Solaire en Toute Sérénité
           </h1>
           <p className="text-(--slate) text-base sm:text-lg mt-4 max-w-[54ch]">
-            Remplissez le formulaire en deux étapes ci-dessous : vos
-            informations, puis les détails spécifiques à votre projet. Nous
-            revenons vers vous sous 48h ouvrées.
+            Obtenez une analyse personnalisée et découvrez instantanément vos
+            économies d'électricité grâce à nos solutions photovoltaïques sur
+            mesure
           </p>
         </div>
       </section>
@@ -890,6 +899,149 @@ const Etude = () => {
                                       Horaires variables selon la saison
                                     </option>
                                   </select>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label className="block text-xs font-semibold text-(--ink) mb-2">
+                                  Type de surfaces disponibles pour les PV
+                                </label>
+                                <div className="flex gap-2.5">
+                                  <label
+                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                      formData.mtTypeSuperficie ===
+                                      "Toiture plate (terrasse)"
+                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                        : "border-(--line) text-(--slate)"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="mtTypeSuperficie"
+                                      value="Toiture plate (terrasse)"
+                                      checked={
+                                        formData.mtTypeSuperficie ===
+                                        "Toiture plate (terrasse)"
+                                      }
+                                      onChange={() =>
+                                        setFormData((p) => ({
+                                          ...p,
+                                          mtTypeSuperficie:
+                                            "Toiture plate (terrasse)",
+                                        }))
+                                      }
+                                      className="accent-forest"
+                                    />
+                                    <span>Toiture plate (terrasse)</span>
+                                  </label>
+                                  <label
+                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                      formData.mtTypeSuperficie ===
+                                      "Toiture inclinée (charpente)"
+                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                        : "border-(--line) text-(--slate)"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="mtTypeSuperficie"
+                                      value="Toiture inclinée (charpente)"
+                                      checked={
+                                        formData.mtTypeSuperficie ===
+                                        "Toiture inclinée (charpente)"
+                                      }
+                                      onChange={() =>
+                                        setFormData((p) => ({
+                                          ...p,
+                                          mtTypeSuperficie:
+                                            "Toiture inclinée (charpente)",
+                                        }))
+                                      }
+                                      className="accent-forest"
+                                    />
+                                    <span>Toiture inclinée (charpente)</span>
+                                  </label>
+                                  <label
+                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                      formData.mtTypeSuperficie ===
+                                      "Terrain au sol (parking, champ)"
+                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                        : "border-(--line) text-(--slate)"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="mtTypeSuperficie"
+                                      value="Terrain au sol (parking, champ)"
+                                      checked={
+                                        formData.mtTypeSuperficie ===
+                                        "Terrain au sol (parking, champ)"
+                                      }
+                                      onChange={() =>
+                                        setFormData((p) => ({
+                                          ...p,
+                                          mtTypeSuperficie:
+                                            "Terrain au sol (parking, champ)",
+                                        }))
+                                      }
+                                      className="accent-forest"
+                                    />
+                                    <span>Terrain au sol (parking, champ)</span>
+                                  </label>
+                                  <label
+                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                      formData.mtTypeSuperficie ===
+                                      "Ombrière de parking"
+                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                        : "border-(--line) text-(--slate)"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="mtTypeSuperficie"
+                                      value="Ombrière de parking"
+                                      checked={
+                                        formData.mtTypeSuperficie ===
+                                        "Ombrière de parking"
+                                      }
+                                      onChange={() =>
+                                        setFormData((p) => ({
+                                          ...p,
+                                          mtTypeSuperficie:
+                                            "Ombrière de parking",
+                                        }))
+                                      }
+                                      className="accent-forest"
+                                    />
+                                    <span>Ombrière de parking</span>
+                                  </label>
+                                  <label
+                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                      formData.mtTypeSuperficie ===
+                                      "Aucune surface disponible"
+                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                        : "border-(--line) text-(--slate)"
+                                    }`}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name="mtTypeSuperficie"
+                                      value="Aucune surface disponible"
+                                      checked={
+                                        formData.mtTypeSuperficie ===
+                                        "Aucune surface disponible"
+                                      }
+                                      onChange={() =>
+                                        setFormData((p) => ({
+                                          ...p,
+                                          mtTypeSuperficie:
+                                            "Aucune surface disponible",
+                                        }))
+                                      }
+                                      className="accent-forest"
+                                    />
+                                    <span>Aucune surface disponible</span>
+                                  </label>
                                 </div>
                               </div>
 
