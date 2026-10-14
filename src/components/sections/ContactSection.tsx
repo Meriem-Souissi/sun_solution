@@ -207,23 +207,39 @@ const Contact = () => {
                       className="input-class"
                     />
                   </Field>
+                  <Field label="Adresse">
+                    <input
+                      name="adresse"
+                      type="text"
+                      placeholder="Saisir votre adresse"
+                      required
+                      className="input-class"
+                    />
+                  </Field>
+                  <Field label="Référence STEG">
+                    <input
+                      name="steg"
+                      type="text"
+                      placeholder="Référence de votre STEG"
+                      className="input-class"
+                    />
+                  </Field>
 
                   <div className="grid grid-cols-1 gap-4 min-[521px]:grid-cols-2">
-                    <Field label="Type de projet">
-                      <select name="typeProjet" className="input-class">
-                        <option>Choisir votre projet</option>
-                        <option>Installation résidentielle</option>
-                        <option>Installation commerciale</option>
-                        <option>Site isolé</option>
-                        <option>Pompage</option>
-                      </select>
+                    <Field label="Superficie approximative disponible">
+                      <input
+                        name="surface"
+                        type="text"
+                        placeholder="Votre surface disponible"
+                        className="input-class"
+                      />
                     </Field>
 
                     <Field label="Puissance à installer">
                       <input
                         name="power"
-                        type="power"
-                        placeholder="Saisir la puissance à installer"
+                        type="text"
+                        placeholder="Puissance à installer"
                         required
                         className="input-class"
                       />
@@ -233,7 +249,7 @@ const Contact = () => {
                   <Field label="Votre facture mensuelle actuelle ou toute précision utile">
                     <textarea
                       name="message"
-                      placeholder="Ex : facture moyenne de 250 DT/mois, toiture plate de 120m²"
+                      placeholder="Ex : facture moyenne de 250 DT/mois ..."
                       className="input-class min-h-24 resize-y"
                     />
                   </Field>
@@ -256,7 +272,7 @@ const Contact = () => {
           )}
 
           {/* ==================== ÉTUDE TECHNIQUE ==================== */}
-          {activeForm === "etude" && (
+          {/* {activeForm === "etude" && (
             <form
               className="rounded-[20px] border border-[#E3DFD3] bg-white p-6 shadow-[0_30px_60px_-32px_rgba(30,36,32,0.25)] min-[521px]:p-10"
               onSubmit={handleSubmit("etude")}
@@ -400,7 +416,7 @@ const Contact = () => {
                 />
               )}
             </form>
-          )}
+          )} */}
         </div>
       </div>
     </section>

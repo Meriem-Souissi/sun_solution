@@ -693,7 +693,7 @@ const Etude = () => {
                                 id="pReference"
                                 type="text"
                                 required
-                                placeholder="Référence du dossier / police"
+                                placeholder="Référence"
                                 value={formData.pReference}
                                 onChange={handleChange}
                                 className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
@@ -777,7 +777,7 @@ const Etude = () => {
                                     id="mtConso"
                                     type="text"
                                     required
-                                    placeholder="Ex : 1 200 MWh/an"
+                                    placeholder="Ex : 1 200 kWh/an"
                                     value={formData.mtConso}
                                     onChange={handleChange}
                                     className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
