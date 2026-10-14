@@ -30,8 +30,8 @@ const Footer = () => {
                 />
               </div>
               <p className="text-[14.5px] text-[#B7C4B9] max-w-[38ch] leading-[1.6] mb-5">
-                Fournisseur photovoltaïque certifié — études, installation et
-                maintenance pour particuliers et entreprises.
+                EPC Fournisseur photovoltaïque certifié — études, installation
+                et maintenance pour particuliers et entreprises.
               </p>
             </div>
 

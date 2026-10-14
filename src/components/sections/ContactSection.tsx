@@ -226,7 +226,7 @@ const Contact = () => {
                   </Field>
 
                   <div className="grid grid-cols-1 gap-4 min-[521px]:grid-cols-2">
-                    <Field label="Superficie approximative disponible">
+                    <Field label="Superficie disponible">
                       <input
                         name="surface"
                         type="text"
@@ -246,10 +246,10 @@ const Contact = () => {
                     </Field>
                   </div>
 
-                  <Field label="Votre facture mensuelle actuelle ou toute précision utile">
+                  <Field label="Votre message">
                     <textarea
                       name="message"
-                      placeholder="Ex : facture moyenne de 250 DT/mois ..."
+                      placeholder="Votre message"
                       className="input-class min-h-24 resize-y"
                     />
                   </Field>
