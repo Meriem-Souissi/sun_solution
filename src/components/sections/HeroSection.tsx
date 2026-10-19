@@ -3,8 +3,14 @@ import Link from "next/link";
 import imgHeroSection from "./../../../public/images/heroSection2.jpg";
 import { ArrowIcon } from "../icons/ArrowIcon";
 import BlueButton from "../ui/BlueButton";
+import Check_Icon from "../icons/Check_Icon";
 
 const HeroSection = () => {
+  const infoTab = [
+    { number: "+X", desc: "installations réalisées" },
+    { number: "8 ans", desc: "d'expérience terrain" },
+    { number: "15 ans", desc: "garantie panneaux" },
+  ];
   return (
     <>
       <section id="accueil" className="pt-20 pb-0">
@@ -40,30 +46,16 @@ const HeroSection = () => {
               </Link>
             </div>
             <div className="flex items-center gap-7 mt-14 pt-7 border-t border-(--line) flex-wrap">
-              <div className="flex items-center gap-2.5">
-                <b className="font-serif text-2xl font-medium text-(--forest)">
-                  +X
-                </b>
-                <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
-                  installations réalisées
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <b className="font-serif text-2xl font-medium text-(--forest)">
-                  8 ans
-                </b>
-                <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
-                  d'expérience terrain
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <b className="font-serif text-2xl font-medium text-(--forest)">
-                  15 ans
-                </b>
-                <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
-                  garantie panneaux
-                </span>
-              </div>
+              {infoTab.map((elt, index) => (
+                <div className="flex items-center gap-2.5" key={index}>
+                  <b className="font-serif text-2xl font-medium text-(--forest)">
+                    {elt.number}
+                  </b>
+                  <span className="text-xs text-slateCustom leading-snug max-w-[11ch]">
+                    {elt.desc}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -89,7 +81,7 @@ const HeroSection = () => {
         </div>
       </section>
       <section className="pt-20 pb-20">
-        <div className="max-w-[1160px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-14">
+        <div className="max-w-290 mx-auto px-8 grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-14">
           <p className="font-serif font-medium text-2xl lg:text-3xl leading-snug max-w-[14ch]">
             Une énergie que vous produisez, que vous maîtrisez.
           </p>
@@ -115,16 +107,7 @@ const HeroSection = () => {
                   key={index}
                   className="flex items-center gap-2.5 text-sm text-ink font-medium"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#D9A441"
-                    strokeWidth="2.4"
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
+                  <Check_Icon />
                   {item}
                 </div>
               ))}

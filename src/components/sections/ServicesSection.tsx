@@ -25,8 +25,9 @@ const ServicesSection = () => {
   ];
   return (
     <>
-      <section id="services" className="pt-20 pb-20 bg-(--sage)">
+      <section id="services" className="pt-18 pb-20 bg-(--sage)">
         <div className="max-w-290 mx-auto px-8">
+          <div className="section-title">Nos services</div>
           <div className="flex justify-between items-end gap-10 mb-16 flex-wrap">
             <h2 className="font-serif text-3xl md:text-4xl font-medium max-w-xs">
               Tout ce qu'il faut, du toit au compteur

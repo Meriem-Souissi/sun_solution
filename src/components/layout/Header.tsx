@@ -13,6 +13,7 @@ const navLinks = [
   { name: "Services", href: "/#services" },
   { name: "Projets", href: "/#projets" },
   { name: "Procédure", href: "/#procedure" },
+  { name: "Contactez-nous", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -51,8 +52,8 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <Link href="/etude" className="hidden md:block">
-          <BlueButton icon={<ArrowIcon />}>Faire une étude</BlueButton>
+        <Link href="/devis" className="hidden md:block">
+          <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
         </Link>
         <button
           className="flex items-center justify-center cursor-pointer w-10.5 h-10.5 bg-(--white) border border-(--line) rounded-full md:hidden "
@@ -74,13 +75,13 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Link href="/etude">
+            <Link href="/devis">
               <BlueButton
                 icon={<ArrowIcon />}
                 className="my-3.75"
                 onClick={() => isMenuOpen(!menuOpen)}
               >
-                Faire une etude
+                Demander un devis
               </BlueButton>
             </Link>
           </nav>

@@ -3,6 +3,12 @@ import bandImage from "./../../../public/images/Band.jpg";
 import React from "react";
 
 const BandImage = () => {
+  const infoTab = [
+    { number: "+X", desc: "installations réalisées" },
+    { number: "xx MW", desc: "puissance cumulée" },
+    { number: "8 ans", desc: "d'expérience terrain" },
+    { number: "98%", desc: "clients satisfaits" },
+  ];
   return (
     <>
       <section className="relative min-h-[360px] py-[120px] flex items-center overflow-hidden">
@@ -15,7 +21,7 @@ const BandImage = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E263C]/90 via-[#0E263C]/60 to-[#0E263C]/25"></div>
         </div>
-        <div className="relative z-10 max-w-[1160px] mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
+        <div className="relative z-10 max-w-290 mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
           <div>
             <h2 className="font-serif text-2xl lg:text-3xl text-(--cream) max-w-xs">
               Une équipe locale, du matériel certifié
@@ -26,38 +32,16 @@ const BandImage = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-7">
-            <div>
-              <b className="font-serif text-3xl font-medium text-(--gold) block">
-                X
-              </b>
-              <span className="text-[#D4DED6] text-xs mt-1 block">
-                installations
-              </span>
-            </div>
-            <div>
-              <b className="font-serif text-3xl font-medium text-(--gold) block">
-                xx MW
-              </b>
-              <span className="text-[#D4DED6] text-xs mt-1 block">
-                puissance cumulée
-              </span>
-            </div>
-            <div>
-              <b className="font-serif text-3xl font-medium text-(--gold) block">
-                8
-              </b>
-              <span className="text-[#D4DED6] text-xs mt-1 block">
-                ans d'expérience
-              </span>
-            </div>
-            <div>
-              <b className="font-serif text-3xl font-medium text-(--gold) block">
-                98%
-              </b>
-              <span className="text-[#D4DED6] text-xs mt-1 block">
-                clients satisfaits
-              </span>
-            </div>
+            {infoTab.map((elt, index) => (
+              <div key={index}>
+                <b className="font-serif text-3xl font-medium text-(--gold) block">
+                  {elt.number}
+                </b>
+                <span className="text-[#D4DED6] text-xs mt-1 block">
+                  {elt.desc}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

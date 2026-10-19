@@ -42,7 +42,7 @@ const ProcedureSection = () => {
   return (
     <>
       <section id="procedure" className="py-28 bg-(--forest) text-(--cream)">
-        <div className="max-w-[1160px] mx-auto px-8">
+        <div className="max-w-290 mx-auto px-8">
           <div className="max-w-2xl mb-16">
             <div className="section-title text-(--gold)">Notre procédure</div>
             <h2 className="font-serif text-3xl md:text-4xl text-(--cream) font-medium">
@@ -59,7 +59,7 @@ const ProcedureSection = () => {
                 <span className="font-serif text-base text-(--gold) block mb-4.5">
                   {p.step}
                 </span>
-                <h3 className="text-(--cream) text-lg font-medium mb-2.5 min-h-[44px]">
+                <h3 className="text-(--cream) text-lg font-medium mb-2.5 min-h-11">
                   {p.title}
                 </h3>
                 <p className="text-[#B7C4B9] text-xs leading-relaxed">
