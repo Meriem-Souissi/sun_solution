@@ -1,12 +1,11 @@
 "use client";
-
-import { ArrowIcon } from "@/components/icons/ArrowIcon";
 import Arrow2Icon from "@/components/icons/Arrow2Icon";
 import MapsIcon from "@/components/icons/MapsIcon";
 import PhoneIcon from "@/components/icons/PhoneIcon";
 import BlueButton from "@/components/ui/BlueButton";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import MailIcon from "@/components/icons/MailIcon";
+import FileInput from "@/components/ui/FileInput";
 
 type ClientType = "physique" | "morale";
 type ProjectType = "autorisation" | "autoproduction";
@@ -18,6 +17,7 @@ type mtTypeSuperficie =
   | "Terrain au sol (parking, champ)"
   | "Ombrière de parking"
   | "Aucune surface disponible";
+type TypeDeStructure = "un étage" | "deux étages";
 
 interface FormState {
   // Étape 1
@@ -57,10 +57,18 @@ interface FormState {
   mtHoraire: string;
   mtTypeSuperficie: mtTypeSuperficie;
   mtSuperficie: { toiture: string; terrain: string };
+
+  // Étape 3 - Branche Dimensions de l'installation
+  d_pv_onduleur: string;
+  d_onduleur_compteur: string;
+  d_pv_regard: string;
+  roofType: string;
+  roofTypeSpecified: string;
+  structureType: TypeDeStructure;
 }
 
 const Etude = () => {
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormState>({
@@ -96,6 +104,12 @@ const Etude = () => {
     mtHoraire: "",
     mtTypeSuperficie: "Toiture plate (terrasse)",
     mtSuperficie: { toiture: "", terrain: "" },
+    d_pv_onduleur: "",
+    d_onduleur_compteur: "",
+    d_pv_regard: "",
+    roofType: "",
+    roofTypeSpecified: "",
+    structureType: "un étage",
   });
 
   // Modificateurs de champs textes / select
@@ -124,26 +138,65 @@ const Etude = () => {
     }
   };
 
-  // Validation passage Étape 1 -> Étape 2
+  // Validation et passage à l'étape suivante (Étape 1 -> 2 -> 3)
   const handleNextStep = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (
-      !formData.nom ||
-      !formData.tel ||
-      !formData.email ||
-      !formData.adresse
-    ) {
-      alert("Veuillez remplir tous les champs obligatoires de l'étape 1.");
-      return;
+
+    // --- VALIDATION ÉTAPE 1 ---
+    if (step === 1) {
+      if (
+        !formData.nom ||
+        !formData.tel ||
+        !formData.email ||
+        !formData.adresse
+      ) {
+        alert("Veuillez remplir tous les champs obligatoires de l'étape 1.");
+        return;
+      }
+      if (formData.clientType === "morale" && !formData.matricule) {
+        alert("Veuillez renseigner la matricule fiscale.");
+        return;
+      }
+      setStep(2);
     }
-    if (formData.clientType === "morale" && !formData.matricule) {
-      alert("Veuillez renseigner la matricule fiscale.");
-      return;
+
+    // --- VALIDATION ÉTAPE 2 ---
+    else if (step === 2) {
+      if (formData.projectType === "autorisation") {
+        if (!formData.aPuissance || !formData.aSurface || !formData.aSite) {
+          alert(
+            "Veuillez remplir tous les champs obligatoires pour l'autorisation.",
+          );
+          return;
+        }
+      } else if (formData.projectType === "autoproduction") {
+        if (!formData.tensionType || !formData.pSite || !formData.pReference) {
+          alert("Veuillez renseigner les informations de tension et de site.");
+          return;
+        }
+        if (
+          formData.tensionType === "mt" &&
+          (!formData.mtSecteur || !formData.mtConso)
+        ) {
+          alert("Veuillez remplir les détails pour la Moyenne Tension.");
+          return;
+        }
+      }
+      setStep(3);
     }
-    setStep(2);
+
+    // Défilement doux vers le haut du formulaire après changement d'étape
     window.scrollTo({ top: 200, behavior: "smooth" });
   };
 
+  //Retour à l'étape précedente
+  const handlePrevStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (step > 1) {
+      setStep((prev) => (prev - 1) as 1 | 2 | 3);
+      window.scrollTo({ top: 200, behavior: "smooth" });
+    }
+  };
   // Soumission du formulaire
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -183,6 +236,12 @@ const Etude = () => {
       mtHoraire: "",
       mtTypeSuperficie: "Toiture plate (terrasse)",
       mtSuperficie: { toiture: "", terrain: "" },
+      d_pv_onduleur: "",
+      d_onduleur_compteur: "",
+      d_pv_regard: "",
+      roofType: "",
+      roofTypeSpecified: "",
+      structureType: "un étage",
     });
     setStep(1);
     setSubmitted(false);
@@ -276,7 +335,7 @@ const Etude = () => {
                   >
                     <b
                       className={`w-7 h-7 rounded-full shrink-0 flex items-center justify-center font-serif text-xs border transition-colors ${
-                        step === 1
+                        step >= 1
                           ? "bg-(--forest) border-(--forest) text-(--cream)"
                           : "bg-(--sage) border-(--forest) text-(--forest)"
                       }`}
@@ -293,14 +352,31 @@ const Etude = () => {
                   >
                     <b
                       className={`w-7 h-7 rounded-full shrink-0 flex items-center justify-center font-serif text-xs border transition-colors ${
-                        step === 2
+                        step >= 2
                           ? "bg-(--forest) border-(--forest) text-(--cream)"
-                          : "bg-(--white) border-(--line) text-(--slate)"
+                          : "bg-(--sage) border-(--forest) text-(--forest)"
                       }`}
                     >
                       2
                     </b>
                     Détails du projet
+                  </div>
+
+                  <div className="flex-1 max-w-11.5 h-px bg-(--line)"></div>
+
+                  <div
+                    className={`flex items-center gap-2.5 text-sm font-semibold transition-colors ${step === 3 ? "text-(--ink)" : "text-(--slate)"}`}
+                  >
+                    <b
+                      className={`w-7 h-7 rounded-full shrink-0 flex items-center justify-center font-serif text-xs border transition-colors ${
+                        step === 3
+                          ? "bg-(--forest) border-(--forest) text-(--cream)"
+                          : "bg-(--sage) border-(--forest) text-(--forest)"
+                      }`}
+                    >
+                      3
+                    </b>
+                    Dimensions de l'instalation
                   </div>
                 </div>
 
@@ -514,17 +590,6 @@ const Etude = () => {
                             <span>Autoproduction</span>
                           </label>
                         </div>
-                      </div>
-
-                      {/* Actions Etape 1 */}
-                      <div className="pt-4">
-                        <BlueButton
-                          icon={<ArrowIcon />}
-                          className="w-full"
-                          onClick={handleNextStep}
-                        >
-                          Continuer
-                        </BlueButton>
                       </div>
                     </div>
                   )}
@@ -1075,31 +1140,192 @@ const Etude = () => {
                           )}
                         </div>
                       )}
-
-                      {/* Actions Etape 2 */}
-                      <div className="pt-4 flex gap-3.5">
-                        <button
-                          type="button"
-                          onClick={() => setStep(1)}
-                          className="flex-1 px-6 py-3.5 rounded-full font-semibold text-sm text-(--ink) border border-(--line) bg-transparent hover:border-(--forest) hover:bg-(--forest)/5 transition-colors"
-                        >
-                          Retour
-                        </button>
-                        <BlueButton type="submit" className="py-3.5 shadow-md">
-                          Envoyer ma demande
-                        </BlueButton>
+                    </div>
+                  )}
+                  {/* ÉTAPE 3 */}
+                  {step == 3 && (
+                    <div className="animate-step-in space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label
+                            htmlFor="d_pv_onduleur"
+                            className="block text-xs font-semibold text-(--ink) mb-2"
+                          >
+                            Distance entre le champ PV (Structure) et l'onduleur
+                          </label>
+                          <input
+                            id="d_pv_onduleur"
+                            type="text"
+                            required
+                            placeholder="Ex: 5m"
+                            value={formData.d_pv_onduleur}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="d_onduleur_compteur"
+                            className="block text-xs font-semibold text-(--ink) mb-2"
+                          >
+                            Distance entre l'onduleur et le compteur STEG
+                          </label>
+                          <input
+                            id="d_onduleur_compteur"
+                            type="text"
+                            required
+                            placeholder="Ex : 10m "
+                            value={formData.d_onduleur_compteur}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                          />
+                        </div>
                       </div>
 
-                      <div className="text-xs text-(--slate) text-center mt-3.5">
-                        Réponse sous 48h ouvrées, sans engagement.
+                      <div>
+                        <label
+                          htmlFor="d_pv_regard"
+                          className="block text-xs font-semibold text-(--ink) mb-2"
+                        >
+                          Distance entre le champ PV (Structure) et le regard de
+                          terre
+                        </label>
+                        <input
+                          id="d_pv_regard"
+                          type="text"
+                          required
+                          placeholder="Ex: 10 m"
+                          value={formData.d_pv_regard}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="roofType"
+                          className="block text-xs font-semibold text-(--ink) mb-2"
+                        >
+                          Type de toiture
+                        </label>
+                        <select
+                          id="roofType"
+                          required
+                          value={formData.roofType}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                        >
+                          <option value="">Choisir...</option>
+                          <option>Béton</option>
+                          <option>Auvent</option>
+                          <option>Charpente</option>
+                          <option>Autre à spécifier</option>
+                        </select>
+                        {formData.roofType === "Autre à spécifier" && (
+                          <input
+                            id="roofTypeSpecified"
+                            type="text"
+                            required
+                            placeholder="Spécifier votre type de toiture"
+                            value={formData.roofTypeSpecified}
+                            onChange={handleChange}
+                            className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                          />
+                        )}
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="structureType"
+                          className="block text-xs font-semibold text-(--ink) mb-2"
+                        >
+                          Type de Structure
+                        </label>
+                        <div className="flex gap-2.5">
+                          <label
+                            className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                              formData.structureType === "un étage"
+                                ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                : "border-(--line) text-(--slate)"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="structureType"
+                              value="un étage"
+                              checked={formData.structureType === "un étage"}
+                              onChange={() =>
+                                setFormData((p) => ({
+                                  ...p,
+                                  structureType: "un étage",
+                                }))
+                              }
+                              className="accent-forest"
+                            />
+                            <span>Un étage</span>
+                          </label>
+
+                          <label
+                            className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                              formData.structureType === "deux étages"
+                                ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                : "border-(--line) text-(--slate)"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="structureType"
+                              value="deux étages"
+                              checked={formData.structureType === "deux étages"}
+                              onChange={() =>
+                                setFormData((p) => ({
+                                  ...p,
+                                  structureType: "deux étages",
+                                }))
+                              }
+                              className="accent-forest"
+                            />
+                            <span>Deux étages</span>
+                          </label>
+                        </div>
                       </div>
                     </div>
                   )}
+                  {/* Boutons d'Actions  */}
+                  <div className="pt-4 flex gap-3.5">
+                    {/* Bouton de retour (affiché uniquement à partir de l'étape 2) */}
+                    {step > 1 && (
+                      <button
+                        type="button"
+                        onClick={handlePrevStep}
+                        className="cursor-pointer flex-1 px-6 py-3.5 rounded-full font-semibold text-sm text-ink border border-line hover:border-forest hover:bg-forest/5 transition-colors"
+                      >
+                        Retour
+                      </button>
+                    )}
+
+                    {/* Bouton suivant (affiché aux étapes 1 et 2) */}
+                    {step < 3 ? (
+                      <BlueButton type="button" onClick={handleNextStep}>
+                        Continuer
+                      </BlueButton>
+                    ) : (
+                      /* Bouton final de soumission à l'étape 3 */
+                      <button
+                        type="submit"
+                        className="bg-(--forest) text-(--cream) font-bold text-sm px-7 py-3.5 rounded-full shadow-md hover:bg-(--forest-deep) transition-all transform hover:-translate-y-0.5"
+                      >
+                        Envoyer ma demande
+                      </button>
+                    )}
+                  </div>
+
+                  {/* <div className="text-xs text-(--slate) text-center mt-3.5">
+                        Réponse sous 48h ouvrées, sans engagement.
+                      </div> */}
                 </form>
               </>
             ) : (
               /* ECRAN DE SUCCÈS */
-              <div className="bg-white border border-(--line) rounded-2xl p-8 sm:p-10 shadow-xl flex flex-col items-center text-center animate-step-in">
+              <div className="bg-(--white) border border-(--line) rounded-2xl p-8 sm:p-10 shadow-xl flex flex-col items-center text-center animate-step-in">
                 <div className="w-15 h-15 rounded-full bg-(--sage) text-forest flex items-center justify-center mb-5">
                   <svg
                     className="w-7 h-7"
@@ -1118,13 +1344,9 @@ const Etude = () => {
                   Merci, votre demande a bien été reçue. Notre équipe l'étudie
                   et vous recontacte sous 48h ouvrées.
                 </p>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="px-6 py-3 rounded-full font-semibold text-sm text-(--ink) border border-(--line) hover:border-(--forest) hover:bg-forest/5 transition-colors"
-                >
+                <BlueButton type="button" onClick={handleReset}>
                   Envoyer une nouvelle demande
-                </button>
+                </BlueButton>
               </div>
             )}
           </div>
@@ -1133,74 +1355,5 @@ const Etude = () => {
     </main>
   );
 };
-
-/* COMPOSANT AUXILIAIRE POUR L'UPLOAD DE FICHIER */
-interface FileInputProps {
-  label: string;
-  multiple?: boolean;
-  file?: File | null;
-  fileList?: FileList | null;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
-
-function FileInput({
-  label,
-  multiple = false,
-  file,
-  fileList,
-  onChange,
-}: FileInputProps) {
-  let text = "Choisir un fichier — PDF, JPG ou PNG";
-  let hasFile = false;
-
-  if (multiple && fileList && fileList.length > 0) {
-    text =
-      fileList.length > 1
-        ? `${fileList.length} fichiers sélectionnés`
-        : fileList[0].name;
-    hasFile = true;
-  } else if (!multiple && file) {
-    text = file.name;
-    hasFile = true;
-  }
-
-  return (
-    <div>
-      <label className="block text-xs font-semibold text-(--ink) mb-2">
-        {label}
-      </label>
-      <label
-        className={`flex items-center gap-3 border rounded-lg p-3.5 cursor-pointer transition-all ${
-          hasFile
-            ? "border-(--forest) bg-(--sage)"
-            : "border-dashed border-(--line) bg-(--cream) hover:border-(--forest)-soft"
-        }`}
-      >
-        <svg
-          className="w-4 h-4 text-forest shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.7"
-        >
-          <path d="M12 16V4M7 9l5-5 5 5" />
-          <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
-        </svg>
-        <span
-          className={`text-xs truncate ${hasFile ? "text-(--ink) font-semibold" : "text-slate-custom"}`}
-        >
-          {text}
-        </span>
-        <input
-          type="file"
-          accept=".pdf,.jpg,.jpeg,.png"
-          multiple={multiple}
-          onChange={onChange}
-          className="hidden"
-        />
-      </label>
-    </div>
-  );
-}
 
 export default Etude;

@@ -32,7 +32,7 @@
 }
 
 @utility blue-button {
-  @apply inline-flex flex-1 items-center justify-center gap-2 
+  @apply w-full inline-flex flex-1 items-center justify-center gap-2 
          bg-(--forest) text-(--cream)
          px-5.5 py-2.75 
          rounded-full 
