@@ -8,7 +8,7 @@ import MailIcon from "@/components/icons/MailIcon";
 import FileInput from "@/components/ui/FileInput";
 
 type ClientType = "physique" | "morale";
-type ProjectType = "autorisation" | "autoproduction";
+type ProjectType = "autorisation" | "autoproduction" | "pompage";
 type TensionType = "bt" | "mt";
 type CourbeChargeType = "oui" | "non";
 type mtTypeSuperficie =
@@ -17,6 +17,7 @@ type mtTypeSuperficie =
   | "Terrain au sol (parking, champ)"
   | "Ombrière de parking"
   | "Aucune surface disponible";
+type GridConnection = "oui" | "non";
 type TypeDeStructure = "un étage" | "deux étages";
 
 interface FormState {
@@ -57,6 +58,12 @@ interface FormState {
   mtHoraire: string;
   mtTypeSuperficie: mtTypeSuperficie;
   mtSuperficie: { toiture: string; terrain: string };
+
+  // Étape 2 - Branche Pompage
+  pPuissanceMoteur: string;
+  pProfondeurPuit: string;
+  pPuissanceVariateur: string;
+  pGridConnection: GridConnection;
 
   // Étape 3 - Branche Dimensions de l'installation
   d_pv_onduleur: string;
@@ -104,6 +111,12 @@ const Etude = () => {
     mtHoraire: "",
     mtTypeSuperficie: "Toiture plate (terrasse)",
     mtSuperficie: { toiture: "", terrain: "" },
+
+    pPuissanceMoteur: "",
+    pProfondeurPuit: "",
+    pPuissanceVariateur: "",
+    pGridConnection: "oui",
+
     d_pv_onduleur: "",
     d_onduleur_compteur: "",
     d_pv_regard: "",
@@ -236,6 +249,10 @@ const Etude = () => {
       mtHoraire: "",
       mtTypeSuperficie: "Toiture plate (terrasse)",
       mtSuperficie: { toiture: "", terrain: "" },
+      pPuissanceMoteur: "",
+      pProfondeurPuit: "",
+      pPuissanceVariateur: "",
+      pGridConnection: "oui",
       d_pv_onduleur: "",
       d_onduleur_compteur: "",
       d_pv_regard: "",
@@ -589,6 +606,29 @@ const Etude = () => {
                             />
                             <span>Autoproduction</span>
                           </label>
+
+                          <label
+                            className={`flex items-center gap-2 border rounded-full px-4 py-2.5 cursor-pointer text-xs transition-all ${
+                              formData.projectType === "pompage"
+                                ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                : "border-(--line) text-(--slate)"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="projectType"
+                              value="pompage"
+                              checked={formData.projectType === "pompage"}
+                              onChange={() =>
+                                setFormData((p) => ({
+                                  ...p,
+                                  projectType: "pompage",
+                                }))
+                              }
+                              className="accent-forest"
+                            />
+                            <span>Pompage</span>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -676,58 +716,64 @@ const Etude = () => {
                       {/* BRANCHE : AUTOPRODUCTION */}
                       {formData.projectType === "autoproduction" && (
                         <div className="space-y-4">
-                          <div>
-                            <label className="block text-xs font-semibold text-(--ink) mb-2">
-                              Type de projet *
-                            </label>
-                            <div className="flex gap-2.5 flex-wrap">
-                              <label
-                                className={`flex items-center gap-2 border rounded-full px-4 py-2.5 cursor-pointer text-xs transition-all ${
-                                  formData.tensionType === "bt"
-                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                    : "border-(--line) text-(--slate)"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="tensionType"
-                                  value="bt"
-                                  checked={formData.tensionType === "bt"}
-                                  onChange={() =>
-                                    setFormData((p) => ({
-                                      ...p,
-                                      tensionType: "bt",
-                                    }))
-                                  }
-                                  className="accent-forest"
-                                />
-                                <span>Basse tension</span>
+                          {formData.clientType === "morale" ? (
+                            <div>
+                              <label className="block text-xs font-semibold text-(--ink) mb-2">
+                                Type de projet *
                               </label>
+                              <div className="flex gap-2.5 flex-wrap">
+                                <label
+                                  className={`flex items-center gap-2 border rounded-full px-4 py-2.5 cursor-pointer text-xs transition-all ${
+                                    formData.tensionType === "bt"
+                                      ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                      : "border-(--line) text-(--slate)"
+                                  }`}
+                                >
+                                  <input
+                                    type="radio"
+                                    name="tensionType"
+                                    value="bt"
+                                    checked={formData.tensionType === "bt"}
+                                    onChange={() =>
+                                      setFormData((p) => ({
+                                        ...p,
+                                        tensionType: "bt",
+                                      }))
+                                    }
+                                    className="accent-forest"
+                                  />
+                                  <span>Basse tension</span>
+                                </label>
 
-                              <label
-                                className={`flex items-center gap-2 border rounded-full px-4 py-2.5 cursor-pointer text-xs transition-all ${
-                                  formData.tensionType === "mt"
-                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                    : "border-(--line) text-(--slate)"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="tensionType"
-                                  value="mt"
-                                  checked={formData.tensionType === "mt"}
-                                  onChange={() =>
-                                    setFormData((p) => ({
-                                      ...p,
-                                      tensionType: "mt",
-                                    }))
-                                  }
-                                  className="accent-forest"
-                                />
-                                <span>Moyenne tension</span>
-                              </label>
+                                <label
+                                  className={`flex items-center gap-2 border rounded-full px-4 py-2.5 cursor-pointer text-xs transition-all ${
+                                    formData.tensionType === "mt"
+                                      ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                      : "border-(--line) text-(--slate)"
+                                  }`}
+                                >
+                                  <input
+                                    type="radio"
+                                    name="tensionType"
+                                    value="mt"
+                                    checked={formData.tensionType === "mt"}
+                                    onChange={() =>
+                                      setFormData((p) => ({
+                                        ...p,
+                                        tensionType: "mt",
+                                      }))
+                                    }
+                                    className="accent-forest"
+                                  />
+                                  <span>Moyenne tension</span>
+                                </label>
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            <span className="block text-xs font-semibold text-(--gold-deep) tracking-wider uppercase mb-3">
+                              Basse tension
+                            </span>
+                          )}
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -769,9 +815,12 @@ const Etude = () => {
                           {/* SOUS-BRANCHE : BASSE TENSION */}
                           {formData.tensionType === "bt" && (
                             <div className="animate-step-in mt-4 pt-4 border-t border-dashed border-(--line) space-y-4">
-                              <span className="block text-xs font-semibold text-(--gold-deep) tracking-wider uppercase mb-3">
-                                Basse tension
-                              </span>
+                              {formData.clientType === "morale" ? (
+                                <span className="block text-xs font-semibold text-(--gold-deep) tracking-wider uppercase mb-3">
+                                  Basse tension
+                                </span>
+                              ) : null}
+
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <FileInput
                                   label="Le compteur"
@@ -971,9 +1020,9 @@ const Etude = () => {
                                 <label className="block text-xs font-semibold text-(--ink) mb-2">
                                   Type de surfaces disponibles pour les PV
                                 </label>
-                                <div className="flex gap-2.5">
+                                <div className="flex flex-wrap gap-2.5">
                                   <label
-                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                    className={`flex items-center gap-2 w-58 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
                                       formData.mtTypeSuperficie ===
                                       "Toiture plate (terrasse)"
                                         ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
@@ -1000,7 +1049,7 @@ const Etude = () => {
                                     <span>Toiture plate (terrasse)</span>
                                   </label>
                                   <label
-                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                    className={`flex items-center w-58 gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
                                       formData.mtTypeSuperficie ===
                                       "Toiture inclinée (charpente)"
                                         ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
@@ -1027,7 +1076,7 @@ const Etude = () => {
                                     <span>Toiture inclinée (charpente)</span>
                                   </label>
                                   <label
-                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                    className={`flex items-center w-58 gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
                                       formData.mtTypeSuperficie ===
                                       "Terrain au sol (parking, champ)"
                                         ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
@@ -1054,7 +1103,7 @@ const Etude = () => {
                                     <span>Terrain au sol (parking, champ)</span>
                                   </label>
                                   <label
-                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                    className={`flex items-center w-58 gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
                                       formData.mtTypeSuperficie ===
                                       "Ombrière de parking"
                                         ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
@@ -1081,7 +1130,7 @@ const Etude = () => {
                                     <span>Ombrière de parking</span>
                                   </label>
                                   <label
-                                    className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                    className={`flex items-center gap-2 w-58 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
                                       formData.mtTypeSuperficie ===
                                       "Aucune surface disponible"
                                         ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
@@ -1138,6 +1187,117 @@ const Etude = () => {
                               </div>
                             </div>
                           )}
+                        </div>
+                      )}
+                      {/* BRANCHE : POMPAGE */}
+                      {formData.projectType === "pompage" && (
+                        <div className="space-y-4">
+                          <div>
+                            <label
+                              htmlFor="pPuissanceMoteur"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Puissance du moteur
+                            </label>
+                            <input
+                              id="pPuissanceMoteur"
+                              type="text"
+                              required
+                              placeholder="En cheveau ou kW"
+                              value={formData.pPuissanceMoteur}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label
+                              htmlFor="pProfondeurPuit"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Profondeur du puit
+                            </label>
+                            <input
+                              id="pProfondeurPuit"
+                              type="text"
+                              required
+                              placeholder="Ex: 2m"
+                              value={formData.pProfondeurPuit}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label
+                              htmlFor="pPuissanceVariateur"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Puissance de variateur
+                            </label>
+                            <input
+                              id="pPuissanceVariateur"
+                              type="text"
+                              required
+                              placeholder="Ex: 2 kW"
+                              value={formData.pPuissanceVariateur}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-semibold text-(--ink) mb-2">
+                              Raccordement au réseau STEG
+                            </label>
+                            <div className="flex gap-2.5">
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.pGridConnection === "oui"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="pGridConnection"
+                                  value="oui"
+                                  checked={formData.pGridConnection === "oui"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      pGridConnection: "oui",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Oui</span>
+                              </label>
+
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.pGridConnection === "non"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="pGridConnection"
+                                  value="non"
+                                  checked={formData.pGridConnection === "non"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      pGridConnection: "non",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Non</span>
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
