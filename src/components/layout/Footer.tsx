@@ -5,9 +5,10 @@ import Link from "next/link";
 const Footer = () => {
   const navLinks = [
     { name: "Accueil", href: "/" },
-    { name: "Services", href: "/#services" },
+    // { name: "Services", href: "/#services" },
     { name: "Projets", href: "/#projets" },
     { name: "Procédure", href: "/#procedure" },
+    { name: "Boutique", href: "/boutique" },
     { name: "Contactez-nous", href: "/#contact" },
   ];
 
