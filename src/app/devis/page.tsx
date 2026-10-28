@@ -1,11 +1,11 @@
 "use client";
-import Arrow2Icon from "@/components/icons/Arrow2Icon";
-import MapsIcon from "@/components/icons/MapsIcon";
-import PhoneIcon from "@/components/icons/PhoneIcon";
-import BlueButton from "@/components/ui/BlueButton";
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import MailIcon from "@/components/icons/MailIcon";
-import FileInput from "@/components/ui/FileInput";
+import Arrow2Icon from "./../../components/icons/Arrow2Icon";
+import MapsIcon from "./../../components/icons/MapsIcon";
+import PhoneIcon from "./../../components/icons/PhoneIcon";
+import BlueButton from "./../../components/ui/BlueButton";
+import MailIcon from "./../../components/icons/MailIcon";
+import FileInput from "./../../components/ui/FileInput";
 
 type ClientType = "physique" | "morale";
 type ProjectType = "autorisation" | "autoproduction" | "pompage";
@@ -17,8 +17,7 @@ type mtTypeSuperficie =
   | "Terrain au sol (parking, champ)"
   | "Ombrière de parking"
   | "Aucune surface disponible";
-type GridConnection = "oui" | "non";
-type TypeDeStructure = "un étage" | "deux étages";
+type TypeDeStructure = "un étage" | "deux étages" | "trois étages";
 
 interface FormState {
   // Étape 1
@@ -57,13 +56,16 @@ interface FormState {
   mtPuissance: string;
   mtHoraire: string;
   mtTypeSuperficie: mtTypeSuperficie;
-  mtSuperficie: { toiture: string; terrain: string };
+  mtSuperficieToiture: string;
+  mtSuperficieTerrain: string;
 
   // Étape 2 - Branche Pompage
   pPuissanceMoteur: string;
-  pProfondeurPuit: string;
-  pPuissanceVariateur: string;
-  pGridConnection: GridConnection;
+  pWaterLevel: string;
+  pSiteImplimentation: string;
+  pEspaceModules: string;
+  pEspaceModulesSpecifier: string;
+  pTypesCulture: string;
 
   // Étape 3 - Branche Dimensions de l'installation
   d_pv_onduleur: string;
@@ -110,12 +112,15 @@ const Etude = () => {
     mtPuissance: "",
     mtHoraire: "",
     mtTypeSuperficie: "Toiture plate (terrasse)",
-    mtSuperficie: { toiture: "", terrain: "" },
+    mtSuperficieToiture: "",
+    mtSuperficieTerrain: "",
 
     pPuissanceMoteur: "",
-    pProfondeurPuit: "",
-    pPuissanceVariateur: "",
-    pGridConnection: "oui",
+    pWaterLevel: "",
+    pSiteImplimentation: "",
+    pEspaceModules: "",
+    pEspaceModulesSpecifier: "",
+    pTypesCulture: "",
 
     d_pv_onduleur: "",
     d_onduleur_compteur: "",
@@ -176,22 +181,57 @@ const Etude = () => {
     // --- VALIDATION ÉTAPE 2 ---
     else if (step === 2) {
       if (formData.projectType === "autorisation") {
-        if (!formData.aPuissance || !formData.aSurface || !formData.aSite) {
+        if (
+          !formData.aPuissance ||
+          !formData.aSurface ||
+          !formData.aSite ||
+          !formData.aTitreFile ||
+          !formData.aStegFile ||
+          !formData.aAgriFile
+        ) {
           alert(
             "Veuillez remplir tous les champs obligatoires pour l'autorisation.",
           );
           return;
         }
       } else if (formData.projectType === "autoproduction") {
-        if (!formData.tensionType || !formData.pSite || !formData.pReference) {
+        if (
+          !formData.tensionType ||
+          !formData.pSite ||
+          !formData.pReference ||
+          !formData.btCompteurFile ||
+          !formData.btDisjoncteurFile
+        ) {
           alert("Veuillez renseigner les informations de tension et de site.");
           return;
         }
         if (
           formData.tensionType === "mt" &&
-          (!formData.mtSecteur || !formData.mtConso)
+          (!formData.mtSecteur ||
+            !formData.mtConso ||
+            !formData.mtFacturesFiles ||
+            !formData.courbeCharge ||
+            !formData.mtCourbeFile ||
+            !formData.mtPuissance ||
+            !formData.mtHoraire ||
+            !formData.mtTypeSuperficie ||
+            !formData.mtSuperficieToiture ||
+            !formData.mtSuperficieTerrain)
         ) {
           alert("Veuillez remplir les détails pour la Moyenne Tension.");
+          return;
+        }
+      } else if (formData.projectType === "pompage") {
+        if (
+          !formData.pPuissanceMoteur ||
+          !formData.pWaterLevel ||
+          !formData.pSiteImplimentation ||
+          !formData.pEspaceModules ||
+          !formData.pTypesCulture
+        ) {
+          alert(
+            "Veuillez remplir tous les champs obligatoires pour le pompage.",
+          );
           return;
         }
       }
@@ -213,6 +253,18 @@ const Etude = () => {
   // Soumission du formulaire
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (
+      !formData.d_pv_onduleur ||
+      !formData.d_onduleur_compteur ||
+      !formData.d_pv_regard ||
+      !formData.roofType ||
+      !formData.structureType
+    ) {
+      alert(
+        "Veuillez remplir les détails pour les dimensions de l'installation.",
+      );
+      return;
+    }
     console.log("Formulaire soumis :", formData);
     setSubmitted(true);
     window.scrollTo({ top: 200, behavior: "smooth" });
@@ -248,11 +300,14 @@ const Etude = () => {
       mtPuissance: "",
       mtHoraire: "",
       mtTypeSuperficie: "Toiture plate (terrasse)",
-      mtSuperficie: { toiture: "", terrain: "" },
+      mtSuperficieToiture: "",
+      mtSuperficieTerrain: "",
       pPuissanceMoteur: "",
-      pProfondeurPuit: "",
-      pPuissanceVariateur: "",
-      pGridConnection: "oui",
+      pWaterLevel: "",
+      pSiteImplimentation: "",
+      pEspaceModules: "",
+      pEspaceModulesSpecifier: "",
+      pTypesCulture: "",
       d_pv_onduleur: "",
       d_onduleur_compteur: "",
       d_pv_regard: "",
@@ -481,7 +536,7 @@ const Etude = () => {
                       {/* Segmented Client Type */}
                       <div>
                         <label className="block text-xs font-semibold text-(--ink) mb-2">
-                          Type de client
+                          Type de client *
                         </label>
                         <div className="flex gap-2.5 flex-wrap">
                           <label
@@ -556,7 +611,7 @@ const Etude = () => {
                       {/* Segmented Project Type */}
                       <div className="pt-2">
                         <label className="block text-xs font-semibold text-(--ink) mb-2">
-                          Type de projet
+                          Type de projet *
                         </label>
                         <div className="flex gap-2.5 flex-wrap">
                           <label
@@ -641,17 +696,20 @@ const Etude = () => {
                       {formData.projectType === "autorisation" && (
                         <div className="space-y-4">
                           <FileInput
-                            label="Titre"
+                            required={true}
+                            label="Titre *"
                             file={formData.aTitreFile}
                             onChange={(e) => handleFileChange("aTitreFile", e)}
                           />
                           <FileInput
-                            label="Étude préliminaire de raccordement à la STEG"
+                            required={true}
+                            label="Étude préliminaire de raccordement à la STEG *"
                             file={formData.aStegFile}
                             onChange={(e) => handleFileChange("aStegFile", e)}
                           />
                           <FileInput
-                            label="Accord du ministère de l'Agriculture"
+                            required={true}
+                            label="Accord du ministère de l'Agriculture *"
                             file={formData.aAgriFile}
                             onChange={(e) => handleFileChange("aAgriFile", e)}
                           />
@@ -823,14 +881,16 @@ const Etude = () => {
 
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <FileInput
-                                  label="Le compteur"
+                                  label="Le compteur *"
+                                  required={true}
                                   file={formData.btCompteurFile}
                                   onChange={(e) =>
                                     handleFileChange("btCompteurFile", e)
                                   }
                                 />
                                 <FileInput
-                                  label="Le disjoncteur"
+                                  label="Le disjoncteur *"
+                                  required={true}
                                   file={formData.btDisjoncteurFile}
                                   onChange={(e) =>
                                     handleFileChange("btDisjoncteurFile", e)
@@ -900,7 +960,8 @@ const Etude = () => {
                               </div>
 
                               <FileInput
-                                label="Les 12 dernières factures"
+                                label="Les 12 dernières factures *"
+                                required={true}
                                 multiple
                                 fileList={formData.mtFacturesFiles}
                                 onChange={(e) =>
@@ -910,7 +971,7 @@ const Etude = () => {
 
                               <div>
                                 <label className="block text-xs font-semibold text-(--ink) mb-2">
-                                  Courbe de charge disponible ?
+                                  Courbe de charge disponible ? *
                                 </label>
                                 <div className="flex gap-2.5">
                                   <label
@@ -964,7 +1025,8 @@ const Etude = () => {
                               {formData.courbeCharge === "oui" && (
                                 <div className="animate-step-in">
                                   <FileInput
-                                    label="La courbe de charge"
+                                    label="La courbe de charge *"
+                                    required
                                     file={formData.mtCourbeFile}
                                     onChange={(e) =>
                                       handleFileChange("mtCourbeFile", e)
@@ -1018,7 +1080,7 @@ const Etude = () => {
 
                               <div>
                                 <label className="block text-xs font-semibold text-(--ink) mb-2">
-                                  Type de surfaces disponibles pour les PV
+                                  Type de surfaces disponibles pour les PV *
                                 </label>
                                 <div className="flex flex-wrap gap-2.5">
                                   <label
@@ -1129,33 +1191,6 @@ const Etude = () => {
                                     />
                                     <span>Ombrière de parking</span>
                                   </label>
-                                  <label
-                                    className={`flex items-center gap-2 w-58 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                      formData.mtTypeSuperficie ===
-                                      "Aucune surface disponible"
-                                        ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                        : "border-(--line) text-(--slate)"
-                                    }`}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="mtTypeSuperficie"
-                                      value="Aucune surface disponible"
-                                      checked={
-                                        formData.mtTypeSuperficie ===
-                                        "Aucune surface disponible"
-                                      }
-                                      onChange={() =>
-                                        setFormData((p) => ({
-                                          ...p,
-                                          mtTypeSuperficie:
-                                            "Aucune surface disponible",
-                                        }))
-                                      }
-                                      className="accent-forest"
-                                    />
-                                    <span>Aucune surface disponible</span>
-                                  </label>
                                 </div>
                               </div>
 
@@ -1171,7 +1206,7 @@ const Etude = () => {
                                   type="text"
                                   required
                                   placeholder="Votre surface de toiture (m²)"
-                                  value={formData.mtSuperficie.toiture}
+                                  value={formData.mtSuperficieToiture}
                                   onChange={handleChange}
                                   className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                                 />
@@ -1180,7 +1215,7 @@ const Etude = () => {
                                   type="text"
                                   required
                                   placeholder="Votre surface de terrain (m²)"
-                                  value={formData.mtSuperficie.terrain}
+                                  value={formData.mtSuperficieTerrain}
                                   onChange={handleChange}
                                   className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                                 />
@@ -1197,7 +1232,7 @@ const Etude = () => {
                               htmlFor="pPuissanceMoteur"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Puissance du moteur
+                              Puissance de la moto pompe *
                             </label>
                             <input
                               id="pPuissanceMoteur"
@@ -1212,17 +1247,17 @@ const Etude = () => {
 
                           <div>
                             <label
-                              htmlFor="pProfondeurPuit"
+                              htmlFor="pWaterLevel"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Profondeur du puit
+                              Niveau de l'eau HMT *
                             </label>
                             <input
-                              id="pProfondeurPuit"
+                              id="pWaterLevel"
                               type="text"
                               required
                               placeholder="Ex: 2m"
-                              value={formData.pProfondeurPuit}
+                              value={formData.pWaterLevel}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
@@ -1230,78 +1265,127 @@ const Etude = () => {
 
                           <div>
                             <label
-                              htmlFor="pPuissanceVariateur"
+                              htmlFor="pSiteImplimentation"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Puissance de variateur
+                              Site d'implimentation *
                             </label>
                             <input
-                              id="pPuissanceVariateur"
+                              id="pSiteImplimentation"
                               type="text"
                               required
                               placeholder="Ex: 2 kW"
-                              value={formData.pPuissanceVariateur}
+                              value={formData.pSiteImplimentation}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-xs font-semibold text-(--ink) mb-2">
-                              Raccordement au réseau STEG
+                            <label
+                              htmlFor="pEspaceModules"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Espace pour la fixatation du modules *
                             </label>
-                            <div className="flex gap-2.5">
-                              <label
-                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                  formData.pGridConnection === "oui"
-                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                    : "border-(--line) text-(--slate)"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="pGridConnection"
-                                  value="oui"
-                                  checked={formData.pGridConnection === "oui"}
-                                  onChange={() =>
-                                    setFormData((p) => ({
-                                      ...p,
-                                      pGridConnection: "oui",
-                                    }))
-                                  }
-                                  className="accent-forest"
-                                />
-                                <span>Oui</span>
-                              </label>
-
-                              <label
-                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                  formData.pGridConnection === "non"
-                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                    : "border-(--line) text-(--slate)"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="pGridConnection"
-                                  value="non"
-                                  checked={formData.pGridConnection === "non"}
-                                  onChange={() =>
-                                    setFormData((p) => ({
-                                      ...p,
-                                      pGridConnection: "non",
-                                    }))
-                                  }
-                                  className="accent-forest"
-                                />
-                                <span>Non</span>
-                              </label>
-                            </div>
+                            <select
+                              id="pEspaceModules"
+                              required
+                              value={formData.pEspaceModules}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            >
+                              <option value="">Choisir ...</option>
+                              <option>Au sol</option>
+                              <option>Sur toiture</option>
+                              <option>Autre à spécifier</option>
+                            </select>
+                            {formData.pEspaceModules ===
+                              "Autre à spécifier" && (
+                              <input
+                                id="mtSecteurSpecified"
+                                type="text"
+                                required
+                                placeholder="Spécifier l'espace pour fixation des modules"
+                                value={formData.pEspaceModulesSpecifier}
+                                onChange={handleChange}
+                                className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              />
+                            )}
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="pTypesCulture"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Type de culture *
+                            </label>
+                            <select
+                              id="pTypesCulture"
+                              required
+                              value={formData.pTypesCulture}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            >
+                              <option value="">
+                                Sélectionnez le type de cultute
+                              </option>
+                              <option>Blé dur</option>
+                              <option>Blé tendre</option>
+                              <option>Orge</option>
+                              <option>Avoine</option>
+                              <option>Triticale</option>
+                              <option>Oliviers</option>
+                              <option>Amandiers</option>
+                              <option>
+                                Agrumes : oranges, citrons, mandarines
+                              </option>
+                              <option>Pommiers, poiriers et pêches</option>
+                              <option>Abricotiers et pruniers</option>
+                              <option>Figuiers</option>
+                              <option>Pistachiers</option>
+                              <option>Vignes</option>
+                              <option>Tomates</option>
+                              <option>Pommes de terre</option>
+                              <option>Oignons</option>
+                              <option>Piments et poivrons</option>
+                              <option>Courgettes</option>
+                              <option>Concombres</option>
+                              <option>Carottes</option>
+                              <option>Navets</option>
+                              <option>Laitues et salades</option>
+                              <option>Choux</option>
+                              <option>Aubergines</option>
+                              <option>Artichauts</option>
+                              <option>Melons et pastèques</option>
+                              <option>Luzerne</option>
+                              <option>Bersim (trèfle d'Alexandrie)</option>
+                              <option>Sulla</option>
+                              <option>Ray-grass</option>
+                              <option>Maïs fourrager</option>
+                              <option>Sorgho fourrager</option>
+                              <option>Avoine fourragère</option>
+                              <option>Fèves</option>
+                              <option>Pois chiches</option>
+                              <option>Lentilles</option>
+                              <option>Poins secs</option>
+                              <option>Haricots secs</option>
+                              <option>Dattes</option>
+                              <option>Fourrages irrigués</option>
+                              <option>
+                                Grenadiers et autres arbres fruitiers adaptés
+                                aux oasis
+                              </option>
+                              <option>Fraises</option>
+                              <option>Raisin</option>
+                              <option>Tournesol</option>
+                            </select>
                           </div>
                         </div>
                       )}
                     </div>
                   )}
+
                   {/* ÉTAPE 3 */}
                   {step == 3 && (
                     <div className="animate-step-in space-y-4">
@@ -1312,6 +1396,7 @@ const Etude = () => {
                             className="block text-xs font-semibold text-(--ink) mb-2"
                           >
                             Distance entre le champ PV (Structure) et l'onduleur
+                            *
                           </label>
                           <input
                             id="d_pv_onduleur"
@@ -1328,7 +1413,7 @@ const Etude = () => {
                             htmlFor="d_onduleur_compteur"
                             className="block text-xs font-semibold text-(--ink) mb-2"
                           >
-                            Distance entre l'onduleur et le compteur STEG
+                            Distance entre l'onduleur et le compteur STEG *
                           </label>
                           <input
                             id="d_onduleur_compteur"
@@ -1348,7 +1433,7 @@ const Etude = () => {
                           className="block text-xs font-semibold text-(--ink) mb-2"
                         >
                           Distance entre le champ PV (Structure) et le regard de
-                          terre
+                          terre *
                         </label>
                         <input
                           id="d_pv_regard"
@@ -1365,7 +1450,7 @@ const Etude = () => {
                           htmlFor="roofType"
                           className="block text-xs font-semibold text-(--ink) mb-2"
                         >
-                          Type de toiture
+                          Type de toiture *
                         </label>
                         <select
                           id="roofType"
@@ -1397,7 +1482,7 @@ const Etude = () => {
                           htmlFor="structureType"
                           className="block text-xs font-semibold text-(--ink) mb-2"
                         >
-                          Type de Structure
+                          Type de Structure *
                         </label>
                         <div className="flex gap-2.5">
                           <label
@@ -1445,10 +1530,38 @@ const Etude = () => {
                             />
                             <span>Deux étages</span>
                           </label>
+                          {(formData.projectType === "pompage" ||
+                            formData.tensionType === "mt") && (
+                            <label
+                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                formData.structureType === "trois étages"
+                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                  : "border-(--line) text-(--slate)"
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="structureType"
+                                value="trois étages"
+                                checked={
+                                  formData.structureType === "trois étages"
+                                }
+                                onChange={() =>
+                                  setFormData((p) => ({
+                                    ...p,
+                                    structureType: "trois étages",
+                                  }))
+                                }
+                                className="accent-forest"
+                              />
+                              <span>Trois étages</span>
+                            </label>
+                          )}
                         </div>
                       </div>
                     </div>
                   )}
+
                   {/* Boutons d'Actions  */}
                   <div className="pt-4 flex gap-3.5">
                     {/* Bouton de retour (affiché uniquement à partir de l'étape 2) */}
@@ -1477,10 +1590,6 @@ const Etude = () => {
                       </button>
                     )}
                   </div>
-
-                  {/* <div className="text-xs text-(--slate) text-center mt-3.5">
-                        Réponse sous 48h ouvrées, sans engagement.
-                      </div> */}
                 </form>
               </>
             ) : (
@@ -1500,7 +1609,7 @@ const Etude = () => {
                 <h3 className="font-serif text-2xl font-medium mb-2.5">
                   Demande envoyée
                 </h3>
-                <p className="text-slate-custom text-sm sm:text-base max-w-[38ch] leading-relaxed mb-7">
+                <p className="text-(--slate) text-sm sm:text-base max-w-[38ch] leading-relaxed mb-7">
                   Merci, votre demande a bien été reçue. Notre équipe l'étudie
                   et vous recontacte sous 48h ouvrées.
                 </p>

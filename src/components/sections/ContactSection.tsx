@@ -114,7 +114,7 @@ const Contact = () => {
             {!submitted ? (
               <>
                 <div className="grid grid-cols-1 gap-4 min-[521px]:grid-cols-2">
-                  <Field label="Nom complet">
+                  <Field label="Nom complet *">
                     <input
                       name="nom"
                       type="text"
@@ -124,7 +124,7 @@ const Contact = () => {
                     />
                   </Field>
 
-                  <Field label="Téléphone">
+                  <Field label="Téléphone *">
                     <input
                       name="telephone"
                       type="tel"
@@ -135,7 +135,7 @@ const Contact = () => {
                   </Field>
                 </div>
 
-                <Field label="Email">
+                <Field label="Email *">
                   <input
                     name="email"
                     type="email"
@@ -144,7 +144,7 @@ const Contact = () => {
                     className="input-class"
                   />
                 </Field>
-                <Field label="Adresse">
+                <Field label="Adresse *">
                   <input
                     name="adresse"
                     type="text"
@@ -154,7 +154,7 @@ const Contact = () => {
                   />
                 </Field>
 
-                <Field label="Votre message">
+                <Field label="Votre message *">
                   <textarea
                     name="message"
                     placeholder="Votre message"

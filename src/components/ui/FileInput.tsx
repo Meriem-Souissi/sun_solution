@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 interface FileInputProps {
   label: string;
+  required: boolean;
   multiple?: boolean;
   file?: File | null;
   fileList?: FileList | null;
@@ -8,6 +9,7 @@ interface FileInputProps {
 }
 const FileInput = ({
   label,
+  required = false,
   multiple = false,
   file,
   fileList,
@@ -57,6 +59,7 @@ const FileInput = ({
         <input
           type="file"
           accept=".pdf,.jpg,.jpeg,.png"
+          required={required}
           multiple={multiple}
           onChange={onChange}
           className="hidden"
