@@ -189,12 +189,13 @@ const Etude = () => {
           !formData.aStegFile ||
           !formData.aAgriFile
         ) {
-          alert(
-            "Veuillez remplir tous les champs obligatoires pour l'autorisation.",
-          );
+          alert("Veuillez remplir tous les champs de vos informations.");
           return;
         }
-      } else if (formData.projectType === "autoproduction") {
+      } else if (
+        formData.projectType === "autoproduction" &&
+        formData.clientType === "physique"
+      ) {
         if (
           !formData.tensionType ||
           !formData.pSite ||
@@ -202,7 +203,21 @@ const Etude = () => {
           !formData.btCompteurFile ||
           !formData.btDisjoncteurFile
         ) {
-          alert("Veuillez renseigner les informations de tension et de site.");
+          alert("Veuillez remplir tous les détails du projet.");
+          return;
+        }
+      } else if (
+        formData.projectType === "autoproduction" &&
+        formData.clientType === "morale"
+      ) {
+        if (
+          formData.tensionType === "bt" &&
+          (!formData.pSite ||
+            !formData.pReference ||
+            !formData.btCompteurFile ||
+            !formData.btDisjoncteurFile)
+        ) {
+          alert("Veuillez remplir tous les détails pour la basse tension.");
           return;
         }
         if (
@@ -211,14 +226,14 @@ const Etude = () => {
             !formData.mtConso ||
             !formData.mtFacturesFiles ||
             !formData.courbeCharge ||
-            !formData.mtCourbeFile ||
+            // !formData.mtCourbeFile ||
             !formData.mtPuissance ||
             !formData.mtHoraire ||
             !formData.mtTypeSuperficie ||
             !formData.mtSuperficieToiture ||
             !formData.mtSuperficieTerrain)
         ) {
-          alert("Veuillez remplir les détails pour la Moyenne Tension.");
+          alert("Veuillez remplir tous les détails pour la moyenne tension.");
           return;
         }
       } else if (formData.projectType === "pompage") {
@@ -229,9 +244,7 @@ const Etude = () => {
           !formData.pEspaceModules ||
           !formData.pTypesCulture
         ) {
-          alert(
-            "Veuillez remplir tous les champs obligatoires pour le pompage.",
-          );
+          alert("Veuillez remplir tous les champs pour le pompage.");
           return;
         }
       }
@@ -261,7 +274,7 @@ const Etude = () => {
       !formData.structureType
     ) {
       alert(
-        "Veuillez remplir les détails pour les dimensions de l'installation.",
+        "Veuillez remplir tous les détails pour les dimensions de l'installation.",
       );
       return;
     }
@@ -1195,30 +1208,45 @@ const Etude = () => {
                               </div>
 
                               <div>
-                                <label
-                                  htmlFor="mtSuperficie"
-                                  className="block text-xs font-semibold text-(--ink) mb-2"
-                                >
+                                <label className="block text-xs font-semibold text-(--ink) mb-2">
                                   Superficie approximative disponible *
                                 </label>
-                                <input
-                                  id="mtSuperficie"
-                                  type="text"
-                                  required
-                                  placeholder="Votre surface de toiture (m²)"
-                                  value={formData.mtSuperficieToiture}
-                                  onChange={handleChange}
-                                  className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                                />
-                                <input
-                                  id="mtSuperficie"
-                                  type="text"
-                                  required
-                                  placeholder="Votre surface de terrain (m²)"
-                                  value={formData.mtSuperficieTerrain}
-                                  onChange={handleChange}
-                                  className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                                />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                  <div>
+                                    <label
+                                      htmlFor="mtSuperficieToiture"
+                                      className="block text-xs font-semibold text-(--ink) mb-2"
+                                    >
+                                      Surface de toiture *
+                                    </label>
+                                    <input
+                                      id="mtSuperficieToiture"
+                                      type="text"
+                                      required
+                                      placeholder="Votre surface de toiture (m²)"
+                                      value={formData.mtSuperficieToiture}
+                                      onChange={handleChange}
+                                      className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label
+                                      htmlFor="mtSuperficieTerrain"
+                                      className="block text-xs font-semibold text-(--ink) mb-2"
+                                    >
+                                      Surface de terrain *
+                                    </label>
+                                    <input
+                                      id="mtSuperficieTerrain"
+                                      type="text"
+                                      required
+                                      placeholder="Votre surface de terrain (m²)"
+                                      value={formData.mtSuperficieTerrain}
+                                      onChange={handleChange}
+                                      className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                                    />
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           )}
@@ -1238,7 +1266,7 @@ const Etude = () => {
                               id="pPuissanceMoteur"
                               type="text"
                               required
-                              placeholder="En cheveau ou kW"
+                              placeholder="En cheveau (HP)"
                               value={formData.pPuissanceMoteur}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
@@ -1274,7 +1302,7 @@ const Etude = () => {
                               id="pSiteImplimentation"
                               type="text"
                               required
-                              placeholder="Ex: 2 kW"
+                              placeholder="Localisation ..."
                               value={formData.pSiteImplimentation}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
@@ -1328,7 +1356,7 @@ const Etude = () => {
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             >
                               <option value="">
-                                Sélectionnez le type de cultute
+                                Sélectionnez le type de culture
                               </option>
                               <option>Blé dur</option>
                               <option>Blé tendre</option>
