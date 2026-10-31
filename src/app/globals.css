@@ -18,6 +18,7 @@
   --sun: linear-gradient(135deg, #b8420f 0%, #d97f1e 100%);
   --sun-hover: linear-gradient(135deg, #a6390c 0%, #c46f16 100%);
   --sky: #6fa3d6;
+  --slate-custom: #59636b;
 }
 
 @theme {
@@ -29,6 +30,16 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Suppression des flèches par défaut sur les inputs de type number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 @utility blue-button {
@@ -52,7 +63,7 @@
 before:bg-(--gold);
 }
 
-@utility project-card {
+@utility new-card {
   @apply relative flex flex-col rounded-2xl border border-slate-800 bg-slate-900/60 transition-all duration-300 
   hover:-translate-y-1 
   hover:border-(--line)

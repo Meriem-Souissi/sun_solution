@@ -6,9 +6,9 @@ const Footer = () => {
   const navLinks = [
     { name: "Accueil", href: "/" },
     // { name: "Services", href: "/#services" },
-    { name: "Projets", href: "/#projets" },
+    { name: "Projets", href: "/projets" },
     { name: "Procédure", href: "/#procedure" },
-    { name: "Boutique", href: "/boutique" },
+    { name: "Equipements", href: "/equipements" },
     { name: "Contactez-nous", href: "/#contact" },
   ];
 

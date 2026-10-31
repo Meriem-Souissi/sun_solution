@@ -66,6 +66,7 @@ interface FormState {
   pEspaceModules: string;
   pEspaceModulesSpecifier: string;
   pTypesCulture: string;
+  pTypesCultureSpecifier: string;
 
   // Étape 3 - Branche Dimensions de l'installation
   d_pv_onduleur: string;
@@ -76,7 +77,7 @@ interface FormState {
   structureType: TypeDeStructure;
 }
 
-const Etude = () => {
+const Devis = () => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
@@ -121,6 +122,7 @@ const Etude = () => {
     pEspaceModules: "",
     pEspaceModulesSpecifier: "",
     pTypesCulture: "",
+    pTypesCultureSpecifier: "",
 
     d_pv_onduleur: "",
     d_onduleur_compteur: "",
@@ -321,6 +323,7 @@ const Etude = () => {
       pEspaceModules: "",
       pEspaceModulesSpecifier: "",
       pTypesCulture: "",
+      pTypesCultureSpecifier: "",
       d_pv_onduleur: "",
       d_onduleur_compteur: "",
       d_pv_regard: "",
@@ -1331,7 +1334,7 @@ const Etude = () => {
                             {formData.pEspaceModules ===
                               "Autre à spécifier" && (
                               <input
-                                id="mtSecteurSpecified"
+                                id="pEspaceModulesSpecifier"
                                 type="text"
                                 required
                                 placeholder="Spécifier l'espace pour fixation des modules"
@@ -1407,7 +1410,19 @@ const Etude = () => {
                               <option>Fraises</option>
                               <option>Raisin</option>
                               <option>Tournesol</option>
+                              <option>Autre à spécifier</option>
                             </select>
+                            {formData.pTypesCulture === "Autre à spécifier" && (
+                              <input
+                                id="pTypesCultureSpecifier"
+                                type="text"
+                                required
+                                placeholder="Spécifier l'espace pour fixation des modules"
+                                value={formData.pTypesCultureSpecifier}
+                                onChange={handleChange}
+                                className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              />
+                            )}
                           </div>
                         </div>
                       )}
@@ -1610,12 +1625,9 @@ const Etude = () => {
                       </BlueButton>
                     ) : (
                       /* Bouton final de soumission à l'étape 3 */
-                      <button
-                        type="submit"
-                        className="bg-(--forest) text-(--cream) font-bold text-sm px-7 py-3.5 rounded-full shadow-md hover:bg-(--forest-deep) transition-all transform hover:-translate-y-0.5"
-                      >
+                      <BlueButton type="submit" onClick={handleSubmit}>
                         Envoyer ma demande
-                      </button>
+                      </BlueButton>
                     )}
                   </div>
                 </form>
@@ -1653,4 +1665,4 @@ const Etude = () => {
   );
 };
 
-export default Etude;
+export default Devis;

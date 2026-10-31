@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import BlueButton from "./BlueButton";
+import { ArrowIcon } from "../icons/ArrowIcon";
 
 type Product = {
   id: string;
@@ -16,6 +18,7 @@ type Product = {
     label: string;
     variant: "gold" | "navy" | "light";
   };
+  calculator?: string;
 };
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -103,21 +106,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Boutons d'actions */}
         <div className="flex flex-col gap-2.5">
-          <Link
-            href=""
-            className="flex items-center justify-center gap-2 bg-(--forest) text-(--cream) py-3.5 px-4 rounded-full font-bold text-sm shadow-[0_12px_24px_-14px_rgba(20,72,112,0.55)] hover:bg-(--forest-deep) hover:-translate-y-0.5 transition-all group"
-          >
-            <span>Passer une commande</span>
-            <svg
-              className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.75"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </Link>
+          <BlueButton icon={<ArrowIcon />}>Passer une commande</BlueButton>
 
           <a
             href={product.techSheetUrl}
@@ -137,6 +126,11 @@ export default function ProductCard({ product }: { product: Product }) {
             </svg>
             <span>Fiche technique</span>
           </a>
+          {product.calculator && (
+            <Link href={product.calculator}>
+              <BlueButton>Simuler l'installation</BlueButton>
+            </Link>
+          )}
         </div>
       </div>
     </article>
