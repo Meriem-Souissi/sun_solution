@@ -48,6 +48,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/sungrow.jpg",
     techSheetUrl: "/fiches-techniques/Fiche Onduleur.pdf",
     badge: { label: "Pro & Industriel", variant: "navy" },
+    calculator: "/calculateur_onduleur",
   },
   {
     id: "huawei-sun2000-2-4-6",
