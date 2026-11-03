@@ -100,7 +100,7 @@ const PRODUCTS: Product[] = [
       "La gamme Huawei SUN2000 (30–40 kW) regroupe des onduleurs triphasés adaptés aux installations photovoltaïques de moyenne et grande puissance, notamment dans les secteurs commercial et industriel.",
     features: ["Sécurité renforcée", "Conception robuste"],
     image: "/images/equipements/onduleur HWAWEI 2000-30ktl-m3.jpg",
-    techSheetUrl: "/fiches-techniques/SUN2000-50kTL-M3.pdf",
+    techSheetUrl: "/fiches-techniques/SUN2000-30-40-50KTL.pdf",
     badge: { label: "Résidentiel & Tertiaire", variant: "light" },
     calculator: "/calculateurs/onduleur",
   },
