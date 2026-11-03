@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowIcon } from "@/components/icons/ArrowIcon";
+import ArrowIcon from "@/components/icons/ArrowIcon";
 import BlueButton from "@/components/ui/BlueButton";
 import React, { useState, useEffect, useMemo } from "react";
 

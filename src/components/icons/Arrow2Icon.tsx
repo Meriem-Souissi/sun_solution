@@ -3,7 +3,7 @@ import React from "react";
 const Svg = () => {
   return (
     <svg
-      className="ic"
+      className="w-4.75 h-4.75 mt-0.5 shrink-0 text-(--gold-deep)"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

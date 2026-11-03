@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BlueButton from "../ui/BlueButton";
 import BurgerIcon from "../icons/BurgerIcon";
-import { ArrowIcon } from "../icons/ArrowIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 import logo from "./../../../public/images/logo.png";
 import { useState } from "react";
 

@@ -78,12 +78,17 @@ before:bg-(--gold);
     placeholder:text-(--slate)/70 focus:border-(--forest) focus:bg-white;
 }
 
-@utility ic {
-  @apply w-4.75 h-4.75 mt-0.5 shrink-0 text-(--gold-deep);
-}
-
 @utility burger-icon {
   @apply block w-5 h-5;
+}
+
+@utility product-card-icon {
+  @apply relative w-10 h-10 cursor-pointer 
+  flex  items-center justify-center rounded-full 
+  bg-[rgba(255,255,255,0.96)] text-(--forest) 
+  border border-solid border-(--line) shadow-[0_8px_18px_-10px_rgba(23,36,46,0.45)] 
+  transition-colors transition-transform duration-200 
+  hover:bg-(--forest) hover:text-(--cream) hover:border-(--forest) hover:transform-[translateY(-1px)];
 }
 
 /* Animation douce lors des transitions d'étapes */
@@ -114,7 +119,31 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   font-family: "Inter", sans-serif;
+}
 
-  /* margin: 0;
-  padding: 0; */
+.product-card-icon::after {
+  /* content: attr(data-tip); */
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 4;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 8px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.product-card-icon:hover::after,
+.product-card-icon:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
 }

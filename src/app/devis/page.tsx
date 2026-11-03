@@ -464,7 +464,7 @@ const Devis = () => {
                     >
                       3
                     </b>
-                    Dimensions de l'instalation
+                    Dimensions de l'installation
                   </div>
                 </div>
 

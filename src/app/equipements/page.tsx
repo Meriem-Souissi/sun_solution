@@ -33,7 +33,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/jonsol.jpg",
     techSheetUrl: "/fiches-techniques/fiche technique Jonsol.pdf",
     badge: { label: "Top Vente", variant: "gold" },
-    calculator: "/calculateur_panneaux",
+    calculator: "/calculateurs/panneaux",
   },
   {
     id: "sungrow-sg320hx",
@@ -48,7 +48,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/sungrow.jpg",
     techSheetUrl: "/fiches-techniques/Fiche Onduleur.pdf",
     badge: { label: "Pro & Industriel", variant: "navy" },
-    calculator: "/calculateur_onduleur",
+    calculator: "/calculateurs/onduleur",
   },
   {
     id: "huawei-sun2000-2-4-6",
@@ -63,6 +63,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/onduleur HWAWEI 2000-2KTL.L1.jpg",
     techSheetUrl: "/fiches-techniques/SUN2000-6KTL-L1.pdf",
     badge: { label: "Résidentiel & Tertiaire", variant: "light" },
+    calculator: "/calculateurs/onduleur",
   },
   {
     id: "huawei-sun2000-6-10",
@@ -74,6 +75,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/onduleur HWAWEI 2000-2KTL.L1.jpg",
     techSheetUrl: "/fiches-techniques/SUN2000-6KTL-M1.pdf",
     badge: { label: "Résidentiel & Tertiaire", variant: "light" },
+    calculator: "/calculateurs/onduleur",
   },
   {
     id: "huawei-sun2000-12-25",
@@ -88,6 +90,7 @@ const PRODUCTS: Product[] = [
     image: "/images/equipements/onduleur HWAWEI 2000-12ktl-m5.jpg",
     techSheetUrl: "/fiches-techniques/sun2000-12-15-17-20-25ktl-m5.pdf",
     badge: { label: "Résidentiel & Tertiaire", variant: "light" },
+    calculator: "/calculateurs/onduleur",
   },
   {
     id: "huawei-sun2000-30-40",
@@ -97,8 +100,9 @@ const PRODUCTS: Product[] = [
       "La gamme Huawei SUN2000 (30–40 kW) regroupe des onduleurs triphasés adaptés aux installations photovoltaïques de moyenne et grande puissance, notamment dans les secteurs commercial et industriel.",
     features: ["Sécurité renforcée", "Conception robuste"],
     image: "/images/equipements/onduleur HWAWEI 2000-30ktl-m3.jpg",
-    techSheetUrl: "/fiches-techniques/SUN2000-30-40KTL-M3.pdf",
+    techSheetUrl: "/fiches-techniques/SUN2000-50kTL-M3.pdf",
     badge: { label: "Résidentiel & Tertiaire", variant: "light" },
+    calculator: "/calculateurs/onduleur",
   },
   {
     id: "sungrow-emu-200a",
@@ -111,7 +115,7 @@ const PRODUCTS: Product[] = [
       "Optimisé pour centrales commerciales et grands parcs",
     ],
     image: "/images/equipements/EMU200A.jpg",
-    techSheetUrl: "/fiches-techniques/EMU200A",
+    techSheetUrl: "/fiches-techniques/EMU200A.pdf",
     badge: { label: "Gestion d'Énergie", variant: "light" },
   },
   {

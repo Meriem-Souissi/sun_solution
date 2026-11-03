@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import imgHeroSection from "./../../../public/images/heroSection2.jpg";
-import { ArrowIcon } from "../icons/ArrowIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 import BlueButton from "../ui/BlueButton";
 import Check_Icon from "../icons/Check_Icon";
 

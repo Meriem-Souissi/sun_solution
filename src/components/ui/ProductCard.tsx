@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import BlueButton from "./BlueButton";
-import { ArrowIcon } from "../icons/ArrowIcon";
+import DownloadIcon from "../icons/DownloadIcon";
+import CalculatorIcon from "../icons/CalculatorIcon";
+import PanierIcon from "../icons/PanierIcon";
 
 type Product = {
   id: string;
@@ -33,16 +34,41 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="flex flex-col bg-(--white) border border-(--line) rounded-[18px] overflow-hidden transition-all duration-250 ease-in-out hover:-translate-y-1 hover:border-(--gold)/55 hover:shadow-[0_26px_44px_-26px_rgba(23,36,46,0.35)]">
       {/* Médias & Visuels */}
-      <div className="relative h-50 bg-gradient-to-br from-(--sage) to-(--cream-2) flex items-center justify-center">
+      <div className="relative h-50 bg-linear-to-br from-(--sage) to-(--cream-2) flex items-center justify-center">
         {product.badge && (
           <span
-            className={`absolute top-4 left-4 z-10 text-[11.5px] font-bold leading-none px-3 py-1.5 rounded-full ${
+            className={`absolute top-6 left-4 z-10 text-[11.5px] font-bold leading-none px-3 py-1.5 rounded-full ${
               badgeStyles[product.badge.variant]
             }`}
           >
             {product.badge.label}
           </span>
         )}
+        <div className="absolute top-3.5 right-3.5 z-3 flex gap-2">
+          {product.calculator && (
+            <Link
+              href={product.calculator}
+              className="product-card-icon after:content-[attr(data-tip)]"
+              data-tip="Vérifier la compatibilité"
+              aria-label="Calculer le nombre de panneaux nécessaires"
+            >
+              <CalculatorIcon />
+            </Link>
+          )}
+
+          <button
+            type="button"
+            className="product-card-icon after:content-[attr(data-tip)]"
+            data-cart
+            data-id="1"
+            data-nom="JONSOL 550 W (Demi-cellules)"
+            data-tip="Ajouter au panier"
+            aria-label="Ajouter JONSOL 550 W (Demi-cellules) au panier"
+          >
+            <PanierIcon />
+            <span className="tool-count"></span>
+          </button>
+        </div>
 
         {!imageError ? (
           <Image
@@ -79,7 +105,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="font-serif text-[19.5px] font-medium mb-3 leading-snug text-(--ink)">
           {product.title}
         </h3>
-        <p className="text-[13.5px] text-slate-custom leading-relaxed mb-[18px]">
+        <p className="text-[13.5px] text-slate-custom leading-relaxed mb-4.5">
           {product.description}
         </p>
 
@@ -106,31 +132,15 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Boutons d'actions */}
         <div className="flex flex-col gap-2.5">
-          <BlueButton icon={<ArrowIcon />}>Passer une commande</BlueButton>
-
-          <a
+          <Link
             href={product.techSheetUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 py-3 px-4 rounded-full font-semibold text-[13.5px] text-(--forest) border border-(--line) bg-(--cream) hover:border-(--forest) hover:bg-(--sage) transition-colors"
           >
-            <svg
-              className="w-3.75 h-3.75"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-              <path d="M14 3v5h5M9 13h6M9 17h6" />
-            </svg>
+            <DownloadIcon />
             <span>Fiche technique</span>
-          </a>
-          {product.calculator && (
-            <Link href={product.calculator}>
-              <BlueButton>Simuler l'installation</BlueButton>
-            </Link>
-          )}
+          </Link>
         </div>
       </div>
     </article>
