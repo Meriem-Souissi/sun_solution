@@ -35,7 +35,7 @@ const HeroSection = () => {
             <div className="flex gap-4 mt-9 flex-wrap">
               <Link href="/#contact">
                 <BlueButton icon={<ArrowIcon />} className="px-6 py-4">
-                  Demander un devis
+                  Demander une étude gratuite
                 </BlueButton>
               </Link>
               <Link

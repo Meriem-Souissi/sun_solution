@@ -1450,266 +1450,274 @@ const Devis = () => {
                   )}
 
                   {/* ÉTAPE 3 */}
-                  {step == 3 &&
-                    (formData.projectType === "pompage" ? (
-                      <div className="animate-step-in space-y-4">
-                        <div>
-                          <label
-                            htmlFor="requiredFlow"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Débit requis (m³/h ou m³/jour) *
-                          </label>
-                          <input
-                            id="requiredFlow"
-                            type="text"
-                            required
-                            placeholder="Ex: 100 m³/h"
-                            value={formData.requiredFlow}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="dailyRequiredVolume"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Volume journalier nécessaire (m³/jour) *
-                          </label>
-                          <input
-                            id="dailyRequiredVolume"
-                            type="text"
-                            required
-                            placeholder="Ex: 100 m³/h"
-                            value={formData.dailyRequiredVolume}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="pumpingHoraire"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Nombre d'heures de fonctionnement souhaité par jour
-                            *
-                          </label>
-                          <select
-                            id="pumpingHoraire"
-                            required
-                            value={formData.pumpingHoraire}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                          >
-                            <option value="">Choisir...</option>
-                            <option>De jour (6h - 18h)</option>
-                            <option>De nuit (18h - 6h)</option>
-                            <option>En continu (24h/24h)</option>
-                            <option>Horaires variables selon la saison</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="typeSpring"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Type de source *
-                          </label>
-                          <div className="flex gap-2.5">
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.typeSpring === "puit"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="typeSpring"
-                                value="puit"
-                                checked={formData.typeSpring === "puit"}
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    typeSpring: "puit",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Puit</span>
-                            </label>
-
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.typeSpring === "forage"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="typeSpring"
-                                value="forage"
-                                checked={formData.typeSpring === "forage"}
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    typeSpring: "forage",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Forage</span>
-                            </label>
-                          </div>
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="pumpingNeed"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Besoin *
-                          </label>
-                          <div className="flex gap-2.5">
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.pumpingNeed === "saisonnier"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="pumpingNeed"
-                                value="saisonnier"
-                                checked={formData.pumpingNeed === "saisonnier"}
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    pumpingNeed: "saisonnier",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Saisonnier</span>
-                            </label>
-
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.pumpingNeed === "annuel"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="pumpingNeed"
-                                value="annuel"
-                                checked={formData.pumpingNeed === "annuel"}
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    pumpingNeed: "annuel",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Annuel</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="animate-step-in space-y-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {step == 3 && (
+                    <div className="animate-step-in space-y-4">
+                      {formData.projectType === "pompage" ? (
+                        <>
                           <div>
                             <label
-                              htmlFor="d_pv_onduleur"
+                              htmlFor="requiredFlow"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Distance entre le champ PV (Structure) et
-                              l'onduleur *
+                              Débit requis (m³/h ou m³/jour) *
                             </label>
                             <input
-                              id="d_pv_onduleur"
+                              id="requiredFlow"
                               type="text"
                               required
-                              placeholder="Ex: 5m"
-                              value={formData.d_pv_onduleur}
+                              placeholder="Ex: 100 m³/h"
+                              value={formData.requiredFlow}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
                           </div>
                           <div>
                             <label
-                              htmlFor="d_onduleur_compteur"
+                              htmlFor="dailyRequiredVolume"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Distance entre l'onduleur et le compteur STEG *
+                              Volume journalier nécessaire (m³/jour) *
                             </label>
                             <input
-                              id="d_onduleur_compteur"
+                              id="dailyRequiredVolume"
                               type="text"
                               required
-                              placeholder="Ex : 10m "
-                              value={formData.d_onduleur_compteur}
+                              placeholder="Ex: 100 m³/h"
+                              value={formData.dailyRequiredVolume}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
                           </div>
-                        </div>
+                          <div>
+                            <label
+                              htmlFor="pumpingHoraire"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Nombre d'heures de fonctionnement souhaité par
+                              jour *
+                            </label>
+                            <select
+                              id="pumpingHoraire"
+                              required
+                              value={formData.pumpingHoraire}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            >
+                              <option value="">Choisir...</option>
+                              <option>De jour (6h - 18h)</option>
+                              <option>De nuit (18h - 6h)</option>
+                              <option>En continu (24h/24h)</option>
+                              <option>
+                                Horaires variables selon la saison
+                              </option>
+                            </select>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="typeSpring"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Type de source *
+                            </label>
+                            <div className="flex gap-2.5">
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.typeSpring === "puit"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="typeSpring"
+                                  value="puit"
+                                  checked={formData.typeSpring === "puit"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      typeSpring: "puit",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Puit</span>
+                              </label>
 
-                        <div>
-                          <label
-                            htmlFor="d_pv_regard"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Distance entre le champ PV (Structure) et le regard
-                            de terre *
-                          </label>
-                          <input
-                            id="d_pv_regard"
-                            type="text"
-                            required
-                            placeholder="Ex: 10 m"
-                            value={formData.d_pv_regard}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                          />
-                        </div>
-                        <div>
-                          <label
-                            htmlFor="roofType"
-                            className="block text-xs font-semibold text-(--ink) mb-2"
-                          >
-                            Type de toiture *
-                          </label>
-                          <select
-                            id="roofType"
-                            required
-                            value={formData.roofType}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                          >
-                            <option value="">Choisir...</option>
-                            <option>Béton</option>
-                            <option>Auvent</option>
-                            <option>Charpente</option>
-                            <option>Autre à spécifier</option>
-                          </select>
-                          {formData.roofType === "Autre à spécifier" && (
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.typeSpring === "forage"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="typeSpring"
+                                  value="forage"
+                                  checked={formData.typeSpring === "forage"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      typeSpring: "forage",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Forage</span>
+                              </label>
+                            </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="pumpingNeed"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Besoin *
+                            </label>
+                            <div className="flex gap-2.5">
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.pumpingNeed === "saisonnier"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="pumpingNeed"
+                                  value="saisonnier"
+                                  checked={
+                                    formData.pumpingNeed === "saisonnier"
+                                  }
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      pumpingNeed: "saisonnier",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Saisonnier</span>
+                              </label>
+
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.pumpingNeed === "annuel"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="pumpingNeed"
+                                  value="annuel"
+                                  checked={formData.pumpingNeed === "annuel"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      pumpingNeed: "annuel",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Annuel</span>
+                              </label>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                              <label
+                                htmlFor="d_pv_onduleur"
+                                className="block text-xs font-semibold text-(--ink) mb-2"
+                              >
+                                Distance entre le champ PV (Structure) et
+                                l'onduleur *
+                              </label>
+                              <input
+                                id="d_pv_onduleur"
+                                type="text"
+                                required
+                                placeholder="Ex: 5m"
+                                value={formData.d_pv_onduleur}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              />
+                            </div>
+                            <div>
+                              <label
+                                htmlFor="d_onduleur_compteur"
+                                className="block text-xs font-semibold text-(--ink) mb-2"
+                              >
+                                Distance entre l'onduleur et le compteur STEG *
+                              </label>
+                              <input
+                                id="d_onduleur_compteur"
+                                type="text"
+                                required
+                                placeholder="Ex : 10m "
+                                value={formData.d_onduleur_compteur}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label
+                              htmlFor="d_pv_regard"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Distance entre le champ PV (Structure) et le
+                              regard de terre *
+                            </label>
                             <input
-                              id="roofTypeSpecified"
+                              id="d_pv_regard"
                               type="text"
                               required
-                              placeholder="Spécifier votre type de toiture"
-                              value={formData.roofTypeSpecified}
+                              placeholder="Ex: 10 m"
+                              value={formData.d_pv_regard}
                               onChange={handleChange}
-                              className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
-                          )}
-                        </div>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="roofType"
+                              className="block text-xs font-semibold text-(--ink) mb-2"
+                            >
+                              Type de toiture *
+                            </label>
+                            <select
+                              id="roofType"
+                              required
+                              value={formData.roofType}
+                              onChange={handleChange}
+                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                            >
+                              <option value="">Choisir...</option>
+                              <option>Béton</option>
+                              <option>Auvent</option>
+                              <option>Charpente</option>
+                              <option>Autre à spécifier</option>
+                            </select>
+                            {formData.roofType === "Autre à spécifier" && (
+                              <input
+                                id="roofTypeSpecified"
+                                type="text"
+                                required
+                                placeholder="Spécifier votre type de toiture"
+                                value={formData.roofTypeSpecified}
+                                onChange={handleChange}
+                                className="w-full mt-4 px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
+                              />
+                            )}
+                          </div>
+                        </>
+                      )}
+                      <>
                         <div>
                           <label
                             htmlFor="structureType"
@@ -1717,84 +1725,84 @@ const Devis = () => {
                           >
                             Type de Structure *
                           </label>
-                          <div className="flex gap-2.5">
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.structureType === "un étage"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="structureType"
-                                value="un étage"
-                                checked={formData.structureType === "un étage"}
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    structureType: "un étage",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Un étage</span>
-                            </label>
-
-                            <label
-                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                formData.structureType === "deux étages"
-                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                  : "border-(--line) text-(--slate)"
-                              }`}
-                            >
-                              <input
-                                type="radio"
-                                name="structureType"
-                                value="deux étages"
-                                checked={
-                                  formData.structureType === "deux étages"
-                                }
-                                onChange={() =>
-                                  setFormData((p) => ({
-                                    ...p,
-                                    structureType: "deux étages",
-                                  }))
-                                }
-                                className="accent-forest"
-                              />
-                              <span>Deux étages</span>
-                            </label>
-                            {formData.tensionType === "mt" && (
-                              <label
-                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
-                                  formData.structureType === "trois étages"
-                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
-                                    : "border-(--line) text-(--slate)"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  name="structureType"
-                                  value="trois étages"
-                                  checked={
-                                    formData.structureType === "trois étages"
-                                  }
-                                  onChange={() =>
-                                    setFormData((p) => ({
-                                      ...p,
-                                      structureType: "trois étages",
-                                    }))
-                                  }
-                                  className="accent-forest"
-                                />
-                                <span>Trois étages</span>
-                              </label>
-                            )}
-                          </div>
                         </div>
-                      </div>
-                    ))}
+                        <div className="flex gap-2.5">
+                          <label
+                            className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                              formData.structureType === "un étage"
+                                ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                : "border-(--line) text-(--slate)"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="structureType"
+                              value="un étage"
+                              checked={formData.structureType === "un étage"}
+                              onChange={() =>
+                                setFormData((p) => ({
+                                  ...p,
+                                  structureType: "un étage",
+                                }))
+                              }
+                              className="accent-forest"
+                            />
+                            <span>Un étage</span>
+                          </label>
+
+                          <label
+                            className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                              formData.structureType === "deux étages"
+                                ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                : "border-(--line) text-(--slate)"
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="structureType"
+                              value="deux étages"
+                              checked={formData.structureType === "deux étages"}
+                              onChange={() =>
+                                setFormData((p) => ({
+                                  ...p,
+                                  structureType: "deux étages",
+                                }))
+                              }
+                              className="accent-forest"
+                            />
+                            <span>Deux étages</span>
+                          </label>
+                          {(formData.tensionType === "mt" ||
+                            formData.projectType === "pompage") && (
+                            <label
+                              className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                formData.structureType === "trois étages"
+                                  ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                  : "border-(--line) text-(--slate)"
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="structureType"
+                                value="trois étages"
+                                checked={
+                                  formData.structureType === "trois étages"
+                                }
+                                onChange={() =>
+                                  setFormData((p) => ({
+                                    ...p,
+                                    structureType: "trois étages",
+                                  }))
+                                }
+                                className="accent-forest"
+                              />
+                              <span>Trois étages</span>
+                            </label>
+                          )}
+                        </div>
+                      </>
+                    </div>
+                  )}
 
                   {/* Boutons d'Actions  */}
                   <div className="pt-4 flex gap-3.5">
