@@ -18,6 +18,7 @@ type mtTypeSuperficie =
   | "Ombrière de parking"
   | "Aucune surface disponible";
 type TypeDeStructure = "un étage" | "deux étages" | "trois étages";
+type LocalPump = "oui" | "non";
 type TypeSpring = "puit" | "forage";
 type PumpingNeed = "saisonnier" | "annuel";
 
@@ -79,9 +80,8 @@ type FormState = {
   structureType: TypeDeStructure;
 
   // Étape 3 - Branche Dimensions de l'installation (Pompage)
-  requiredFlow: string;
-  dailyRequiredVolume: string;
-  pumpingHoraire: string;
+  distnace_pv_motopompe: string;
+  localPump: LocalPump;
   pumpingNeed: PumpingNeed;
   typeSpring: TypeSpring;
 };
@@ -140,9 +140,8 @@ const Devis = () => {
     roofTypeSpecified: "",
     structureType: "un étage",
 
-    requiredFlow: "",
-    dailyRequiredVolume: "",
-    pumpingHoraire: "",
+    distnace_pv_motopompe: "",
+    localPump: "oui",
     pumpingNeed: "saisonnier",
     typeSpring: "puit",
   });
@@ -345,9 +344,8 @@ const Devis = () => {
       roofType: "",
       roofTypeSpecified: "",
       structureType: "un étage",
-      requiredFlow: "",
-      dailyRequiredVolume: "",
-      pumpingHoraire: "",
+      distnace_pv_motopompe: "",
+      localPump: "oui",
       pumpingNeed: "saisonnier",
       typeSpring: "puit",
     });
@@ -1456,62 +1454,78 @@ const Devis = () => {
                         <>
                           <div>
                             <label
-                              htmlFor="requiredFlow"
+                              htmlFor="distnace_pv_motopompe"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Débit requis (m³/h ou m³/jour) *
+                              Distance entre le champs PV et le local de la moto
+                              pompe *
                             </label>
                             <input
-                              id="requiredFlow"
+                              id="distnace_pv_motopompe"
                               type="text"
                               required
-                              placeholder="Ex: 100 m³/h"
-                              value={formData.requiredFlow}
+                              placeholder="Ex: 10 m"
+                              value={formData.distnace_pv_motopompe}
                               onChange={handleChange}
                               className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
                             />
                           </div>
                           <div>
                             <label
-                              htmlFor="dailyRequiredVolume"
+                              htmlFor="localPump"
                               className="block text-xs font-semibold text-(--ink) mb-2"
                             >
-                              Volume journalier nécessaire (m³/jour) *
+                              Disponibilité de local moto pompe *
                             </label>
-                            <input
-                              id="dailyRequiredVolume"
-                              type="text"
-                              required
-                              placeholder="Ex: 100 m³/h"
-                              value={formData.dailyRequiredVolume}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                            />
+                            <div className="flex gap-2.5">
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.localPump === "oui"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="localPump"
+                                  value="oui"
+                                  checked={formData.localPump === "oui"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      localPump: "oui",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Oui</span>
+                              </label>
+
+                              <label
+                                className={`flex items-center gap-2 border rounded-full px-4 py-2 cursor-pointer text-xs transition-all ${
+                                  formData.localPump === "non"
+                                    ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold"
+                                    : "border-(--line) text-(--slate)"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name="localPump"
+                                  value="non"
+                                  checked={formData.localPump === "non"}
+                                  onChange={() =>
+                                    setFormData((p) => ({
+                                      ...p,
+                                      localPump: "non",
+                                    }))
+                                  }
+                                  className="accent-forest"
+                                />
+                                <span>Non</span>
+                              </label>
+                            </div>
                           </div>
-                          <div>
-                            <label
-                              htmlFor="pumpingHoraire"
-                              className="block text-xs font-semibold text-(--ink) mb-2"
-                            >
-                              Nombre d'heures de fonctionnement souhaité par
-                              jour *
-                            </label>
-                            <select
-                              id="pumpingHoraire"
-                              required
-                              value={formData.pumpingHoraire}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 border border-(--line) rounded-lg text-sm bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) transition-colors"
-                            >
-                              <option value="">Choisir...</option>
-                              <option>De jour (6h - 18h)</option>
-                              <option>De nuit (18h - 6h)</option>
-                              <option>En continu (24h/24h)</option>
-                              <option>
-                                Horaires variables selon la saison
-                              </option>
-                            </select>
-                          </div>
+
                           <div>
                             <label
                               htmlFor="typeSpring"
