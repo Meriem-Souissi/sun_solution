@@ -54,7 +54,9 @@ export default function Navbar() {
         </nav>
 
         <Link href="/devis" className="hidden md:block">
-          <BlueButton icon={<ArrowIcon />}>Demander un devis</BlueButton>
+          <BlueButton icon={<ArrowIcon />}>
+            Demander une étude gratuite
+          </BlueButton>
         </Link>
         <button
           className="flex items-center justify-center cursor-pointer w-10.5 h-10.5 bg-(--white) border border-(--line) rounded-full md:hidden "
@@ -82,7 +84,7 @@ export default function Navbar() {
                 className="my-3.75"
                 onClick={() => isMenuOpen(!menuOpen)}
               >
-                Demander un devis
+                Demander une étude gratuite
               </BlueButton>
             </Link>
           </nav>
