@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import MailIcon from "../icons/MailIcon";
 import MapsIcon from "../icons/MapsIcon";
 import PhoneIcon from "../icons/PhoneIcon";
-import CheckIcon from "../icons/CheckIcon";
+import BigCheckIcon from "../icons/BigCheckIcon";
 import Arrow2Icon from "../icons/Arrow2Icon";
 import BlueButton from "../ui/BlueButton";
 
@@ -200,7 +200,7 @@ function SuccessMessage({
       className="flex flex-col items-center px-2.5 pb-2.5 pt-6.5 text-center"
     >
       <div className="mb-5.5 flex h-15 w-15 items-center justify-center rounded-full bg-(--sage) text-[#144870]">
-        <CheckIcon />
+        <BigCheckIcon />
       </div>
 
       <h3 className="mb-2.5 font-serif text-[22px] font-medium leading-[1.14] text-(--ink)">

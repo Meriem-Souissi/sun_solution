@@ -1,5 +1,6 @@
 "use client";
 
+import PanierIcon from "@/components/icons/PanierIcon";
 import React, { useState } from "react";
 
 const INVERTER_MODELS = [
@@ -83,7 +84,7 @@ const InverterOrderSection = () => {
           <option value="">Sélectionnez un modèle</option>
           {INVERTER_MODELS.map((model, idx) => (
             <option key={idx} value={model.name}>
-              {model.name} ({model.power} kW)
+              {model.name}
             </option>
           ))}
         </select>
@@ -155,19 +156,7 @@ const InverterOrderSection = () => {
         onClick={() => ajouterAuPanier(1, "Onduleur Huawei SUN2000")}
         className="flex items-center justify-center gap-2.5 w-full py-4 px-7 bg-(--forest) text-(--cream) rounded-full font-bold text-[15px] shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-(--forest-deep) hover:-translate-y-0.5 transition-all cursor-pointer"
       >
-        <svg
-          className="w-4.5 h-4.5 shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6" />
-          <circle cx="9.5" cy="20" r="1.3" />
-          <circle cx="17" cy="20" r="1.3" />
-        </svg>
+        <PanierIcon />
         <span>Ajouter au panier</span>
       </button>
     </div>

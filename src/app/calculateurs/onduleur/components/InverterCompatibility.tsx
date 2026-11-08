@@ -131,7 +131,7 @@ const InverterCompatibility = () => {
           <option value="">Sélectionnez un modèle</option>
           {INVERTER_MODELS.map((model, idx) => (
             <option key={idx} value={model.name}>
-              {model.name} ({model.power} kW)
+              {model.name}
             </option>
           ))}
         </select>
@@ -175,7 +175,7 @@ const InverterCompatibility = () => {
             0.9≤Pcpv/(Pac ond)≤1.3 :
           </span>
           <span
-            className={`text-right font-semibold text-[15px] ml-auto leading-relaxed ${
+            className={`font-semibold text-[15px] ml-auto leading-relaxed ${
               compatibilityResult.state === "number" ||
               compatibilityResult.state === "ok" ||
               compatibilityResult.state === "bad"

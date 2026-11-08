@@ -1,4 +1,4 @@
-const CheckIcon = () => {
+const BigCheckIcon = () => {
   return (
     <svg
       className="h-6.5 w-6.5"
@@ -12,4 +12,4 @@ const CheckIcon = () => {
     </svg>
   );
 };
-export default CheckIcon;
+export default BigCheckIcon;

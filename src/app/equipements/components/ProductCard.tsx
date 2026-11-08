@@ -1,26 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Product } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import DownloadIcon from "../icons/DownloadIcon";
-import CalculatorIcon from "../icons/CalculatorIcon";
-import PanierIcon from "../icons/PanierIcon";
-
-type Product = {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  features: string[];
-  image: string;
-  techSheetUrl: string;
-  badge?: {
-    label: string;
-    variant: "gold" | "navy" | "light";
-  };
-  calculator?: string;
-};
+import DownloadIcon from "../../../components/icons/DownloadIcon";
+import CalculatorIcon from "../../../components/icons/CalculatorIcon";
+import PanierIcon from "../../../components/icons/PanierIcon";
+import ToastIcon from "../../../components/icons/ToastIcon";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [imageError, setImageError] = useState(false);
@@ -171,17 +158,7 @@ export default function ProductCard({ product }: { product: Product }) {
               : "opacity-0 translate-x-[-50%] translate-y-4"
           }`}
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4 text-(--gold) shrink-0"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <ToastIcon />
           {product.title} ajouté au panier !
         </div>
       )}

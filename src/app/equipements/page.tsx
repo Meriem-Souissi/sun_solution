@@ -1,23 +1,8 @@
 "use client";
-
-import React, { useState, useMemo } from "react";
+import { Product } from "@/types/product";
 import Link from "next/link";
-import ProductCard from "../../components/ui/ProductCard";
-
-type Product = {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  features: string[];
-  image: string;
-  techSheetUrl: string;
-  badge?: {
-    label: string;
-    variant: "gold" | "navy" | "light";
-  };
-  calculator?: string;
-};
+import ProductCard from "./components/ProductCard";
+import TrustBar from "./components/TrustBar";
 
 const PRODUCTS: Product[] = [
   {
@@ -146,6 +131,21 @@ const PRODUCTS: Product[] = [
     techSheetUrl: "/fiches-techniques/luna fiche technique.pdf",
     badge: { label: "Stockage Énergétique", variant: "light" },
   },
+  {
+    id: "gd100-pv-2-50",
+    title: "INVT GD100-PV (2~50 HP)",
+    category: "Variateurs solaires",
+    description:
+      "La gamme INVT GD100-PV propose des variateurs dédiés au pompage solaire, optimisant l'énergie photovoltaïque et garantissant un fonctionnnement fiable des motopompes.",
+    features: [
+      "Technologie MPPT: optimisation de l'énergie solaire jusqu'à 99%.",
+      "Démarrage automatique: fonctionnement adapté à l'ensoleillement disponible.",
+    ],
+    image: "/images/equipements/invt GD100-PV.jpg",
+    techSheetUrl: "/fiches-techniques/VARIATEUR VF DATASHEET.pdf",
+    badge: { label: "Top vente", variant: "gold" },
+    calculator: "/calculateurs/variateur",
+  },
 ];
 
 const Products = () => {
@@ -189,88 +189,10 @@ const Products = () => {
       </section>
 
       {/* TRUST STRIP SECTION */}
-      <section className="bg-(--white) border-y border-(--line) py-0">
-        <div className="max-w-[1160px] mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="p-7 md:py-10 md:px-7 flex flex-col gap-3.5 border-t sm:border-t-0 sm:border-l first:border-l-0 border-(--line)">
-            <svg
-              className="w-6 h-6 text-(--gold-deep)"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <path d="M12 22s7-4.5 7-11V5l-7-3-7 3v6c0 6.5 7 11 7 11Z" />
-            </svg>
-            <h3 className="font-serif text-base font-medium text-(--ink)">
-              Garantie constructeur
-            </h3>
-            <p className="text-[13.5px] text-(--slate) leading-normal">
-              Jusqu'à 25 ans sur les panneaux, selon le fabricant choisi.
-            </p>
-          </div>
-
-          <div className="p-7 md:py-10 md:px-7 flex flex-col gap-3.5 border-t sm:border-t-0 border-l border-(--line)">
-            <svg
-              className="w-6 h-6 text-(--gold-deep)"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <path d="M3 21v-4a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v4" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-            <h3 className="font-serif text-base font-medium text-(--ink)">
-              SAV local
-            </h3>
-            <p className="text-[13.5px] text-(--slate) leading-normal">
-              Une équipe technique basée à Tunis, joignable directement.
-            </p>
-          </div>
-
-          <div className="p-7 md:py-10 md:px-7 flex flex-col gap-3.5 border-t lg:border-t-0 lg:border-l border-(--line)">
-            <svg
-              className="w-6 h-6 text-(--gold-deep)"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <rect x="1" y="7" width="15" height="10" rx="1" />
-              <path d="M16 10h3l3 3v4h-6" />
-              <circle cx="6" cy="19" r="1.6" />
-              <circle cx="18" cy="19" r="1.6" />
-            </svg>
-            <h3 className="font-serif text-base font-medium text-(--ink)">
-              Livraison Grand Tunis
-            </h3>
-            <p className="text-[13.5px] text-(--slate) leading-normal">
-              Livraison et retrait en atelier possibles selon les quantités.
-            </p>
-          </div>
-
-          <div className="p-7 md:py-10 md:px-7 flex flex-col gap-3.5 border-t lg:border-t-0 border-l border-(--line)">
-            <svg
-              className="w-6 h-6 text-(--gold-deep)"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-            >
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <h3 className="font-serif text-base font-medium text-(--ink)">
-              Produits certifiés
-            </h3>
-            <p className="text-[13.5px] text-(--slate) leading-normal">
-              Matériel conforme aux normes en vigueur et compatible STEG.
-            </p>
-          </div>
-        </div>
-      </section>
+      <TrustBar />
 
       {/* CTA BAND */}
-      <section className="bg-(--forest) text-(--cream) py-24">
+      {/* <section className="bg-(--forest) text-(--cream) py-24">
         <div className="max-w-[1160px] mx-auto px-8 flex items-center justify-between gap-10 flex-wrap">
           <div>
             <h2 className="font-serif text-2xl md:text-3xl text-(--cream) max-w-[16ch] leading-tight font-medium">
@@ -297,7 +219,7 @@ const Products = () => {
             </svg>
           </Link>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 };

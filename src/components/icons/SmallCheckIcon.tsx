@@ -1,10 +1,10 @@
 import React from "react";
 
-const Check_Icon = () => {
+const SmallCheckIcon = () => {
   return (
     <svg
-      width="16"
-      height="16"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="none"
       stroke="#D9A441"
@@ -15,4 +15,4 @@ const Check_Icon = () => {
   );
 };
 
-export default Check_Icon;
+export default SmallCheckIcon;
