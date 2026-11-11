@@ -160,8 +160,8 @@ const Products = () => {
       <section className="py-20 bg-(--cream)">
         {/* HERO SECTION */}
         <section className="pt-7 pb-9">
-          <div className="max-w-240 mx-auto px-8 max-w-190">
-            <div className="flex items-center gap-2.5 text-xs font-semibold text-(--forest) tracking-wider mb-5 before:content-[''] before:w-[22px] before:h-px before:bg-(--gold)">
+          <div className="mx-auto px-8 max-w-180">
+            <div className="section-title">
               Équipements de haute performance
             </div>
             <h1 className="font-serif text-3xl md:text-5xl font-medium leading-tight text-(--ink) max-w-[18ch]">

@@ -19,6 +19,7 @@
   --sun-hover: linear-gradient(135deg, #a6390c 0%, #c46f16 100%);
   --sky: #6fa3d6;
   --slate-custom: #59636b;
+  --slate: #59636b;
 }
 
 @theme {

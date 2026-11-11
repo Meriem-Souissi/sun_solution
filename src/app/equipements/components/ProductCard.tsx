@@ -96,7 +96,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <rect x="3" y="4" width="18" height="14" rx="1.2" />
                 <path d="M3 9h18M3 14h18M9 4v14M15 4v14M8 21h8" />
               </svg>
-              <span className="text-[12.5px] font-medium text-slate-custom">
+              <span className="text-[12.5px] font-medium text-(--slate-custom)">
                 {product.title}
               </span>
             </div>
