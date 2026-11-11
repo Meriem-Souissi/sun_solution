@@ -13,7 +13,7 @@ const PROJECTS_DATA: Project[] = [
     title: "Centrale Photovoltaïque",
     description: "Réalisation d'une centrale en régime d'autorisation.",
     image: "/images/projets/centrale.jpg",
-    isFeatured: true,
+    // isFeatured: true,
   },
   {
     id: "res-tunis",
@@ -75,48 +75,48 @@ const PROJECTS_DATA: Project[] = [
   },
 ];
 
-const FILTERS = [
-  { label: "Tous", value: "all" },
-  { label: "Résidentiel", value: "Résidentiel" },
-  { label: "Collectivité", value: "Collectivité" },
-  { label: "Centrale", value: "Centrale" },
-  { label: "Agriculture", value: "Agriculture" },
-  { label: "Off-Grid", value: "Off-Grid" },
-];
+// const FILTERS = [
+//   { label: "Tous", value: "all" },
+//   { label: "Résidentiel", value: "Résidentiel" },
+//   { label: "Collectivité", value: "Collectivité" },
+//   { label: "Centrale", value: "Centrale" },
+//   { label: "Agriculture", value: "Agriculture" },
+//   { label: "Off-Grid", value: "Off-Grid" },
+// ];
 
 const page = () => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [imageError, setImageError] = useState(false);
 
   // Calcul des statistiques globales (indépendantes du filtre actif)
-  const stats = useMemo(() => {
-    const totalCount = PROJECTS_DATA.length;
-    const totalKwc = PROJECTS_DATA.reduce((acc, curr) => acc + curr.kwc, 0);
-    const uniqueGovs = new Set(PROJECTS_DATA.map((p) => p.gov)).size;
+  // const stats = useMemo(() => {
+  //   const totalCount = PROJECTS_DATA.length;
+  //   const totalKwc = PROJECTS_DATA.reduce((acc, curr) => acc + curr.kwc, 0);
+  //   const uniqueGovs = new Set(PROJECTS_DATA.map((p) => p.gov)).size;
 
-    const formatter = new Intl.NumberFormat("fr-FR", {
-      maximumFractionDigits: 2,
-    });
-    const formattedPower =
-      totalKwc >= 1000
-        ? `${formatter.format(totalKwc / 1000)} MWc`
-        : `${formatter.format(totalKwc)} kWc`;
+  //   const formatter = new Intl.NumberFormat("fr-FR", {
+  //     maximumFractionDigits: 2,
+  //   });
+  //   const formattedPower =
+  //     totalKwc >= 1000
+  //       ? `${formatter.format(totalKwc / 1000)} MWc`
+  //       : `${formatter.format(totalKwc)} kWc`;
 
-    return {
-      count: totalCount,
-      power: formattedPower,
-      govs: uniqueGovs,
-    };
-  }, []);
+  //   return {
+  //     count: totalCount,
+  //     power: formattedPower,
+  //     govs: uniqueGovs,
+  //   };
+  // }, []);
 
   // Compteurs pour chaque catégorie de filtre
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: PROJECTS_DATA.length };
-    PROJECTS_DATA.forEach((p) => {
-      counts[p.category] = (counts[p.category] || 0) + 1;
-    });
-    return counts;
-  }, []);
+  // const categoryCounts = useMemo(() => {
+  //   const counts: Record<string, number> = { all: PROJECTS_DATA.length };
+  //   PROJECTS_DATA.forEach((p) => {
+  //     counts[p.category] = (counts[p.category] || 0) + 1;
+  //   });
+  //   return counts;
+  // }, []);
 
   // Projets filtrés
   const filteredProjects = useMemo(() => {
@@ -139,7 +139,7 @@ const page = () => {
         </section>
 
         {/* STATS BAND */}
-        <section
+        {/* <section
           className="pt-7 pb-9"
           aria-label="Chiffres clés des réalisations présentées"
         >
@@ -171,13 +171,13 @@ const page = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* PROJECTS MAIN & FILTERS */}
-        <section className="pb-[110px] pt-0">
+        <section className="pb-[110px]">
           <div className="w-full max-w-[1160px] mx-auto px-[32px] max-[520px]:px-[20px]">
             {/* FILTERS */}
-            <div
+            {/* <div
               className="flex flex-wrap gap-2 mb-[34px]"
               role="group"
               aria-label="Filtrer par type de projet"
@@ -203,7 +203,7 @@ const page = () => {
                   </button>
                 );
               })}
-            </div>
+            </div> */}
 
             {/* GRID */}
             <div className="grid grid-cols-3 max-[960px]:grid-cols-2 max-[640px]:grid-cols-1 gap-[24px]">
