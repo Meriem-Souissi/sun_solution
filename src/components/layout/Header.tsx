@@ -10,9 +10,7 @@ import { useState } from "react";
 
 const navLinks = [
   { name: "Accueil", href: "/" },
-  // { name: "Services", href: "/#services" },
   { name: "Projets", href: "/projets" },
-  { name: "Procédure", href: "/#procedure" },
   { name: "Equipements", href: "/equipements" },
   { name: "Contactez-nous", href: "/#contact" },
 ];
@@ -52,7 +50,30 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-
+        <Link
+          href="/panier"
+          className="cart-link current"
+          aria-current="page"
+          id="cartLink"
+          aria-label="Voir le panier"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6" />
+            <circle cx="9.5" cy="20" r="1.3" />
+            <circle cx="17" cy="20" r="1.3" />
+          </svg>
+          <span className="cart-badge" id="cartItemCount">
+            0
+          </span>
+        </Link>
         <Link href="/devis" className="hidden md:block">
           <BlueButton icon={<ArrowIcon />}>
             Demander une étude gratuite

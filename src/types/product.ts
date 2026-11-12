@@ -1,3 +1,7 @@
+type ProductModel = {
+  name: string;
+  power: number;
+};
 export type Product = {
   id: string;
   title: string;
@@ -11,4 +15,5 @@ export type Product = {
     variant: "gold" | "navy" | "light";
   };
   calculator?: string;
+  models: ProductModel[];
 };

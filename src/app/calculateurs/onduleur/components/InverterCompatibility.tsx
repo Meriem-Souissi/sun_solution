@@ -3,30 +3,38 @@
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import BlueButton from "@/components/ui/BlueButton";
 import React, { useState, useEffect, useMemo } from "react";
-
-const INVERTER_MODELS = [
-  { name: "Sungrow SG320HX-20", power: 320 },
-  { name: "Huawei SUN2000 (2 kW)", power: 2 },
-  { name: "Huawei SUN2000 (3 kW)", power: 3 },
-  { name: "Huawei SUN2000 (4 kW)", power: 4 },
-  { name: "Huawei SUN2000 (4.6 kW)", power: 4.6 },
-  { name: "Huawei SUN2000 (6 kW)", power: 6 },
-  { name: "Huawei SUN2000 (8 kW)", power: 8 },
-  { name: "Huawei SUN2000 (10 kW)", power: 10 },
-  { name: "Huawei SUN2000 (12 kW)", power: 12 },
-  { name: "Huawei SUN2000 (15 kW)", power: 15 },
-  { name: "Huawei SUN2000 (17 kW)", power: 17 },
-  { name: "Huawei SUN2000 (20 kW)", power: 20 },
-  { name: "Huawei SUN2000 (25 kW)", power: 25 },
-  { name: "Huawei SUN2000 (30 kW)", power: 30 },
-  { name: "Huawei SUN2000 (40 kW)", power: 40 },
-  { name: "Huawei SUN2000 (50 kW)", power: 50 },
-];
+import { useSearchParams } from "next/navigation";
+import { PRODUCTS } from "./../../../../data/products";
+// const INVERTER_MODELS = [
+//   { name: "Sungrow SG320HX-20", power: 320 },
+//   { name: "Huawei SUN2000 (2 kW)", power: 2 },
+//   { name: "Huawei SUN2000 (3 kW)", power: 3 },
+//   { name: "Huawei SUN2000 (4 kW)", power: 4 },
+//   { name: "Huawei SUN2000 (4.6 kW)", power: 4.6 },
+//   { name: "Huawei SUN2000 (6 kW)", power: 6 },
+//   { name: "Huawei SUN2000 (8 kW)", power: 8 },
+//   { name: "Huawei SUN2000 (10 kW)", power: 10 },
+//   { name: "Huawei SUN2000 (12 kW)", power: 12 },
+//   { name: "Huawei SUN2000 (15 kW)", power: 15 },
+//   { name: "Huawei SUN2000 (17 kW)", power: 17 },
+//   { name: "Huawei SUN2000 (20 kW)", power: 20 },
+//   { name: "Huawei SUN2000 (25 kW)", power: 25 },
+//   { name: "Huawei SUN2000 (30 kW)", power: 30 },
+//   { name: "Huawei SUN2000 (40 kW)", power: 40 },
+//   { name: "Huawei SUN2000 (50 kW)", power: 50 },
+// ];
 
 const InverterCompatibility = () => {
+  const searchParams = useSearchParams();
+  const equipementId = searchParams.get("equipement");
   const [pvPower, setPvPower] = useState<string>("1");
   const [selectedInverter, setSelectedInverter] = useState<string>("");
   const [inverterPower, setInverterPower] = useState<string>("");
+
+  const INVERTER_MODELS =
+    PRODUCTS.find((item) => item.id === equipementId)?.models ||
+    PRODUCTS[0].models;
+  console.log(INVERTER_MODELS);
 
   // Mise à jour de la puissance de l'onduleur lors du changement de sélection
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
