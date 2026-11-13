@@ -44,7 +44,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-slateCustom px-4 py-2 rounded-full hover:text-(--ink) hover:bg-(--sage) transition-colors"
+              className="text-sm font-medium text-(--slate-custom) px-4 py-2 rounded-full hover:text-(--ink) hover:bg-(--sage) transition-colors"
             >
               {link.name}
             </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
         </nav>
         <Link
           href="/panier"
-          className="cart-link current"
+          className="cart-link"
           aria-current="page"
           id="cartLink"
           aria-label="Voir le panier"

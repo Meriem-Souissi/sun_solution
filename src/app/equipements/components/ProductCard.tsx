@@ -47,7 +47,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="absolute top-3.5 right-3.5 z-3 flex gap-2">
             {product.calculator && (
               <Link
-                href={`/calculateurs/onduleur/?equipement=${product.id}`}
+                href={`${product.calculator}/?equipement=${product.id}`}
                 className="product-card-icon after:content-[attr(data-tip)]"
                 data-tip="Vérifier la compatibilité"
                 aria-label="Calculer le nombre de panneaux nécessaires"

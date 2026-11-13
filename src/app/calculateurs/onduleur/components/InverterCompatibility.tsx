@@ -2,9 +2,9 @@
 
 import ArrowIcon from "@/components/icons/ArrowIcon";
 import BlueButton from "@/components/ui/BlueButton";
+import { ProductModel } from "@/types/product";
 import React, { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { PRODUCTS } from "./../../../../data/products";
+
 // const INVERTER_MODELS = [
 //   { name: "Sungrow SG320HX-20", power: 320 },
 //   { name: "Huawei SUN2000 (2 kW)", power: 2 },
@@ -24,29 +24,27 @@ import { PRODUCTS } from "./../../../../data/products";
 //   { name: "Huawei SUN2000 (50 kW)", power: 50 },
 // ];
 
-const InverterCompatibility = () => {
-  const searchParams = useSearchParams();
-  const equipementId = searchParams.get("equipement");
+const InverterCompatibility = ({
+  inverter_models,
+}: {
+  inverter_models: ProductModel[];
+}) => {
+  console.log("1", inverter_models);
   const [pvPower, setPvPower] = useState<string>("1");
   const [selectedInverter, setSelectedInverter] = useState<string>("");
   const [inverterPower, setInverterPower] = useState<string>("");
-
-  const INVERTER_MODELS =
-    PRODUCTS.find((item) => item.id === equipementId)?.models ||
-    PRODUCTS[1].models;
-  console.log(INVERTER_MODELS);
 
   // Mise à jour de la puissance de l'onduleur lors du changement de sélection
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSelectedInverter(value);
 
-    const found = INVERTER_MODELS.find((item) => item.name === value);
-    if (found) {
-      setInverterPower(found.power.toString());
-    } else {
-      setInverterPower("");
-    }
+    // const found = inverter_models.find((item) => item.name === value);
+    // if (found) {
+    //   setInverterPower(found.power.toString());
+    // } else {
+    //   setInverterPower("");
+    // }
   };
 
   // Calcul dynamique de la compatibilité
@@ -137,7 +135,7 @@ const InverterCompatibility = () => {
           className="w-full px-4 py-3.5 bg-(--cream) border border-(--line) rounded-xl font-sans text-[15px] font-medium text-(--ink) cursor-pointer focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:ring-3 focus:ring-(--forest)/10 transition-all appearance-none bg-no-repeat bg-[position:right_16px_center] bg-[size:16px] pr-12"
         >
           <option value="">Sélectionnez un modèle</option>
-          {INVERTER_MODELS.map((model, idx) => (
+          {inverter_models.map((model, idx) => (
             <option key={idx} value={model.name}>
               {model.name}
             </option>

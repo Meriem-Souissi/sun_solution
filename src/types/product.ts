@@ -1,4 +1,4 @@
-type ProductModel = {
+export type ProductModel = {
   name: string;
   power: number;
 };

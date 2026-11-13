@@ -1,28 +1,13 @@
 "use client";
-
-import PanierIcon from "@/components/icons/PanierIcon";
 import React, { useState } from "react";
+import PanierIcon from "@/components/icons/PanierIcon";
+import { ProductModel } from "@/types/product";
 
-const INVERTER_MODELS = [
-  { name: "Sungrow SG320HX-20", power: 320 },
-  { name: "Huawei SUN2000 (2 kW)", power: 2 },
-  { name: "Huawei SUN2000 (3 kW)", power: 3 },
-  { name: "Huawei SUN2000 (4 kW)", power: 4 },
-  { name: "Huawei SUN2000 (4.6 kW)", power: 4.6 },
-  { name: "Huawei SUN2000 (6 kW)", power: 6 },
-  { name: "Huawei SUN2000 (8 kW)", power: 8 },
-  { name: "Huawei SUN2000 (10 kW)", power: 10 },
-  { name: "Huawei SUN2000 (12 kW)", power: 12 },
-  { name: "Huawei SUN2000 (15 kW)", power: 15 },
-  { name: "Huawei SUN2000 (17 kW)", power: 17 },
-  { name: "Huawei SUN2000 (20 kW)", power: 20 },
-  { name: "Huawei SUN2000 (25 kW)", power: 25 },
-  { name: "Huawei SUN2000 (30 kW)", power: 30 },
-  { name: "Huawei SUN2000 (40 kW)", power: 40 },
-  { name: "Huawei SUN2000 (50 kW)", power: 50 },
-];
-
-const InverterOrderSection = () => {
+const InverterOrderSection = ({
+  inverter_models,
+}: {
+  inverter_models: ProductModel[];
+}) => {
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -82,8 +67,8 @@ const InverterOrderSection = () => {
           className="w-full px-4 py-3.5 bg-(--cream) border border-(--line) rounded-xl font-sans text-[15px] font-medium text-(--ink) cursor-pointer focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:ring-3 focus:ring-(--forest)/10 transition-all appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23144870\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M6 9l6 6 6-6\'/></svg>')] bg-no-repeat bg-[position:right_16px_center] bg-[size:16px] pr-12"
         >
           <option value="">Sélectionnez un modèle</option>
-          {INVERTER_MODELS.map((model, idx) => (
-            <option key={idx} value={model.name}>
+          {inverter_models.map((model, index) => (
+            <option key={index} value={model.name}>
               {model.name}
             </option>
           ))}

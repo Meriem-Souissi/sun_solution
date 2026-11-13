@@ -120,7 +120,7 @@ export default function CartPage() {
 
   return (
     <main>
-      <section className="pt-17 pb-9">
+      <section className="pt-27 pb-9">
         <div className="mx-auto px-[32px] max-[520px]:px-[20px] max-w-[760px]">
           <div className="section-title">Panier</div>
           <h1 className="font-serif text-(--ink) leading-[1.14] tracking-[-0.01em] font-medium text-[clamp(32px,4vw,46px)] max-w-[18ch]">
@@ -164,7 +164,7 @@ export default function CartPage() {
                         key={it.id}
                         className="grid grid-cols-[64px_1fr_auto] max-[560px]:grid-cols-[56px_1fr] gap-[18px] max-[560px]:gap-[14px] items-center py-[22px] border-t border-(--line) first:border-t-0"
                       >
-                        <div className="w-[64px] h-[64px] max-[560px]:w-[56px] max-[560px]:h-[56px] rounded-[16px] text-(--forest-soft) bg-gradient-to-br from-sage to-cream-2 flex items-center justify-center">
+                        <div className="w-[64px] h-[64px] max-[560px]:w-[56px] max-[560px]:h-[56px] rounded-[16px] text-(--forest-soft) bg-gradient-to-br from-(--sage) to-(--cream) flex items-center justify-center">
                           {isPanel(it.nom) ? (
                             <svg
                               width="30px"
@@ -209,13 +209,13 @@ export default function CartPage() {
                         </div>
 
                         <div className="flex items-center gap-[14px] max-[560px]:col-span-full max-[560px]:justify-between">
-                          <div className="inline-flex items-center gap-[4px] bg-cream border border-line rounded-full p-[4px]">
+                          <div className="inline-flex items-center gap-1 bg-(--cream) border border-(--line) rounded-full p-1">
                             <button
                               type="button"
                               onClick={() => handleQuantityChange(it.id, -1)}
                               disabled={it.quantite <= 1}
                               aria-label={`Diminuer la quantité de ${it.nom}`}
-                              className="w-[34px] h-[34px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-white border border-line text-forest hover:bg-forest hover:border-forest hover:text-cream disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                              className="w-[34px] h-[34px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-(--white) border border-(--line) text-(--forest) hover:bg-(--forest) hover:border-(--forest) hover:text-(--cream) disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                             >
                               <svg
                                 className="w-[14px] h-[14px]"
@@ -235,7 +235,7 @@ export default function CartPage() {
                               type="button"
                               onClick={() => handleQuantityChange(it.id, 1)}
                               aria-label={`Augmenter la quantité de ${it.nom}`}
-                              className="w-[34px] h-[34px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-white border border-line text-forest hover:bg-forest hover:border-forest hover:text-cream transition-colors"
+                              className="w-[34px] h-[34px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-(--white) border border-(--line) text-(--forest) hover:bg-(--forest) hover:border-(--forest) hover:text-(--cream) transition-colors"
                             >
                               <svg
                                 className="w-[14px] h-[14px]"
@@ -254,7 +254,7 @@ export default function CartPage() {
                             type="button"
                             onClick={() => handleRemove(it.id)}
                             aria-label={`Retirer ${it.nom} du panier`}
-                            className="w-[40px] h-[40px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-white border border-line text-slate hover:text-terracotta hover:border-terracotta hover:bg-[#FDF3F1] transition-colors"
+                            className="w-[40px] h-[40px] rounded-full shrink-0 cursor-pointer flex items-center justify-center bg-(--white) border border-(--line) text-(--slate) hover:text-(--terracotta) hover:border-(--terracotta) hover:bg-[#FDF3F1] transition-colors"
                           >
                             <svg
                               className="w-[17px] h-[17px]"
@@ -275,8 +275,8 @@ export default function CartPage() {
                 </div>
 
                 <Link
-                  href="/boutique"
-                  className="inline-flex items-center gap-[8px] my-[22px] mb-[18px] font-sans text-[14px] font-semibold text-forest group"
+                  href="/equipements"
+                  className="inline-flex items-center gap-[8px] my-[22px] mb-[18px] font-sans text-[14px] font-semibold text-(--forest) group"
                 >
                   <svg
                     className="w-[15px] h-[15px] transition-transform duration-200 group-hover:-translate-x-[3px]"
@@ -294,30 +294,30 @@ export default function CartPage() {
               </div>
 
               {/* SECTION SUMMARY & FORM */}
-              <aside className="sticky top-[96px] bg-white border border-line rounded-[20px] p-[30px] max-[560px]:p-[24px_20px] shadow-[0_30px_60px_-36px_rgba(20,72,112,0.35)]">
-                <h2 className="font-serif font-medium text-[22px] text-ink mb-[6px]">
+              <aside className="sticky top-[96px] bg-(--white) border border-(--line) rounded-[20px] p-[30px] max-[560px]:p-[24px_20px] shadow-[0_30px_60px_-36px_rgba(20,72,112,0.35)]">
+                <h2 className="font-serif font-medium text-[22px] text-(--ink) mb-[6px]">
                   Finaliser la commande
                 </h2>
                 <dl
-                  className="my-[18px] mb-[6px] bg-cream border border-line rounded-[14px] p-[2px_20px]"
+                  className="my-[18px] mb-[6px] bg-(--cream) border border-(--line) rounded-[14px] p-[2px_20px]"
                   aria-live="polite"
                 >
                   <div className="flex items-baseline justify-between gap-[12px] py-[14px]">
-                    <dt className="text-[14px] text-slate">
+                    <dt className="text-[14px] text-(--slate)">
                       Articles au total
                     </dt>
-                    <dd className="font-serif font-medium text-[26px] text-forest leading-[1.1]">
+                    <dd className="font-serif font-medium text-[26px] text-(--forest) leading-[1.1]">
                       {totalArticles}
                     </dd>
                   </div>
-                  <div className="flex items-baseline justify-between gap-[12px] py-[14px] border-t border-line">
+                  <div className="flex items-baseline justify-between gap-[12px] py-[14px] border-t border-(--line)">
                     <dt className="text-[14px] text-slate">Références</dt>
-                    <dd className="font-serif font-medium text-[20px] text-ink leading-[1.1]">
+                    <dd className="font-serif font-medium text-[20px] text-(--ink) leading-[1.1]">
                       {panier.length}
                     </dd>
                   </div>
                 </dl>
-                <p className="text-[12.5px] text-slate leading-[1.55] mb-[24px]">
+                <p className="text-[12.5px] text-(--slate) leading-[1.55] mb-[24px]">
                   Les prix vous sont communiqués sur devis, avec la
                   disponibilité et les frais de livraison.
                 </p>
@@ -326,7 +326,7 @@ export default function CartPage() {
                   <div className="mb-[16px]">
                     <label
                       htmlFor="o-nom"
-                      className="block text-[13px] font-semibold text-ink mb-[8px]"
+                      className="block text-[13px] font-semibold text-(--ink) mb-[8px]"
                     >
                       Nom complet
                     </label>
@@ -340,7 +340,7 @@ export default function CartPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, nom: e.target.value })
                       }
-                      className="w-full p-[13px_16px] border border-line rounded-[12px] font-sans text-[14.5px] bg-cream text-ink focus:outline-none focus:border-forest focus:bg-white focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
+                      className="w-full p-[13px_16px] border border-(--line) rounded-[12px] font-sans text-[14.5px] bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
                     />
                   </div>
 
@@ -348,7 +348,7 @@ export default function CartPage() {
                     <div>
                       <label
                         htmlFor="o-tel"
-                        className="block text-[13px] font-semibold text-ink mb-[8px]"
+                        className="block text-[13px] font-semibold text-(--ink) mb-[8px]"
                       >
                         Téléphone
                       </label>
@@ -365,13 +365,13 @@ export default function CartPage() {
                             telephone: e.target.value,
                           })
                         }
-                        className="w-full p-[13px_16px] border border-line rounded-[12px] font-sans text-[14.5px] bg-cream text-ink focus:outline-none focus:border-forest focus:bg-white focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
+                        className="w-full p-[13px_16px] border border-(--line) rounded-[12px] font-sans text-[14.5px] bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
                       />
                     </div>
                     <div>
                       <label
                         htmlFor="o-email"
-                        className="block text-[13px] font-semibold text-ink mb-[8px]"
+                        className="block text-[13px] font-semibold text-(--ink) mb-[8px]"
                       >
                         Email
                       </label>
@@ -385,18 +385,18 @@ export default function CartPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full p-[13px_16px] border border-line rounded-[12px] font-sans text-[14.5px] bg-cream text-ink focus:outline-none focus:border-forest focus:bg-white focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
+                        className="w-full p-[13px_16px] border border-(--line) rounded-[12px] font-sans text-[14.5px] bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="mb-[16px]">
-                    <span className="block text-[13px] font-semibold text-ink mb-[8px]">
+                    <span className="block text-[13px] font-semibold text-(--ink) mb-[8px]">
                       Mode de réception
                     </span>
                     <div className="flex gap-[10px] flex-wrap">
                       <label
-                        className={`flex items-center gap-[8px] border border-line rounded-full p-[10px_16px] cursor-pointer text-[13.5px] transition-all ${formData.reception === "livraison" ? "border-forest bg-sage text-ink font-semibold" : "text-slate"}`}
+                        className={`flex items-center gap-[8px] border border-(--line) rounded-full p-[10px_16px] cursor-pointer text-[13.5px] transition-all ${formData.reception === "livraison" ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold" : "text-(--slate)"}`}
                       >
                         <input
                           type="radio"
@@ -411,7 +411,7 @@ export default function CartPage() {
                         <span>Livraison</span>
                       </label>
                       <label
-                        className={`flex items-center gap-[8px] border border-line rounded-full p-[10px_16px] cursor-pointer text-[13.5px] transition-all ${formData.reception === "retrait" ? "border-forest bg-sage text-ink font-semibold" : "text-slate"}`}
+                        className={`flex items-center gap-[8px] border border-(--line) rounded-full p-[10px_16px] cursor-pointer text-[13.5px] transition-all ${formData.reception === "retrait" ? "border-(--forest) bg-(--sage) text-(--ink) font-semibold" : "text-(--slate)"}`}
                       >
                         <input
                           type="radio"
@@ -432,7 +432,7 @@ export default function CartPage() {
                     <div className="mb-[16px]">
                       <label
                         htmlFor="o-adresse"
-                        className="block text-[13px] font-semibold text-ink mb-[8px]"
+                        className="block text-[13px] font-semibold text-(--ink) mb-[8px]"
                       >
                         Adresse de livraison
                       </label>
@@ -446,7 +446,7 @@ export default function CartPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, adresse: e.target.value })
                         }
-                        className="w-full p-[13px_16px] border border-line rounded-[12px] font-sans text-[14.5px] bg-cream text-ink focus:outline-none focus:border-forest focus:bg-white focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
+                        className="w-full p-[13px_16px] border border-(--line) rounded-[12px] font-sans text-[14.5px] bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all"
                       />
                     </div>
                   )}
@@ -454,7 +454,7 @@ export default function CartPage() {
                   <div className="mb-[16px]">
                     <label
                       htmlFor="o-message"
-                      className="block text-[13px] font-semibold text-ink mb-[8px]"
+                      className="block text-[13px] font-semibold text-(--ink) mb-[8px]"
                     >
                       Précisions (facultatif)
                     </label>
@@ -465,14 +465,11 @@ export default function CartPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })
                       }
-                      className="w-full p-[13px_16px] border border-line rounded-[12px] font-sans text-[14.5px] bg-cream text-ink focus:outline-none focus:border-forest focus:bg-white focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all resize-vertical min-h-[80px]"
+                      className="w-full p-[13px_16px] border border-(--line) rounded-[12px] font-sans text-[14.5px] bg-(--cream) text-(--ink) focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:shadow-[0_0_0_3px_rgba(20,72,112,0.10)] transition-all resize-vertical min-h-[80px]"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center gap-[10px] w-full mt-[6px] bg-forest text-cream p-[16px_28px] rounded-full border-none font-bold text-[15px] font-sans cursor-pointer shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-forest-deep hover:-translate-y-[2px] hover:shadow-[0_16px_32px_-10px_rgba(20,72,112,0.6)] transition-all group"
-                  >
+                  <button type="submit" className="blue-button">
                     <span>Valider ma commande</span>
                     <svg
                       className="w-[15px] h-[15px] transition-transform duration-200 group-hover:translate-x-[3px]"
@@ -486,7 +483,7 @@ export default function CartPage() {
                       <path d="M5 12h14M13 6l6 6-6 6" />
                     </svg>
                   </button>
-                  <div className="text-[12.5px] text-slate mt-[14px] text-center">
+                  <div className="text-[12.5px] text-(--slate) mt-[14px] text-center">
                     Réponse sous 48h ouvrées, sans engagement.
                   </div>
                 </form>
@@ -541,8 +538,8 @@ export default function CartPage() {
 
           {/* 3. COMMANDE ENVOYÉE (CONFIRMATION) */}
           {orderDone && (
-            <div className="max-w-[600px] mx-auto text-center bg-white border border-line rounded-[22px] p-[56px_40px] max-[560px]:p-[40px_22px] shadow-[0_30px_60px_-36px_rgba(20,72,112,0.3)]">
-              <div className="w-[68px] h-[68px] rounded-full bg-sage text-forest flex items-center justify-center mx-auto mb-[24px]">
+            <div className="max-w-[600px] mx-auto text-center bg-(--white) border border-(--line) rounded-[22px] p-[56px_40px] max-[560px]:p-[40px_22px] shadow-[0_30px_60px_-36px_rgba(20,72,112,0.3)]">
+              <div className="w-[68px] h-[68px] rounded-full bg-(--sage) text-(--forest) flex items-center justify-center mx-auto mb-[24px]">
                 <svg
                   className="w-[30px] h-[30px]"
                   viewBox="0 0 24 24"
@@ -555,10 +552,10 @@ export default function CartPage() {
                   <path d="M20 6 9 17l-5-5" />
                 </svg>
               </div>
-              <h2 className="font-serif font-medium text-[clamp(24px,3vw,30px)] text-ink mb-[12px]">
+              <h2 className="font-serif font-medium text-[clamp(24px,3vw,30px)] text-(--ink) mb-[12px]">
                 Commande envoyée
               </h2>
-              <p className="text-slate text-[15.5px] max-w-[44ch] mx-auto mb-[28px]">
+              <p className="text-(--slate) text-[15.5px] max-w-[44ch] mx-auto mb-[28px]">
                 Merci {orderDone.client.nom}, votre commande a bien été reçue.
                 Notre équipe vous recontacte sous 48h ouvrées pour confirmer le
                 prix, la disponibilité et la{" "}
@@ -567,14 +564,14 @@ export default function CartPage() {
                   : "date de retrait en atelier."}
               </p>
 
-              <ul className="list-none text-left bg-cream border border-line rounded-[14px] p-[6px_20px] mx-auto mb-[28px] max-w-[440px]">
+              <ul className="list-none text-left bg-(--cream) border border-(--line) rounded-[14px] p-[6px_20px] mx-auto mb-[28px] max-w-[440px]">
                 {orderDone.articles.map((a, idx) => (
                   <li
                     key={idx}
-                    className="flex justify-between gap-[16px] py-[12px] text-[14px] border-t border-line first:border-t-0"
+                    className="flex justify-between gap-[16px] py-[12px] text-[14px] border-t border-(--line) first:border-t-0"
                   >
                     <span className="text-ink">{a.nom}</span>
-                    <span className="font-serif font-medium text-forest whitespace-nowrap">
+                    <span className="font-serif font-medium text-(--forest) whitespace-nowrap">
                       × {a.quantite}
                     </span>
                   </li>
@@ -582,8 +579,8 @@ export default function CartPage() {
               </ul>
 
               <Link
-                href="/boutique"
-                className="inline-flex items-center justify-center gap-[10px] bg-forest text-cream p-[16px_28px] rounded-full border-none font-bold text-[15px] font-sans cursor-pointer shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-forest-deep hover:-translate-y-[2px] transition-all group"
+                href="/equipements"
+                className="inline-flex items-center justify-center gap-[10px] bg-(--forest) text-(--cream) p-[16px_28px] rounded-full border-none font-bold text-[15px] font-sans cursor-pointer shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-(--forest-deep) hover:-translate-y-[2px] transition-all group"
               >
                 <span>Retour à la boutique</span>
                 <svg
