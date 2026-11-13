@@ -33,7 +33,7 @@ const InverterCompatibility = () => {
 
   const INVERTER_MODELS =
     PRODUCTS.find((item) => item.id === equipementId)?.models ||
-    PRODUCTS[0].models;
+    PRODUCTS[1].models;
   console.log(INVERTER_MODELS);
 
   // Mise à jour de la puissance de l'onduleur lors du changement de sélection
