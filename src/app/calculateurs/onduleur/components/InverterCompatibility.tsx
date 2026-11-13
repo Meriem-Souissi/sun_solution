@@ -5,25 +5,6 @@ import BlueButton from "@/components/ui/BlueButton";
 import { ProductModel } from "@/types/product";
 import React, { useState, useEffect, useMemo } from "react";
 
-// const INVERTER_MODELS = [
-//   { name: "Sungrow SG320HX-20", power: 320 },
-//   { name: "Huawei SUN2000 (2 kW)", power: 2 },
-//   { name: "Huawei SUN2000 (3 kW)", power: 3 },
-//   { name: "Huawei SUN2000 (4 kW)", power: 4 },
-//   { name: "Huawei SUN2000 (4.6 kW)", power: 4.6 },
-//   { name: "Huawei SUN2000 (6 kW)", power: 6 },
-//   { name: "Huawei SUN2000 (8 kW)", power: 8 },
-//   { name: "Huawei SUN2000 (10 kW)", power: 10 },
-//   { name: "Huawei SUN2000 (12 kW)", power: 12 },
-//   { name: "Huawei SUN2000 (15 kW)", power: 15 },
-//   { name: "Huawei SUN2000 (17 kW)", power: 17 },
-//   { name: "Huawei SUN2000 (20 kW)", power: 20 },
-//   { name: "Huawei SUN2000 (25 kW)", power: 25 },
-//   { name: "Huawei SUN2000 (30 kW)", power: 30 },
-//   { name: "Huawei SUN2000 (40 kW)", power: 40 },
-//   { name: "Huawei SUN2000 (50 kW)", power: 50 },
-// ];
-
 const InverterCompatibility = ({
   inverter_models,
 }: {
@@ -39,12 +20,12 @@ const InverterCompatibility = ({
     const value = e.target.value;
     setSelectedInverter(value);
 
-    // const found = inverter_models.find((item) => item.name === value);
-    // if (found) {
-    //   setInverterPower(found.power.toString());
-    // } else {
-    //   setInverterPower("");
-    // }
+    const found = inverter_models.find((item) => item.name === value);
+    if (found) {
+      setInverterPower(found.power.toString());
+    } else {
+      setInverterPower("");
+    }
   };
 
   // Calcul dynamique de la compatibilité

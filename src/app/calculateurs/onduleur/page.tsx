@@ -1,4 +1,6 @@
 "use client";
+
+export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import InverterCompatibility from "./components/InverterCompatibility";
@@ -17,6 +19,8 @@ export default function SimulatorPage() {
     <main className="py-12 px-5 sm:px-8 max-w-290 mx-auto space-y-8">
       <Suspense fallback={<div>Chargement...</div>}>
         <InverterCompatibility inverter_models={INVERTER_MODELS} />
+      </Suspense>
+      <Suspense fallback={<div>Chargement...</div>}>
         <OrderSection inverter_models={INVERTER_MODELS} />
       </Suspense>
     </main>
