@@ -4,14 +4,15 @@ import PanierIcon from "@/components/icons/PanierIcon";
 import React, { useState } from "react";
 
 const VARIATOR_MODELS = [
-  { name: "INVT GD100-PV (5 HP)", power: 320 },
-  { name: "INVT GD100-PV (7.5 ou 10 HP)", power: 2 },
-  { name: "INVT GD100-PV (10 ou 15 HP)", power: 3 },
-  { name: "INVT GD100-PV (15 ou 20 HP)", power: 4 },
-  { name: "INVT GD100-PV (20 ou 25 HP)", power: 4.6 },
-  { name: "INVT GD100-PV (25 ou 30 HP)", power: 6 },
-  { name: "INVT GD100-PV (30 ou 35 HP)", power: 8 },
-  { name: "INVT GD100-PV (35 ou 40 HP)", power: 8 },
+  { name: "INVT GD100-PV (5 HP)", power: 5 },
+  { name: "INVT GD100-PV (7.5 HP)", power: 7.5 },
+  { name: "INVT GD100-PV (10 HP)", power: 10 },
+  { name: "INVT GD100-PV (15 HP)", power: 15 },
+  { name: "INVT GD100-PV (20 HP)", power: 20 },
+  { name: "INVT GD100-PV (25 HP)", power: 25 },
+  { name: "INVT GD100-PV (30 HP)", power: 30 },
+  { name: "INVT GD100-PV (35 HP)", power: 35 },
+  { name: "INVT GD100-PV (40 HP)", power: 40 },
 ];
 
 const InverterOrderSection = () => {
@@ -24,7 +25,7 @@ const InverterOrderSection = () => {
   };
 
   // Ajout au panier via localStorage
-  const ajouterAuPanier = (articleId: number, nomArticle: string) => {
+  const ajouterAuPanier = (articleId: any, nomArticle: string) => {
     if (typeof window === "undefined") return;
 
     const existingCart = JSON.parse(
@@ -39,7 +40,7 @@ const InverterOrderSection = () => {
     } else {
       existingCart.push({
         id: articleId,
-        nom: selectedModel ? `${nomArticle} - ${selectedModel}` : nomArticle,
+        nom: selectedModel ? `${nomArticle}` : null,
         quantite: quantity,
       });
     }
@@ -68,7 +69,7 @@ const InverterOrderSection = () => {
           Puissance de variateur
         </label>
         <select
-          id="typeOnduleurCommande"
+          id="typeVariateurCommande"
           value={selectedModel}
           onChange={(e) => setSelectedModel(e.target.value)}
           className="w-full px-4 py-3.5 bg-(--cream) border border-(--line) rounded-xl font-sans text-[15px] font-medium text-(--ink) cursor-pointer focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:ring-3 focus:ring-(--forest)/10 transition-all appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23144870\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M6 9l6 6 6-6\'/></svg>')] bg-no-repeat bg-[position:right_16px_center] bg-[size:16px] pr-12"
@@ -145,7 +146,7 @@ const InverterOrderSection = () => {
       {/* Bouton d'ajout au panier */}
       <button
         type="button"
-        onClick={() => ajouterAuPanier(1, "Onduleur Huawei SUN2000")}
+        onClick={() => ajouterAuPanier(selectedModel, selectedModel)}
         className="flex items-center justify-center gap-2.5 w-full py-4 px-7 bg-(--forest) text-(--cream) rounded-full font-bold text-[15px] shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-(--forest-deep) hover:-translate-y-0.5 transition-all cursor-pointer"
       >
         <PanierIcon />

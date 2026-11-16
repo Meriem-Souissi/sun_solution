@@ -10,7 +10,6 @@ const InverterCompatibility = ({
 }: {
   inverter_models: ProductModel[];
 }) => {
-  console.log("1", inverter_models);
   const [pvPower, setPvPower] = useState<string>("1");
   const [selectedInverter, setSelectedInverter] = useState<string>("");
   const [inverterPower, setInverterPower] = useState<string>("");

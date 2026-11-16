@@ -17,7 +17,7 @@ const InverterOrderSection = ({
   };
 
   // Ajout au panier via localStorage
-  const ajouterAuPanier = (articleId: number, nomArticle: string) => {
+  const ajouterAuPanier = (articleId: any, nomArticle: string) => {
     if (typeof window === "undefined") return;
 
     const existingCart = JSON.parse(
@@ -32,7 +32,7 @@ const InverterOrderSection = ({
     } else {
       existingCart.push({
         id: articleId,
-        nom: selectedModel ? `${nomArticle} - ${selectedModel}` : nomArticle,
+        nom: selectedModel ? `${nomArticle}` : null,
         quantite: quantity,
       });
     }
@@ -138,7 +138,7 @@ const InverterOrderSection = ({
       {/* Bouton d'ajout au panier */}
       <button
         type="button"
-        onClick={() => ajouterAuPanier(1, "Onduleur Huawei SUN2000")}
+        onClick={() => ajouterAuPanier(selectedModel, selectedModel)}
         className="flex items-center justify-center gap-2.5 w-full py-4 px-7 bg-(--forest) text-(--cream) rounded-full font-bold text-[15px] shadow-[0_14px_28px_-12px_rgba(20,72,112,0.5)] hover:bg-(--forest-deep) hover:-translate-y-0.5 transition-all cursor-pointer"
       >
         <PanierIcon />

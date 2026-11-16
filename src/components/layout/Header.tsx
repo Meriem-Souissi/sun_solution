@@ -7,6 +7,7 @@ import BurgerIcon from "../icons/BurgerIcon";
 import ArrowIcon from "../icons/ArrowIcon";
 import logo from "./../../../public/images/logo.png";
 import { useState } from "react";
+import { useShoopingCartCount } from "../../hooks/useShoppingCartCounter";
 
 const navLinks = [
   { name: "Accueil", href: "/" },
@@ -17,6 +18,9 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, isMenuOpen] = useState(false);
+  const count = useShoopingCartCount();
+  const displayCount = count > 99 ? "99+" : count;
+  const hasItems = count > 0;
 
   return (
     <header className="sticky top-0 z-50 bg-(--cream) backdrop-blur-md border-b border-(--line)">
@@ -55,7 +59,11 @@ export default function Navbar() {
           className="cart-link"
           aria-current="page"
           id="cartLink"
-          aria-label="Voir le panier"
+          aria-label={
+            hasItems
+              ? `Voir le panier (${count} article${count > 1 ? "s" : ""})`
+              : "Voir le panier"
+          }
         >
           <svg
             viewBox="0 0 24 24"
@@ -70,8 +78,11 @@ export default function Navbar() {
             <circle cx="9.5" cy="20" r="1.3" />
             <circle cx="17" cy="20" r="1.3" />
           </svg>
-          <span className="cart-badge" id="cartItemCount">
-            0
+          <span
+            className="absolute -top-1.5 -right-1.5 min-w-4.75 h-4.75 rounded-full p-[0_5px] bg-(--gold) text-(--ink) text-xs font-bold leading-4.75 text-center"
+            id="cartItemCount"
+          >
+            {displayCount}
           </span>
         </Link>
         <Link href="/devis" className="hidden md:block">
