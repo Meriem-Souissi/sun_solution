@@ -1,6 +1,6 @@
 import React from "react";
 
-const Svg = () => {
+const ArrowTiltedIcon = () => {
   return (
     <svg
       className="w-4.75 h-4.75 mt-0.5 shrink-0 text-(--gold-deep)"
@@ -14,4 +14,4 @@ const Svg = () => {
   );
 };
 
-export default Svg;
+export default ArrowTiltedIcon;

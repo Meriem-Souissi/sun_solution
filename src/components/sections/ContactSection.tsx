@@ -5,7 +5,7 @@ import MailIcon from "../icons/MailIcon";
 import MapsIcon from "../icons/MapsIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 import BigCheckIcon from "../icons/BigCheckIcon";
-import Arrow2Icon from "../icons/Arrow2Icon";
+import ArrowTiltedIcon from "../icons/ArrowTiltedIcon";
 import BlueButton from "../ui/BlueButton";
 
 const Field = ({
@@ -95,7 +95,7 @@ const Contact = () => {
                   rel="noopener noreferrer"
                 >
                   Voir sur Google Maps
-                  <Arrow2Icon />
+                  <ArrowTiltedIcon />
                 </a>
               </span>
             </div>

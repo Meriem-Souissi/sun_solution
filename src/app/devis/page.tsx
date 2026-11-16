@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import Arrow2Icon from "./../../components/icons/Arrow2Icon";
+import ArrowTiltedIcon from "../../components/icons/ArrowTiltedIcon";
 import MapsIcon from "./../../components/icons/MapsIcon";
 import PhoneIcon from "./../../components/icons/PhoneIcon";
 import BlueButton from "./../../components/ui/BlueButton";
@@ -162,7 +162,16 @@ const Devis = () => {
   ) => {
     if (e.target.files) {
       if (e.target.multiple) {
-        setFormData((prev) => ({ ...prev, [key]: e.target.files }));
+        const dt = new DataTransfer();
+        // 1. Conserver les fichiers déjà présents
+        const existingFiles = formData[key] as FileList | null;
+        if (existingFiles) {
+          Array.from(existingFiles).forEach((f) => dt.items.add(f));
+        }
+        // 2. Ajouter les nouveaux fichiers sélectionnés
+        Array.from(e.target.files).forEach((f) => dt.items.add(f));
+
+        setFormData((prev) => ({ ...prev, [key]: dt.files }));
       } else {
         setFormData((prev) => ({
           ...prev,
@@ -422,7 +431,7 @@ const Devis = () => {
                       rel="noopener noreferrer"
                     >
                       Voir sur Google Maps
-                      <Arrow2Icon />
+                      <ArrowTiltedIcon />
                     </a>
                   </span>
                 </div>
@@ -734,18 +743,27 @@ const Devis = () => {
                             label="Titre *"
                             file={formData.aTitreFile}
                             onChange={(e) => handleFileChange("aTitreFile", e)}
+                            onRemove={() =>
+                              setFormData({ ...formData, aTitreFile: null })
+                            }
                           />
                           <FileInput
                             required={true}
                             label="Étude préliminaire de raccordement à la STEG *"
                             file={formData.aStegFile}
                             onChange={(e) => handleFileChange("aStegFile", e)}
+                            onRemove={() =>
+                              setFormData({ ...formData, aStegFile: null })
+                            }
                           />
                           <FileInput
                             required={true}
                             label="Accord du ministère de l'Agriculture *"
                             file={formData.aAgriFile}
                             onChange={(e) => handleFileChange("aAgriFile", e)}
+                            onRemove={() =>
+                              setFormData({ ...formData, aAgriFile: null })
+                            }
                           />
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -921,6 +939,12 @@ const Devis = () => {
                                   onChange={(e) =>
                                     handleFileChange("btCompteurFile", e)
                                   }
+                                  onRemove={() =>
+                                    setFormData({
+                                      ...formData,
+                                      btCompteurFile: null,
+                                    })
+                                  }
                                 />
                                 <FileInput
                                   label="Le disjoncteur *"
@@ -928,6 +952,12 @@ const Devis = () => {
                                   file={formData.btDisjoncteurFile}
                                   onChange={(e) =>
                                     handleFileChange("btDisjoncteurFile", e)
+                                  }
+                                  onRemove={() =>
+                                    setFormData({
+                                      ...formData,
+                                      btDisjoncteurFile: null,
+                                    })
                                   }
                                 />
                               </div>
@@ -998,9 +1028,31 @@ const Devis = () => {
                                 required={true}
                                 multiple
                                 fileList={formData.mtFacturesFiles}
-                                onChange={(e) =>
-                                  handleFileChange("mtFacturesFiles", e)
-                                }
+                                onChange={(e) => {
+                                  handleFileChange("mtFacturesFiles", e);
+                                  console.log();
+                                }}
+                                onRemove={(indexToRemove) => {
+                                  setFormData((prev) => {
+                                    if (!prev.mtFacturesFiles) return prev;
+
+                                    const dt = new DataTransfer();
+                                    Array.from(prev.mtFacturesFiles).forEach(
+                                      (file, index) => {
+                                        if (index !== indexToRemove) {
+                                          dt.items.add(file);
+                                        }
+                                      },
+                                    );
+
+                                    return {
+                                      ...prev,
+                                      // Si plus aucun fichier, remet à null (pratique pour la validation required)
+                                      mtFacturesFiles:
+                                        dt.files.length > 0 ? dt.files : null,
+                                    };
+                                  });
+                                }}
                               />
 
                               <div>
@@ -1064,6 +1116,12 @@ const Devis = () => {
                                     file={formData.mtCourbeFile}
                                     onChange={(e) =>
                                       handleFileChange("mtCourbeFile", e)
+                                    }
+                                    onRemove={() =>
+                                      setFormData({
+                                        ...formData,
+                                        mtCourbeFile: null,
+                                      })
                                     }
                                   />
                                 </div>

@@ -8,6 +8,7 @@ import ArrowIcon from "../icons/ArrowIcon";
 import logo from "./../../../public/images/logo.png";
 import { useState } from "react";
 import { useShoopingCartCount } from "../../hooks/useShoppingCartCounter";
+import PanierIcon from "../icons/PanierIcon";
 
 const navLinks = [
   { name: "Accueil", href: "/" },
@@ -65,19 +66,7 @@ export default function Navbar() {
               : "Voir le panier"
           }
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6" />
-            <circle cx="9.5" cy="20" r="1.3" />
-            <circle cx="17" cy="20" r="1.3" />
-          </svg>
+          <PanierIcon />
           <span
             className="absolute -top-1.5 -right-1.5 min-w-4.75 h-4.75 rounded-full p-[0_5px] bg-(--gold) text-(--ink) text-xs font-bold leading-4.75 text-center"
             id="cartItemCount"
