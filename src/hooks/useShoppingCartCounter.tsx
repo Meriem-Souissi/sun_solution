@@ -33,7 +33,7 @@ export const useShoopingCartCount = () => {
     };
 
     window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("pageshow", handleStorageChange);
+    window.addEventListener("cartUpdated", handleStorageChange);
 
     // Fonction globale optionnelle si d'autres composants déclenchent un rafraîchissement manuel
     (window as any).refreshHeaderCart = () => {
@@ -42,7 +42,7 @@ export const useShoopingCartCount = () => {
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("pageshow", handleStorageChange);
+      window.removeEventListener("cartUpdated", handleStorageChange);
       delete (window as any).refreshHeaderCart;
     };
   }, []);

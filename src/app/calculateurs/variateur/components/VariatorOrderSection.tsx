@@ -49,6 +49,7 @@ const InverterOrderSection = () => {
     alert(
       `Succès ! ${quantity} unité(s) de "${nomArticle}" ajoutée(s) au panier.`,
     );
+    window.dispatchEvent(new CustomEvent("cartUpdated"));
   };
 
   return (
