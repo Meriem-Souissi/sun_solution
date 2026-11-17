@@ -13,6 +13,7 @@ const VARIATOR_MODELS = [
   { name: "INVT GD100-PV (30 HP)", power: 30 },
   { name: "INVT GD100-PV (35 HP)", power: 35 },
   { name: "INVT GD100-PV (40 HP)", power: 40 },
+  { name: "INVT GD100-PV (45 HP)", power: 45 },
 ];
 
 const InverterOrderSection = () => {

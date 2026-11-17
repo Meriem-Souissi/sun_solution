@@ -13,6 +13,7 @@ const MOTO_POMPE_POWER = [
   { name: "25 HP", value: 25 },
   { name: "30 HP", value: 30 },
   { name: "35 HP", value: 35 },
+  { name: "40 HP", value: 40 },
 ];
 
 const VARIATOR_MODELS = [
@@ -24,6 +25,7 @@ const VARIATOR_MODELS = [
   { name: "INVT GD100-PV (25 ou 30 HP)", power: 25 },
   { name: "INVT GD100-PV (30 ou 35 HP)", power: 30 },
   { name: "INVT GD100-PV (35 ou 40 HP)", power: 35 },
+  { name: "INVT GD100-PV (40 ou 45 HP)", power: 40 },
 ];
 
 const InverterCompatibility = () => {

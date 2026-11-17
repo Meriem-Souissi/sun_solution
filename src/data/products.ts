@@ -18,22 +18,6 @@ export const PRODUCTS: Product[] = [
     models: [],
   },
   {
-    id: "sungrow-sg320hx",
-    title: "Onduleur SUNGROW Multi-MPPT",
-    category: "Onduleurs réseau",
-    description:
-      "L'onduleur chaîne multi-MPPT Sungrow SG320HX-20 est conçu pour les grands parcs photovoltaïques et les systèmes solaires industriels en 1500 Vdc.",
-    features: [
-      "Multiples traqueurs MPPT indépendants",
-      "Protection IP66 ultra-résistante",
-    ],
-    image: "/images/equipements/sungrow.jpg",
-    techSheetUrl: "/fiches-techniques/Fiche Onduleur.pdf",
-    badge: { label: "Pro & Industriel", variant: "navy" },
-    calculator: "/calculateurs/onduleur",
-    models: [{ name: "Sungrow SG320HX-20", power: 320 }],
-  },
-  {
     id: "huawei-sun2000-2-4-6",
     title: "Onduleur Huawei SUN2000 (2-3-4-4.6)",
     category: "Onduleurs triphasés",
