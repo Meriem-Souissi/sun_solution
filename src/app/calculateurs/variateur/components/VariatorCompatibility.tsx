@@ -105,7 +105,7 @@ const InverterCompatibility = () => {
           onChange={(e) => setmotoPompePower(e.target.value)}
           className="w-full px-4 py-3.5 bg-(--cream) border border-(--line) rounded-xl font-sans text-[15px] font-medium text-(--ink) cursor-pointer focus:outline-none focus:border-(--forest) focus:bg-(--white) focus:ring-3 focus:ring-(--forest)/10 transition-all appearance-none bg-no-repeat bg-[position:right_16px_center] bg-[size:16px] pr-12"
         >
-          <option value="">Sélectionnez un modèle</option>
+          <option value="">Sélectionnez la puissance de la motopompe</option>
           {MOTO_POMPE_POWER.map((power, index) => (
             <option key={index} value={power.value}>
               {power.name}

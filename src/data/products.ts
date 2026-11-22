@@ -137,6 +137,7 @@ export const PRODUCTS: Product[] = [
     image: "/images/equipements/batterie Huawei LUNA2000.jpg",
     techSheetUrl: "/fiches-techniques/luna fiche technique.pdf",
     badge: { label: "Stockage Énergétique", variant: "light" },
+    calculator: "/calculateurs/batterie",
     models: [],
   },
   {
