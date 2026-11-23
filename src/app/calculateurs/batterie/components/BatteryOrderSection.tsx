@@ -62,7 +62,7 @@ const BatteryOrderSection = () => {
           htmlFor="typeOnduleurCommande"
           className="block text-xs font-semibold text-(--ink) mb-2.5"
         >
-          Puissance de variateur
+          Puissance de la batterie
         </label>
         <select
           id="typeVariateurCommande"

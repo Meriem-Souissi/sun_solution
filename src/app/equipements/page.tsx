@@ -5,11 +5,6 @@ import ProductCard from "./components/ProductCard";
 import TrustBar from "./components/TrustBar";
 
 const Products = () => {
-  // Ouverture sécurisée de la fiche technique PDF
-  const openTechSheet = (file: string) => {
-    window.open(`/${file}`, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <main className="bg-(--cream) min-h-screen text-(--ink)">
       {/* SECTION NOS ÉQUIPEMENTS */}

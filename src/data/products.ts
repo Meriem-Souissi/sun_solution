@@ -15,7 +15,7 @@ export const PRODUCTS: Product[] = [
     techSheetUrl: "/fiches-techniques/fiche technique Jonsol.pdf",
     badge: { label: "Top Vente", variant: "gold" },
     calculator: "/calculateurs/panneaux",
-    models: [],
+    models: [{ name: "JONSOL 550 W (Demi-cellules)", power: 500 }],
   },
   {
     id: "huawei-sun2000-2-4-6",
@@ -154,6 +154,17 @@ export const PRODUCTS: Product[] = [
     techSheetUrl: "/fiches-techniques/VARIATEUR VF DATASHEET.pdf",
     badge: { label: "Top vente", variant: "gold" },
     calculator: "/calculateurs/variateur",
-    models: [],
+    models: [
+      { name: "INVT GD100-PV (5 HP)", power: 5 },
+      { name: "INVT GD100-PV (7.5 HP)", power: 7.5 },
+      { name: "INVT GD100-PV (10 HP)", power: 10 },
+      { name: "INVT GD100-PV (15 HP)", power: 15 },
+      { name: "INVT GD100-PV (20 HP)", power: 20 },
+      { name: "INVT GD100-PV (25 HP)", power: 25 },
+      { name: "INVT GD100-PV (30 HP)", power: 30 },
+      { name: "INVT GD100-PV (35 HP)", power: 35 },
+      { name: "INVT GD100-PV (40 HP)", power: 40 },
+      { name: "INVT GD100-PV (45 HP)", power: 45 },
+    ],
   },
 ];
