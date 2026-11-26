@@ -138,7 +138,12 @@ export const PRODUCTS: Product[] = [
     techSheetUrl: "/fiches-techniques/luna fiche technique.pdf",
     badge: { label: "Stockage Énergétique", variant: "light" },
     calculator: "/calculateurs/batterie",
-    models: [],
+    models: [
+      { name: "Huawei LUNA2000 (5 kW)", power: 5 },
+      { name: "Huawei LUNA2000 (10 kW)", power: 10 },
+      { name: "Huawei LUNA2000 (15 kW)", power: 15 },
+      { name: "Huawei LUNA2000 (20 kW)", power: 20 },
+    ],
   },
   {
     id: "gd100-pv-2-50",

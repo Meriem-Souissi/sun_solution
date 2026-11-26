@@ -9,12 +9,14 @@ import CalculatorIcon from "../../../components/icons/CalculatorIcon";
 import PanierIcon from "../../../components/icons/PanierIcon";
 import ToastIcon from "../../../components/icons/ToastIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
+import BlueButton from "@/components/ui/BlueButton";
 
 export default function ProductCard({ product }: { product: Product }) {
   const [imageError, setImageError] = useState(false);
-  const [count, setCount] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [showPanelConfiguration, setShowPanelConfiguration] = useState(false);
+  const [selectedId, setSelectedId] = useState(0);
+  const [selectedModel, setSelectedModel] = useState<string>(product.title);
   const [quantity, setQuantity] = useState<number>(1);
 
   const badgeStyles = {
@@ -23,20 +25,42 @@ export default function ProductCard({ product }: { product: Product }) {
     light: "bg-(--white) text-(--forest) border border-(--line)",
   };
 
-  const incrementCount = () => {
-    setCount((prevCount) => prevCount + 1);
+  // Gestion de la quantité
+  const modifierQuantite = (valeur: number) => {
+    setQuantity((prev) => Math.max(1, prev + valeur));
+  };
 
+  // Ajout au panier via localStorage
+  const ajouterAuPanier = (articleId: any, nomArticle: string) => {
+    if (typeof window === "undefined") return;
+
+    const existingCart = JSON.parse(
+      localStorage.getItem("panierSolaire") || "[]",
+    );
+    const indexArticle = existingCart.findIndex(
+      (item: any) => item.id === articleId,
+    );
+
+    if (indexArticle !== -1) {
+      existingCart[indexArticle].quantite += quantity;
+    } else {
+      existingCart.push({
+        id: articleId,
+        nom: selectedModel ? `${nomArticle}` : null,
+        quantite: quantity,
+      });
+    }
+
+    localStorage.setItem("panierSolaire", JSON.stringify(existingCart));
+
+    window.dispatchEvent(new CustomEvent("cartUpdated"));
     setShowToast(true);
 
     // Masque le toast automatiquement après 3 secondes
     setTimeout(() => {
       setShowToast(false);
+      setSelectedId(0);
     }, 3000);
-  };
-
-  // Gestion de la quantité
-  const modifierQuantite = (valeur: number) => {
-    setQuantity((prev) => Math.max(1, prev + valeur));
   };
 
   return (
@@ -44,10 +68,10 @@ export default function ProductCard({ product }: { product: Product }) {
       <article className="relative flex flex-col bg-(--white) border border-(--line) rounded-[18px] overflow-hidden transition-all duration-250 ease-in-out hover:-translate-y-1 hover:border-(--gold)/55 hover:shadow-[0_26px_44px_-26px_rgba(23,36,46,0.35)]">
         {showPanelConfiguration ? (
           <>
-            <div className="absolute flex flex-col p-6 inset-0 z-6 bg-(--white) overflow-y-auto animate-[cfgIn_0.28s_ease_both]">
-              <div className="flex items-start justify-between gap-3 mb-6">
+            <div className="absolute flex flex-col px-8 py-6 inset-0 z-6 bg-(--white) overflow-y-auto animate-[cfgIn_0.28s_ease_both]">
+              <div className="flex items-start justify-between gap-3 mb-8">
                 <div>
-                  <span className="text-xs font-semibold text-(--gold-deep) mb-2">
+                  <span className="block text-xs font-semibold text-(--gold-deep) mb-4">
                     {product.category}
                   </span>
                   <h3 className="font-serif text-[19.5px] font-medium mb-3 leading-snug text-(--ink)">
@@ -63,23 +87,41 @@ export default function ProductCard({ product }: { product: Product }) {
                   <CloseIcon />
                 </button>
               </div>
-              <div className="m-b-[22px]">
-                <span className="block mb-[10px] text-(--ink) font-semibold text-sm">
-                  Puissance
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {product.models.map((model, idx) => (
-                    <button
-                      key={idx}
-                      className="text-sm font-medium px-4 py-[9px] rounded-full cursor-pointer bg-(--cream) text-(--slate) border border-(--line) transition-colors duration-[180ms]"
-                    >
-                      {model.power}{" "}
-                      {product.category === "Variateurs solaires" ? "HP" : "kW"}
-                    </button>
-                  ))}
+              {product.models.length !== 0 ? (
+                <div className="mb-[40px]">
+                  <span className="block mb-[10px] text-(--ink) font-semibold text-sm">
+                    Puissance
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {product.models.map((model) => {
+                      const isSelected = selectedId === model.power;
+                      return (
+                        <button
+                          key={model.power}
+                          className={`text-sm font-medium px-4 py-[9px] rounded-full cursor-pointer border transition-colors duration-[180ms] ${
+                            isSelected
+                              ? "text-(--cream) bg-(--forest) border-(--forest)"
+                              : "text-(--slate) bg-(--cream) border-(--line)"
+                          }`}
+                          onClick={() => (
+                            setSelectedModel(model.name),
+                            setSelectedId(model.power)
+                          )}
+                        >
+                          {model.power}
+                          {product.category === "Variateurs solaires"
+                            ? "HP"
+                            : product.category === "Panneaux solaires"
+                              ? "W"
+                              : "kW"}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-              <div className="m-b-[22px]">
+              ) : null}
+
+              <div className="mb-[40px]">
                 <span className="block mb-[10px] text-(--ink) font-semibold text-sm">
                   Quantité
                 </span>
@@ -133,6 +175,14 @@ export default function ProductCard({ product }: { product: Product }) {
                   </button>
                 </div>
               </div>
+              <div>
+                <BlueButton
+                  type="button"
+                  onClick={() => ajouterAuPanier(selectedModel, selectedModel)}
+                >
+                  Ajouter au panier{" "}
+                </BlueButton>
+              </div>
             </div>
           </>
         ) : (
@@ -171,12 +221,6 @@ export default function ProductCard({ product }: { product: Product }) {
                   }
                 >
                   <PanierIcon />
-                  {count > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-(--gold) px-1 text-[11px] font-bold text-(--ink) animate-in zoom-in-50 duration-200">
-                      {count > 99 ? "99+" : count}
-                    </span>
-                  )}
-                  {/* <span className="tool-count"></span> */}
                 </button>
               </div>
 
@@ -265,7 +309,8 @@ export default function ProductCard({ product }: { product: Product }) {
           }`}
         >
           <ToastIcon />
-          {product.title} ajouté au panier !
+          {`Succès ! ${quantity} unité(s) de "${selectedModel}" ajoutée(s) au
+          panier.`}
         </div>
       )}
     </>
